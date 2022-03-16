@@ -2,12 +2,12 @@
 A collection of mods I've made for Elden Ring. For use with [Elden Mod Loader](https://www.nexusmods.com/eldenring/mods/117).
 
 **Mods:**
-- [https://www.nexusmods.com/eldenring/mods/216](Unlock the framerate)
-- [https://www.nexusmods.com/eldenring/mods/179](Remove chromatic aberration)
-- [https://www.nexusmods.com/eldenring/mods/177](Remove vignette)
-- [https://www.nexusmods.com/eldenring/mods/175](Remove black bars)
-- [https://www.nexusmods.com/eldenring/mods/118](Fix the camera)
-- [https://github.com/techiew/DirectXHook](Pause the game (different repo))
+- [Unlock the framerate](https://www.nexusmods.com/eldenring/mods/216)
+- [Remove chromatic aberration](https://www.nexusmods.com/eldenring/mods/179)
+- [Remove vignette](https://www.nexusmods.com/eldenring/mods/177)
+- [Remove black bars](https://www.nexusmods.com/eldenring/mods/175)
+- [Fix the camera](https://www.nexusmods.com/eldenring/mods/118)
+- [Pause the game (different repo)](https://github.com/techiew/DirectXHook)
 
 ### Credits
 - Thanks to **uberhalit** for his [EldenRingFpsUnlockAndMore](https://github.com/uberhalit/EldenRingFpsUnlockAndMore) code.
