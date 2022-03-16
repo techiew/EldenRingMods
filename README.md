@@ -11,4 +11,4 @@ A collection of mods I've made for Elden Ring. For use with [Elden Mod Loader](h
 
 ### Credits
 - Thanks to **uberhalit** for his [EldenRingFpsUnlockAndMore](https://github.com/uberhalit/EldenRingFpsUnlockAndMore) code.
-- Thanks to **gurrgur** for his compilation of hex edits in this repo: [https://github.com/gurrgur/er-patcher](er-patcher).
+- Thanks to **gurrgur** for his compilation of hex edits in this repo: [er-patcher](https://github.com/gurrgur/er-patcher).
