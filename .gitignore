@@ -1,0 +1,9 @@
+x64/
+Release/
+.vs/
+*.log
+*.obj
+*.tlog
+*.ipdb
+*.pdb
+*.user

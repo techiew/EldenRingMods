@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UltrawideFix", "UltrawideFix\UltrawideFix.vcxproj", "{F9EC5802-C250-4D1A-8390-D39E983A6BC1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RemoveVignette", "RemoveVignette\RemoveVignette.vcxproj", "{BFEA10A1-2CAD-43E4-BC12-99FF1A9653E7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RemoveChromaticAberration", "RemoveChromaticAberration\RemoveChromaticAberration.vcxproj", "{1B0EC86E-B3E2-4ACC-AD0C-D32E7878FADC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnlockTheFps", "UnlockTheFps\UnlockTheFps.vcxproj", "{977A2607-CBC3-4969-9A87-4A6AB6532FC4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CameraFix", "CameraFix\CameraFix.vcxproj", "{458B5A7C-0287-413F-BFC1-DC64BAA3EF31}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IncreaseAnimationDistance", "IncreaseAnimationDistance\IncreaseAnimationDistance.vcxproj", "{C2825812-F55A-4DA3-9FD4-F1612CC38C04}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdjustTheFov", "AdjustTheFov\AdjustTheFov.vcxproj", "{42DEF6A1-381D-48CB-8FEE-9EF7621ED0EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9EC5802-C250-4D1A-8390-D39E983A6BC1}.Release|x64.ActiveCfg = Release|x64
+		{F9EC5802-C250-4D1A-8390-D39E983A6BC1}.Release|x64.Build.0 = Release|x64
+		{BFEA10A1-2CAD-43E4-BC12-99FF1A9653E7}.Release|x64.ActiveCfg = Release|x64
+		{BFEA10A1-2CAD-43E4-BC12-99FF1A9653E7}.Release|x64.Build.0 = Release|x64
+		{1B0EC86E-B3E2-4ACC-AD0C-D32E7878FADC}.Release|x64.ActiveCfg = Release|x64
+		{1B0EC86E-B3E2-4ACC-AD0C-D32E7878FADC}.Release|x64.Build.0 = Release|x64
+		{977A2607-CBC3-4969-9A87-4A6AB6532FC4}.Release|x64.ActiveCfg = Release|x64
+		{977A2607-CBC3-4969-9A87-4A6AB6532FC4}.Release|x64.Build.0 = Release|x64
+		{458B5A7C-0287-413F-BFC1-DC64BAA3EF31}.Release|x64.ActiveCfg = Release|x64
+		{458B5A7C-0287-413F-BFC1-DC64BAA3EF31}.Release|x64.Build.0 = Release|x64
+		{C2825812-F55A-4DA3-9FD4-F1612CC38C04}.Release|x64.ActiveCfg = Release|x64
+		{C2825812-F55A-4DA3-9FD4-F1612CC38C04}.Release|x64.Build.0 = Release|x64
+		{42DEF6A1-381D-48CB-8FEE-9EF7621ED0EB}.Release|x64.ActiveCfg = Release|x64
+		{42DEF6A1-381D-48CB-8FEE-9EF7621ED0EB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {915C58E0-01A3-4269-B4A6-BC27D26E70F1}
+	EndGlobalSection
+EndGlobal
