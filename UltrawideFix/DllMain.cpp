@@ -14,6 +14,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	{
 		Replace(patchAddress, originalBytes, newBytes);
 	}
+	CloseLog();
 	return 0;
 }
 

@@ -14,16 +14,26 @@ namespace ModUtils
 	static FILE* logFile = nullptr;
 	static const int MASKED = 0x00;
 
-	inline std::string GetModuleName()
+	inline std::string GetModuleName(bool thisModule)
 	{
 		static char dummy = 'x';
 		HMODULE module = NULL;
-		GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, &dummy, &module);
+
+		if (thisModule)
+		{
+			GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, &dummy, &module);
+		}
+
 		char lpFilename[MAX_PATH];
 		GetModuleFileNameA(module, lpFilename, sizeof(lpFilename));
 		std::string moduleName = strrchr(lpFilename, '\\');
 		moduleName = moduleName.substr(1, moduleName.length());
-		moduleName.erase(moduleName.find(".dll"), moduleName.length());
+
+		if (thisModule)
+		{
+			moduleName.erase(moduleName.find(".dll"), moduleName.length());
+		}
+
 		return moduleName;
 	}
 
@@ -31,7 +41,7 @@ namespace ModUtils
 	{
 		if (muModuleName == "")
 		{
-			muModuleName = GetModuleName();
+			muModuleName = GetModuleName(true);
 		}
 
 		if (logFile == nullptr)
@@ -51,11 +61,20 @@ namespace ModUtils
 		va_end(args);
 	}
 
+	inline void CloseLog()
+	{
+		if (logFile != nullptr)
+		{
+			fclose(logFile);
+			logFile = nullptr;
+		}
+	}
+
 	inline void RaiseError(std::string error)
 	{
 		if (muModuleName == "")
 		{
-			muModuleName = GetModuleName();
+			muModuleName = GetModuleName(true);
 		}
 		Log("Raised error: %s", error.c_str());
 		MessageBox(NULL, error.c_str(), muModuleName.c_str(), MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
@@ -64,9 +83,11 @@ namespace ModUtils
 	inline uintptr_t SigScan(std::vector<unsigned char> pattern, std::vector<unsigned char> mask = {})
 	{
 		MODULEINFO modInfo = { 0 };
-		GetModuleInformation(GetCurrentProcess(), GetModuleHandle("eldenring.exe"), &modInfo, sizeof(MODULEINFO));
+		std::string moduleName = GetModuleName(false);
+		GetModuleInformation(GetCurrentProcess(), GetModuleHandleA(moduleName.c_str()), &modInfo, sizeof(MODULEINFO));
 		uintptr_t currentAddress = (uintptr_t)modInfo.lpBaseOfDll;
 		uintptr_t end = currentAddress + (uintptr_t)modInfo.SizeOfImage;
+		Log("Module: %s = %p", moduleName.c_str(), currentAddress);
 
 		MEMORY_BASIC_INFORMATION memoryInfo;
 		while (currentAddress < end)
@@ -80,6 +101,7 @@ namespace ModUtils
 
 			if ((protection == PAGE_EXECUTE_READWRITE || protection == PAGE_READWRITE) && state == MEM_COMMIT)
 			{
+				Log("Checking region: %p", memoryInfo.BaseAddress);
 				while (currentAddress < regionEnd - pattern.size())
 				{
 					for (size_t i = 0; i < pattern.size(); i++)

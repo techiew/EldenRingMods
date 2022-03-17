@@ -6,15 +6,15 @@ using namespace ModUtils;
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
-	// I literally can't see a difference, so I'm putting this on ice for now.
-	//Log("Activating IncreaseAnimationDistance...");
-	//std::vector<unsigned char> originalBytes = {  };
-	//std::vector<unsigned char> newBytes = {  };
-	//uintptr_t patchAddress = SigScan(originalBytes);
-	//if (patchAddress != 0)
-	//{
-	//	Replace(patchAddress, originalBytes, newBytes);
-	//}
+	Log("Activating IncreaseAnimationDistance...");
+	std::vector<unsigned char> originalBytes = {  };
+	std::vector<unsigned char> newBytes = {  };
+	uintptr_t patchAddress = SigScan(originalBytes);
+	if (patchAddress != 0)
+	{
+		Replace(patchAddress, originalBytes, newBytes);
+	}
+	CloseLog();
 	return 0;
 }
 
