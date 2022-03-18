@@ -7,8 +7,9 @@ A collection of mods I've made for Elden Ring. For use with [Elden Mod Loader](h
 - [Remove vignette](https://www.nexusmods.com/eldenring/mods/177)
 - [Remove black bars](https://www.nexusmods.com/eldenring/mods/175)
 - [Fix the camera](https://www.nexusmods.com/eldenring/mods/118)
-- [Pause the game (different repo)](https://github.com/techiew/DirectXHook)
+- [Pause the game](https://www.nexusmods.com/eldenring/mods/43)
 
 ### Credits
 - Thanks to **uberhalit** for his [EldenRingFpsUnlockAndMore](https://github.com/uberhalit/EldenRingFpsUnlockAndMore) code.
 - Thanks to **gurrgur** for his compilation of hex edits in this repo: [er-patcher](https://github.com/gurrgur/er-patcher).
+- Thanks to **iArtorias** for his [new pausing technique](https://github.com/iArtorias/elden_pause).
