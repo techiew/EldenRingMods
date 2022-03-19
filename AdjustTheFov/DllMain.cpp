@@ -13,9 +13,8 @@ extern "C" {
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating AdjustTheFov...");
-	std::vector<unsigned char> mask = { 2, 3, 4, 5, 8, 9, 13, 14, 15, 16, 17, 18, 19 };
-	std::vector<unsigned char> pattern = { 0x80, 0xBB, MASKED, MASKED, MASKED, MASKED, 0x00, 0x44, MASKED, MASKED, 0xE0, 0xF3, 0x44, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x45 };
-	uintptr_t hookAddress = SigScan(pattern, mask);
+	std::vector<uint16_t> pattern = { 0x80, 0xBB, MASKED, MASKED, MASKED, MASKED, 0x00, 0x44, MASKED, MASKED, 0xE0, 0xF3, 0x44, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x45 };
+	uintptr_t hookAddress = SigScan(pattern);
 	if (hookAddress != 0)
 	{
 		size_t clearance = 20;
@@ -35,7 +34,7 @@ BOOL WINAPI DllMain(HINSTANCE module, DWORD reason, LPVOID)
 	if (reason == DLL_PROCESS_ATTACH)
 	{
 		DisableThreadLibraryCalls(module);
-		CreateThread(0, 0, &MainThread, 0, 0, NULL);
+		//CreateThread(0, 0, &MainThread, 0, 0, NULL);
 	}
 	return 1;
 }

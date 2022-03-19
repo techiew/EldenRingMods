@@ -8,15 +8,16 @@
 #include <iostream>
 #include <vector>
 #include <xinput.h>
+#include <sstream>
 
 namespace ModUtils
 {
 	static std::string muModuleName = "";
+	static HWND muWindow = NULL;
 	static FILE* logFile = nullptr;
 	static bool logOpened = false;
 	static bool enumWindowsCalled = false;
-	static const int MASKED = 0x00;
-	static HWND muWindow = NULL;
+	static const int MASKED = 0xffff;
 	constexpr unsigned char HK_NONE = 0x07;
 
 	inline std::string GetModuleName(bool thisModule)
@@ -91,20 +92,59 @@ namespace ModUtils
 		MessageBox(NULL, error.c_str(), muModuleName.c_str(), MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
 	}
 
-	inline uintptr_t SigScan(std::vector<unsigned char> pattern, std::vector<unsigned char> mask = {})
+	inline uintptr_t SigScan(std::vector<uint16_t> pattern)
 	{
-		MODULEINFO modInfo = { 0 };
+		std::string patternString = "";
+		for (auto bytes : pattern)
+		{
+			std::stringstream stream;
+			std::string byte = "";
+			if (bytes == MASKED)
+			{
+				byte = "?";
+			}
+			else
+			{
+				stream << "0x" << std::hex << bytes;
+				byte = stream.str();
+			}
+			patternString.append(byte + " ");
+		}
+		Log("Pattern: %s", patternString.c_str());
+
+		HANDLE process = GetCurrentProcess();
+		Log("Process handle: %i", process);
+
 		std::string moduleName = GetModuleName(false);
-		GetModuleInformation(GetCurrentProcess(), GetModuleHandleA(moduleName.c_str()), &modInfo, sizeof(MODULEINFO));
+		HMODULE module = GetModuleHandleA(moduleName.c_str());
+		if (module == NULL)
+		{
+			Log("Failed to get module handle of %s: %i", moduleName, GetLastError());
+			RaiseError("Failed to get module handle!");
+			return 0;
+		}
+
+		MODULEINFO modInfo = { 0 };
+		if (GetModuleInformation(process, module, &modInfo, sizeof(MODULEINFO)) == 0)
+		{
+			Log("GetModuleInformation failed for: %s, %i", moduleName, GetLastError());
+			RaiseError("Failed to get module information!");
+			return 0;
+		}
+
 		uintptr_t currentAddress = (uintptr_t)modInfo.lpBaseOfDll;
 		uintptr_t end = currentAddress + (uintptr_t)modInfo.SizeOfImage;
-		Log("Module: %s = %p", moduleName.c_str(), currentAddress);
+		Log("%s bounds = %p - %p", moduleName.c_str(), currentAddress, end);
 
 		size_t numRegionsChecked = 0;
-		MEMORY_BASIC_INFORMATION memoryInfo;
-		while (currentAddress < end)
+		while (numRegionsChecked < 123)
 		{
-			VirtualQuery((void*)currentAddress, &memoryInfo, sizeof(MEMORY_BASIC_INFORMATION));
+			MEMORY_BASIC_INFORMATION memoryInfo = { 0 };
+			if (VirtualQuery((void*)currentAddress, &memoryInfo, sizeof(MEMORY_BASIC_INFORMATION)) == 0)
+			{
+				Log("VirtualQuery failed: %i", GetLastError());
+				continue;
+			}
 			uintptr_t regionStart = (uintptr_t)memoryInfo.BaseAddress;
 			uintptr_t regionSize = (uintptr_t)memoryInfo.RegionSize;
 			uintptr_t regionEnd = regionStart + regionSize;
@@ -113,22 +153,17 @@ namespace ModUtils
 
 			if ((protection == PAGE_EXECUTE_READWRITE || protection == PAGE_READWRITE) && state == MEM_COMMIT)
 			{
-				if (numRegionsChecked > 2000)
-				{
-					break;
-				}
-
 				Log("Checking region: %p", memoryInfo.BaseAddress);
 				while (currentAddress < regionEnd - pattern.size())
 				{
 					for (size_t i = 0; i < pattern.size(); i++)
 					{
-						if (std::find(mask.begin(), mask.end(), i) != mask.end())
+						if (pattern[i] == MASKED)
 						{
 							currentAddress++;
 							continue;
-						}
-						else if (*(unsigned char*)currentAddress != pattern[i])
+						} 
+						else if (*(unsigned char*)currentAddress != (unsigned char)pattern[i])
 						{
 							currentAddress++;
 							break;
@@ -139,7 +174,6 @@ namespace ModUtils
 							Log("Found signature at %p", signature);
 							return signature;
 						}
-
 						currentAddress++;
 					}
 				}
@@ -148,27 +182,51 @@ namespace ModUtils
 			else
 			{
 				currentAddress += memoryInfo.RegionSize;
+				Log("Skipped region: %p", regionStart);
 			}
 		}
+		Log("Stopped at: %p, num regions checked: %i", currentAddress, numRegionsChecked);
 		RaiseError("Could not find signature!");
 		return 0;
 	}
 
-	inline bool Replace(uintptr_t address, std::vector<unsigned char> originalBytes, std::vector<unsigned char> newBytes, std::vector<unsigned char> mask = {})
+	inline bool Replace(uintptr_t address, std::vector<uint16_t> originalBytes, std::vector<uint8_t> newBytes)
 	{
-		std::vector<unsigned char> buffer(originalBytes.size());
-		memcpy(&buffer[0], (void*)address, buffer.size());
-		for (size_t index : mask)
+		std::vector<uint8_t> truncatedOriginalBytes;
+		for (auto bytes : originalBytes)
 		{
-			if (index >= buffer.size())
-			{
-				RaiseError("Mask goes out of bounds!");
-				return false;
-			}
-			buffer[index] = MASKED;
+			truncatedOriginalBytes.push_back((uint8_t)bytes);
 		}
 
-		if (memcmp(&buffer[0], &originalBytes[0], buffer.size()) == 0)
+		std::string bufferString = "";
+		std::vector<uint8_t> buffer(originalBytes.size());
+		memcpy(&buffer[0], (void*)address, buffer.size());
+		for (size_t i = 0; i < buffer.size(); i++) 
+		{
+			std::stringstream stream;
+			stream << "0x" << std::hex << (unsigned int)buffer[i];
+			std::string byte = stream.str();
+			bufferString.append(byte);
+			if (originalBytes[i] == MASKED)
+			{
+				bufferString.append("?");
+				buffer[i] = 0xff;
+			}
+			bufferString.append(" ");
+		}
+		Log("Bytes at address: %s", bufferString.c_str());
+
+		std::string newBytesString = "";
+		for (size_t i = 0; i < newBytes.size(); i++)
+		{
+			std::stringstream stream;
+			stream << "0x" << std::hex << (unsigned int)newBytes[i];
+			std::string byte = stream.str();
+			newBytesString.append(byte + " ");
+		}
+		Log("New bytes: %s", newBytesString.c_str());
+
+		if (memcmp(&buffer[0], &truncatedOriginalBytes[0], buffer.size()) == 0)
 		{
 			Log("Bytes match");
 			memcpy((void*)address, &newBytes[0], newBytes.size());
@@ -191,6 +249,7 @@ namespace ModUtils
 			if (processId == GetCurrentProcessId())
 			{
 				muWindow = hwnd;
+				Log("Application window found");
 				return false;
 			}
 		}
@@ -273,6 +332,7 @@ namespace ModUtils
 			return false;
 		}
 
+		Log("Key: %i, modifier: %i", keyPressed, modifierPressed);
 		notReleasedKeys.push_back(key);
 		return true;
 	}

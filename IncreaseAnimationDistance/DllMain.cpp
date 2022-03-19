@@ -7,8 +7,8 @@ using namespace ModUtils;
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating IncreaseAnimationDistance...");
-	std::vector<unsigned char> originalBytes = {  };
-	std::vector<unsigned char> newBytes = {  };
+	std::vector<uint16_t> originalBytes = {  };
+	std::vector<uint8_t> newBytes = {  };
 	uintptr_t patchAddress = SigScan(originalBytes);
 	if (patchAddress != 0)
 	{
