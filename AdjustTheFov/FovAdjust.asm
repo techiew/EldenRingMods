@@ -1,30 +1,21 @@
 .data
 extern fov : real4
-extern returnAddr : qword
+extern returnAddress : qword
+extern resolvedRelativeAddress : qword
 
 .code
 	FovAdjust PROC
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		call [resolvedRelativeAddress]
 		movaps xmm0, [fov]
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
-		jmp qword ptr [returnAddr]
+		jmp qword ptr [returnAddress]
 	FovAdjust ENDP
 end

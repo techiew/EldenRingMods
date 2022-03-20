@@ -94,9 +94,52 @@ namespace ModUtils
 		MessageBox(NULL, error.c_str(), muModuleName.c_str(), MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
 	}
 
+	DWORD_PTR GetProcessBaseAddress(DWORD processId)
+	{
+		DWORD_PTR baseAddress = 0;
+		HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
+		HMODULE* moduleArray = nullptr;
+		LPBYTE moduleArrayBytes = 0;
+		DWORD bytesRequired = 0;
+
+		if (processHandle)
+		{
+			if (EnumProcessModules(processHandle, NULL, 0, &bytesRequired))
+			{
+				if (bytesRequired)
+				{
+					moduleArrayBytes = (LPBYTE)LocalAlloc(LPTR, bytesRequired);
+
+					if (moduleArrayBytes)
+					{
+						unsigned int moduleCount;
+
+						moduleCount = bytesRequired / sizeof(HMODULE);
+						moduleArray = (HMODULE*)moduleArrayBytes;
+
+						if (EnumProcessModules(processHandle, moduleArray, bytesRequired, &bytesRequired))
+						{
+							baseAddress = (DWORD_PTR)moduleArray[0];
+						}
+
+						LocalFree(moduleArrayBytes);
+					}
+				}
+			}
+
+			CloseHandle(processHandle);
+		}
+
+		return baseAddress;
+	}
+
 	inline uintptr_t SigScan(std::vector<uint16_t> pattern)
 	{
+		DWORD processId = GetCurrentProcessId();
+		uintptr_t regionStart = GetProcessBaseAddress(processId);
 		Log("Process name: %s", GetModuleName(false).c_str());
+		Log("Process ID: %i", processId);
+		Log("Process base address: %i", regionStart);
 
 		std::string patternString = "";
 		for (auto bytes : pattern)
@@ -116,15 +159,22 @@ namespace ModUtils
 		}
 		Log("Pattern: %s", patternString.c_str());
 
-		uintptr_t currentAddress = 0;
-		uintptr_t regionStart = 0x7ff700000000;
 		size_t numRegionsChecked = 0;
-		while (numRegionsChecked < 200)
+		uintptr_t currentAddress = 0;
+		while (numRegionsChecked < 50000)
 		{
 			MEMORY_BASIC_INFORMATION memoryInfo = { 0 };
 			if (VirtualQuery((void*)regionStart, &memoryInfo, sizeof(MEMORY_BASIC_INFORMATION)) == 0)
 			{
-				Log("VirtualQuery failed: %i", GetLastError());
+				DWORD error = GetLastError();
+				if (error == ERROR_INVALID_PARAMETER)
+				{
+					Log("Reached end of scannable memory.");
+				}
+				else
+				{
+					Log("VirtualQuery failed, error code: %i.", error);
+				}
 				break;
 			}
 			regionStart = (uintptr_t)memoryInfo.BaseAddress;
@@ -133,7 +183,7 @@ namespace ModUtils
 			uintptr_t protection = (uintptr_t)memoryInfo.Protect;
 			uintptr_t state = (uintptr_t)memoryInfo.State;
 
-			if ((protection == PAGE_EXECUTE_READWRITE || protection == PAGE_READWRITE) && state == MEM_COMMIT)
+			if ((protection == PAGE_EXECUTE_READWRITE || protection == PAGE_READWRITE || protection == PAGE_READONLY) && state == MEM_COMMIT)
 			{
 				Log("Checking region: %p", regionStart);
 				currentAddress = regionStart;
@@ -165,6 +215,7 @@ namespace ModUtils
 			{
 				Log("Skipped region: %p", regionStart);
 			}
+
 			numRegionsChecked++;
 			regionStart += memoryInfo.RegionSize;
 		}
@@ -320,13 +371,15 @@ namespace ModUtils
 		return true;
 	}
 
-	inline void Hook(uintptr_t address, uintptr_t destination, size_t clearance)
+	inline void Hook(uintptr_t address, uintptr_t destination, size_t extraClearance = 0)
 	{
 		DWORD oldProtection;
+		size_t clearance = 14 + extraClearance;
 		VirtualProtect((void*)address, clearance, PAGE_EXECUTE_READWRITE, &oldProtection);
 		memset((void*)address, 0x90, clearance);
 		*(uintptr_t*)address = 0x0000000025ff;
 		memcpy((void*)(address + 6), (void*)&destination, 8);
 		VirtualProtect((void*)address, clearance, oldProtection, &oldProtection);
+		Log("Created jump from %p to %p with a clearance of %i", address, destination, clearance);
 	}
 }
