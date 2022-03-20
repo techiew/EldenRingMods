@@ -1,0 +1,230 @@
+f3 0f 10 ? ? f3 0f 59 ? ? ? ? ? e8 ? ? ? ? f3 41 0f ? ? f3 45 0f ? ? 4c 8d ? ? ? ? ? ? 48
+
+FUNCTION ABOVE:
+
+7FF726E3F530 - 48 81 EC 00010000     - sub rsp,00000100
+7FF726E3F537 - 0F10 81 90000000      - movups xmm0,[rcx+00000090]
+7FF726E3F53E - 4C 8D 4D 17           - lea r9,[rbp+17]
+7FF726E3F542 - 48 8B F9              - mov rdi,rcx
+7FF726E3F545 - F3 0F10 49 78         - movss xmm1,[rcx+78]
+7FF726E3F54A - 48 8B DA              - mov rbx,rdx
+7FF726E3F54D - F3 0F10 51 7C         - movss xmm2,[rcx+7C]
+7FF726E3F552 - F3 0F59 0D 92FB6E01   - mulss xmm1,[7FF72852F0EC]
+7FF726E3F55A - 0F29 45 37            - movaps [rbp+37],xmm0
+7FF726E3F55E - 0F10 81 80000000      - movups xmm0,[rcx+00000080]
+7FF726E3F565 - 48 8D 4D D7           - lea rcx,[rbp-29]
+7FF726E3F569 - 0F29 70 E8            - movaps [rax-18],xmm6
+7FF726E3F56D - 48 8D 45 37           - lea rax,[rbp+37]
+7FF726E3F571 - 0F29 45 17            - movaps [rbp+17],xmm0
+7FF726E3F575 - 48 89 44 24 20        - mov [rsp+20],rax
+7FF726E3F57A - E8 61E60A00           - call 7FF726EEDBE0
+7FF726E3F57F - F3 0F10 35 B1FB6E01   - movss xmm6,[7FF72852F138]
+7FF726E3F587 - 0F28 50 20            - movaps xmm2,[rax+20]
+7FF726E3F58B - 0F28 00               - movaps xmm0,[rax]
+7FF726E3F58E - 0F28 48 10            - movaps xmm1,[rax+10]
+7FF726E3F592 - 0F28 58 30            - movaps xmm3,[rax+30]
+7FF726E3F596 - 0F29 03               - movaps [rbx],xmm0
+7FF726E3F599 - 0F29 4B 10            - movaps [rbx+10],xmm1
+7FF726E3F59D - 0F29 53 20            - movaps [rbx+20],xmm2
+7FF726E3F5A1 - 0F29 5B 30            - movaps [rbx+30],xmm3
+7FF726E3F5A5 - F3 0F10 97 A0000000   - movss xmm2,[rdi+000000A0]
+7FF726E3F5AD - 0F2E D6               - ucomiss xmm2,xmm6
+7FF726E3F5B0 - 7A 02                 - jp 7FF726E3F5B4
+7FF726E3F5B2 - 74 4D                 - je 7FF726E3F601
+7FF726E3F5B4 - 0F57 C0               - xorps xmm0,xmm0
+7FF726E3F5B7 - 48 8D 55 D7           - lea rdx,[rbp-29]
+7FF726E3F5BB - 0F28 E2               - movaps xmm4,xmm2
+7FF726E3F5BE - 0F57 C9               - xorps xmm1,xmm1
+7FF726E3F5C1 - 0F14 E0               - unpcklps xmm4,xmm0
+7FF726E3F5C4 - 0F57 DB               - xorps xmm3,xmm3
+7FF726E3F5C7 - 0F14 E1               - unpcklps xmm4,xmm1
+7FF726E3F5CA - 48 8B CB              - mov rcx,rbx
+7FF726E3F5CD - 0F28 CA               - movaps xmm1,xmm2
+7FF726E3F5D0 - 0F29 65 D7            - movaps [rbp-29],xmm4
+7FF726E3F5D4 - 0F14 C8               - unpcklps xmm1,xmm0
+7FF726E3F5D7 - 0F28 C2               - movaps xmm0,xmm2
+7FF726E3F5DA - 0F57 D2               - xorps xmm2,xmm2
+7FF726E3F5DD - 0F14 D9               - unpcklps xmm3,xmm1
+7FF726E3F5E0 - 0F14 D0               - unpcklps xmm2,xmm0
+7FF726E3F5E3 - 0F57 C9               - xorps xmm1,xmm1
+7FF726E3F5E6 - 0F28 05 A3A86C01      - movaps xmm0,[7FF728509E90]
+7FF726E3F5ED - 0F14 D1               - unpcklps xmm2,xmm1
+7FF726E3F5F0 - 0F29 55 F7            - movaps [rbp-09],xmm2
+7FF726E3F5F4 - 0F29 5D E7            - movaps [rbp-19],xmm3
+7FF726E3F5F8 - 0F29 45 07            - movaps [rbp+07],xmm0
+7FF726E3F5FC - E8 2F5969FE           - call 7FF7254D4F30
+7FF726E3F601 - F3 0F10 87 A4000000   - movss xmm0,[rdi+000000A4]
+7FF726E3F609 - 0F2E C6               - ucomiss xmm0,xmm6
+7FF726E3F60C - 7A 06                 - jp 7FF726E3F614
+7FF726E3F60E - 0F84 84000000         - je 7FF726E3F698
+7FF726E3F614 - F3 0F5C F0            - subss xmm6,xmm0
+7FF726E3F618 - F3 0F11 45 9B         - movss [rbp-65],xmm0
+7FF726E3F61D - F3 0F11 45 87         - movss [rbp-79],xmm0
+7FF726E3F622 - 48 8D 55 D7           - lea rdx,[rbp-29]
+7FF726E3F626 - F3 0F11 45 AF         - movss [rbp-51],xmm0
+7FF726E3F62B - 48 8B CB              - mov rcx,rbx
+7FF726E3F62E - 48 C7 45 93 00000000  - mov qword ptr [rbp-6D],00000000
+7FF726E3F636 - 48 C7 45 8B 00000000  - mov qword ptr [rbp-75],00000000
+7FF726E3F63E - F3 0F59 35 DAFA6E01   - mulss xmm6,[7FF72852F120]
+7FF726E3F646 - 48 C7 45 9F 00000000  - mov qword ptr [rbp-61],00000000
+7FF726E3F64E - 0F28 45 87            - movaps xmm0,[rbp-79]
+7FF726E3F652 - 0F28 4D 97            - movaps xmm1,[rbp-69]
+7FF726E3F656 - 0F29 45 D7            - movaps [rbp-29],xmm0
+7FF726E3F65A - 0F29 4D E7            - movaps [rbp-19],xmm1
+7FF726E3F65E - F3 0F11 75 B7         - movss [rbp-49],xmm6
+7FF726E3F663 - F3 0F11 75 BB         - movss [rbp-45],xmm6
+7FF726E3F668 - F3 0F11 75 BF         - movss [rbp-41],xmm6
+7FF726E3F66D - 48 C7 45 A7 00000000  - mov qword ptr [rbp-59],00000000
+7FF726E3F675 - C7 45 B3 00000000     - mov [rbp-4D],00000000
+7FF726E3F67C - 0F28 45 A7            - movaps xmm0,[rbp-59]
+7FF726E3F680 - C7 45 C3 0000803F     - mov [rbp-3D],3F800000
+7FF726E3F687 - 0F28 4D B7            - movaps xmm1,[rbp-49]
+7FF726E3F68B - 0F29 4D 07            - movaps [rbp+07],xmm1
+7FF726E3F68F - 0F29 45 F7            - movaps [rbp-09],xmm0
+7FF726E3F693 - E8 985869FE           - call 7FF7254D4F30
+7FF726E3F698 - 4C 8D 9C 24 00010000  - lea r11,[rsp+00000100]
+7FF726E3F6A0 - 48 8B C3              - mov rax,rbx
+7FF726E3F6A3 - 49 8B 5B 20           - mov rbx,[r11+20]
+7FF726E3F6A7 - 49 8B 7B 28           - mov rdi,[r11+28]
+7FF726E3F6AB - 41 0F28 73 F0         - movaps xmm6,[r11-10]
+7FF726E3F6B0 - 49 8B E3              - mov rsp,r11
+7FF726E3F6B3 - 5D                    - pop rbp
+7FF726E3F6B4 - C3                    - ret 
+
+
+RELEVANT FUNCTION:
+
+7FF726E3F6B6 - 4C 87 76 08           - xchg [rsi+08],r14
+7FF726E3F6BA - EB 73                 - jmp 7FF726E3F72F
+7FF726E3F6BC - 0D 7A237348           - or eax,4873237A
+7FF726E3F6C1 - 8B C4                 - mov eax,esp
+7FF726E3F6C3 - 53                    - push rbx
+7FF726E3F6C4 - 48 81 EC A0000000     - sub rsp,000000A0
+7FF726E3F6CB - 0F29 78 E8            - movaps [rax-18],xmm7
+7FF726E3F6CF - 0F57 C9               - xorps xmm1,xmm1
+7FF726E3F6D2 - 44 0F29 40 D8         - movaps [rax-28],xmm8
+7FF726E3F6D7 - 48 8B D9              - mov rbx,rcx
+7FF726E3F6DA - 44 0F29 48 C8         - movaps [rax-38],xmm9
+7FF726E3F6DF - 44 0F29 50 B8         - movaps [rax-48],xmm10
+7FF726E3F6E4 - F3 44 0F10 52 6C      - movss xmm10,[rdx+6C]
+7FF726E3F6EA - 44 0F2E D1            - ucomiss xmm10,xmm1
+7FF726E3F6EE - 44 0F29 58 A8         - movaps [rax-58],xmm11
+7FF726E3F6F3 - 44 0F28 DB            - movaps xmm11,xmm3
+7FF726E3F6F7 - 44 0F29 60 98         - movaps [rax-68],xmm12
+7FF726E3F6FC - 44 0F28 E2            - movaps xmm12,xmm2
+7FF726E3F700 - 7A 1E                 - jp 7FF726E3F720
+7FF726E3F702 - 75 1C                 - jne 7FF726E3F720
+7FF726E3F704 - 8B 42 5C              - mov eax,[rdx+5C]
+7FF726E3F707 - 45 0F57 D2            - xorps xmm10,xmm10
+7FF726E3F70B - 0F57 C0               - xorps xmm0,xmm0
+7FF726E3F70E - F3 4C 0F2A D0         - cvtsi2ss xmm10,rax
+7FF726E3F713 - 8B 42 60              - mov eax,[rdx+60]
+7FF726E3F716 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+7FF726E3F71B - F3 44 0F5E D0         - divss xmm10,xmm0
+7FF726E3F720 - F3 0F10 BC 24 D0000000  - movss xmm7,[rsp+000000D0]
+7FF726E3F729 - 0F2F F9               - comiss xmm7,xmm1
+7FF726E3F72C - F3 44 0F10 0D 03FA6E01  - movss xmm9,[7FF72852F138]
+7FF726E3F735 - 45 0F28 C1            - movaps xmm8,xmm9
+7FF726E3F739 - 76 0C                 - jna 7FF726E3F747
+7FF726E3F73B - F3 41 0F58 F9         - addss xmm7,xmm9
+7FF726E3F740 - F3 44 0F5E C7         - divss xmm8,xmm7
+7FF726E3F745 - EB 0E                 - jmp 7FF726E3F755
+7FF726E3F747 - F3 44 0F5C C7         - subss xmm8,xmm7
+7FF726E3F74C - 41 0F28 F9            - movaps xmm7,xmm9
+7FF726E3F750 - F3 41 0F5E F8         - divss xmm7,xmm8
+7FF726E3F755 - F3 0F10 42 50         - movss xmm0,[rdx+50]                 <----- SIGNATURE
+7FF726E3F75A - F3 0F59 05 BEF96E01   - mulss xmm0,[7FF72852F120]
+7FF726E3F762 - E8 994D9900           - call 7FF7277D4500
+7FF726E3F767 - F3 41 0F5C C1         - subss xmm0,xmm9
+7FF726E3F76C - F3 45 0F59 C2         - mulss xmm8,xmm10                    <----- CHANGE TO 0xf3 0x0f 0x5c 0xc0 0x90
+7FF726E3F771 - 4C 8D 9C 24 A0000000  - lea r11,[rsp+000000A0]
+7FF726E3F779 - 48 8B C3              - mov rax,rbx
+7FF726E3F77C - 45 0F28 53 C0         - movaps xmm10,[r11-40]
+7FF726E3F781 - F3 45 0F5E E3         - divss xmm12,xmm11
+7FF726E3F786 - F3 0F59 84 24 D8000000  - mulss xmm0,[rsp+000000D8]
+7FF726E3F78F - F3 44 0F11 64 24 28   - movss [rsp+28],xmm12
+7FF726E3F796 - 45 0F28 63 A0         - movaps xmm12,[r11-60]
+7FF726E3F79B - F3 41 0F58 C1         - addss xmm0,xmm9
+7FF726E3F7A0 - F3 44 0F59 C0         - mulss xmm8,xmm0
+7FF726E3F7A5 - F3 0F59 C7            - mulss xmm0,xmm7
+7FF726E3F7A9 - 41 0F28 7B F0         - movaps xmm7,[r11-10]
+7FF726E3F7AE - F3 44 0F11 44 24 20   - movss [rsp+20],xmm8
+7FF726E3F7B5 - 45 0F28 43 E0         - movaps xmm8,[r11-20]
+7FF726E3F7BA - F3 0F11 44 24 24      - movss [rsp+24],xmm0
+7FF726E3F7C0 - 41 0F28 C3            - movaps xmm0,xmm11
+7FF726E3F7C4 - F3 0F59 05 54F96E01   - mulss xmm0,[7FF72852F120]
+7FF726E3F7CC - F3 44 0F5C C8         - subss xmm9,xmm0
+7FF726E3F7D1 - F3 45 0F5E CB         - divss xmm9,xmm11
+7FF726E3F7D6 - 45 0F28 5B B0         - movaps xmm11,[r11-50]
+7FF726E3F7DB - 44 0F57 0D 4D076F01   - xorps xmm9,[7FF72852FF30]
+7FF726E3F7E3 - F3 44 0F11 4C 24 2C   - movss [rsp+2C],xmm9
+7FF726E3F7EA - 0F28 44 24 20         - movaps xmm0,[rsp+20]
+7FF726E3F7EF - 45 0F28 4B D0         - movaps xmm9,[r11-30]
+7FF726E3F7F4 - 0F11 03               - movups [rbx],xmm0
+7FF726E3F7F7 - 49 8B E3              - mov rsp,r11
+7FF726E3F7FA - 5B                    - pop rbx
+7FF726E3F7FB - C3                    - ret 
+
+
+FUNCTION BELOW:
+
+7FF726E3F7FC - 90                    - nop 
+7FF726E3F7FD - 8B 01                 - mov eax,[rcx]
+7FF726E3F7FF - 39 0F                 - cmp [rdi],ecx
+7FF726E3F801 - 28 05 A9FA6E01        - sub [7FF72852F2B0],al
+7FF726E3F807 - 48 8D 91 AC000000     - lea rdx,[rcx+000000AC]
+7FF726E3F80E - 45 33 D2              - xor r10d,r10d
+7FF726E3F811 - C7 41 04 0000803F     - mov [rcx+04],3F800000
+7FF726E3F818 - 48 8D 42 08           - lea rax,[rdx+08]
+7FF726E3F81C - 44 89 11              - mov [rcx],r10d
+7FF726E3F81F - 48 3B D0              - cmp rdx,rax
+7FF726E3F822 - C7 41 20 07000000     - mov [rcx+20],00000007
+7FF726E3F829 - 41 B9 02000000        - mov r9d,00000002
+7FF726E3F82F - C7 41 24 0000003F     - mov [rcx+24],3F000000
+7FF726E3F836 - 45 0F47 CA            - cmova r9d,r10d
+7FF726E3F83A - C7 41 30 CDCC0C40     - mov [rcx+30],400CCCCD
+7FF726E3F841 - 0F11 41 10            - movups [rcx+10],xmm0
+7FF726E3F845 - C7 41 34 00007A43     - mov [rcx+34],437A0000
+7FF726E3F84C - 45 8B C2              - mov r8d,r10d
+7FF726E3F84F - C7 41 28 CDCCCC3F     - mov [rcx+28],3FCCCCCD
+7FF726E3F856 - C7 41 2C 9A99D93F     - mov [rcx+2C],3FD9999A
+7FF726E3F85D - 66 C7 81 E8000000 0101 - mov word ptr [rcx+000000E8],0101
+7FF726E3F866 - 44 88 51 38           - mov [rcx+38],r10l
+7FF726E3F86A - C7 41 3C 000000C0     - mov [rcx+3C],C0000000
+7FF726E3F871 - C7 41 40 0000803F     - mov [rcx+40],3F800000
+7FF726E3F878 - C7 41 44 0000003F     - mov [rcx+44],3F000000
+7FF726E3F87F - C7 41 48 00008040     - mov [rcx+48],40800000
+7FF726E3F886 - C7 41 4C 00000041     - mov [rcx+4C],41000000
+7FF726E3F88D - C7 41 50 000000C1     - mov [rcx+50],C1000000
+7FF726E3F894 - 66 44 89 51 54        - mov [rcx+54],r10w
+7FF726E3F899 - C7 41 58 07000000     - mov [rcx+58],00000007
+7FF726E3F8A0 - C7 41 64 0000803F     - mov [rcx+64],3F800000
+7FF726E3F8A7 - C7 41 60 0000003F     - mov [rcx+60],3F000000
+7FF726E3F8AE - C7 41 6C 0000803F     - mov [rcx+6C],3F800000
+7FF726E3F8B5 - C7 41 5C 0000803F     - mov [rcx+5C],3F800000
+7FF726E3F8BC - 44 89 51 68           - mov [rcx+68],r10d
+7FF726E3F8C0 - C7 41 70 CDCC4C3F     - mov [rcx+70],3F4CCCCD
+7FF726E3F8C7 - 48 C7 41 74 CDCC4C3F  - mov qword ptr [rcx+74],3F4CCCCD
+7FF726E3F8CF - C7 41 7C 0000803F     - mov [rcx+7C],3F800000
+7FF726E3F8D6 - 0F11 81 80000000      - movups [rcx+00000080],xmm0
+7FF726E3F8DD - C7 81 A0000000 0000803F - mov [rcx+000000A0],3F800000
+7FF726E3F8E7 - 0F11 81 90000000      - movups [rcx+00000090],xmm0
+7FF726E3F8EE - C7 81 A4000000 0000803F - mov [rcx+000000A4],3F800000
+7FF726E3F8F8 - 44 88 91 A8000000     - mov [rcx+000000A8],r10l
+7FF726E3F8FF - 77 0F                 - ja 7FF726E3F910
+7FF726E3F901 - 49 FF C0              - inc r8
+7FF726E3F904 - 44 89 12              - mov [rdx],r10d
+7FF726E3F907 - 48 8D 52 04           - lea rdx,[rdx+04]
+7FF726E3F90B - 4D 3B C1              - cmp r8,r9
+7FF726E3F90E - 75 F1                 - jne 7FF726E3F901
+7FF726E3F910 - C7 81 B4000000 0000803F - mov [rcx+000000B4],3F800000
+7FF726E3F91A - 48 C7 81 B8000000 0000003F - mov qword ptr [rcx+000000B8],3F000000
+7FF726E3F925 - 44 89 91 C0000000     - mov [rcx+000000C0],r10d
+7FF726E3F92C - 48 C7 81 C4000000 07000000 - mov qword ptr [rcx+000000C4],00000007
+7FF726E3F937 - 44 88 91 CC000000     - mov [rcx+000000CC],r10l
+7FF726E3F93E - 44 89 91 D0000000     - mov [rcx+000000D0],r10d
+7FF726E3F945 - 48 C7 81 D4000000 0000003F - mov qword ptr [rcx+000000D4],3F000000
+7FF726E3F950 - 48 C7 81 DC000000 CDCCCC3E - mov qword ptr [rcx+000000DC],3ECCCCCD
+7FF726E3F95B - 44 89 91 E4000000     - mov [rcx+000000E4],r10d
+7FF726E3F962 - C3                    - ret 
+

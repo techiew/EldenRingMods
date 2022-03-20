@@ -10,6 +10,8 @@
 #include <xinput.h>
 #include <sstream>
 
+#include "ini.h"
+
 namespace ModUtils
 {
 	static std::string muModuleName = "";
@@ -20,7 +22,7 @@ namespace ModUtils
 	static const int MASKED = 0xffff;
 	constexpr unsigned char HK_NONE = 0x07;
 
-	inline std::string GetModuleName(bool thisModule)
+	inline std::string GetModuleName(bool thisModule = true)
 	{
 		static char dummy = 'x';
 		HMODULE module = NULL;
@@ -94,6 +96,8 @@ namespace ModUtils
 
 	inline uintptr_t SigScan(std::vector<uint16_t> pattern)
 	{
+		Log("Process name: %s", GetModuleName(false).c_str());
+
 		std::string patternString = "";
 		for (auto bytes : pattern)
 		{
@@ -112,40 +116,18 @@ namespace ModUtils
 		}
 		Log("Pattern: %s", patternString.c_str());
 
-		HANDLE process = GetCurrentProcess();
-		Log("Process handle: %i", process);
-
-		std::string moduleName = GetModuleName(false);
-		HMODULE module = GetModuleHandleA(moduleName.c_str());
-		if (module == NULL)
-		{
-			Log("Failed to get module handle of %s: %i", moduleName, GetLastError());
-			RaiseError("Failed to get module handle!");
-			return 0;
-		}
-
-		MODULEINFO modInfo = { 0 };
-		if (GetModuleInformation(process, module, &modInfo, sizeof(MODULEINFO)) == 0)
-		{
-			Log("GetModuleInformation failed for: %s, %i", moduleName, GetLastError());
-			RaiseError("Failed to get module information!");
-			return 0;
-		}
-
-		uintptr_t currentAddress = (uintptr_t)modInfo.lpBaseOfDll;
-		uintptr_t end = currentAddress + (uintptr_t)modInfo.SizeOfImage;
-		Log("%s bounds = %p - %p", moduleName.c_str(), currentAddress, end);
-
+		uintptr_t currentAddress = 0;
+		uintptr_t regionStart = 0x7ff700000000;
 		size_t numRegionsChecked = 0;
-		while (numRegionsChecked < 123)
+		while (numRegionsChecked < 200)
 		{
 			MEMORY_BASIC_INFORMATION memoryInfo = { 0 };
-			if (VirtualQuery((void*)currentAddress, &memoryInfo, sizeof(MEMORY_BASIC_INFORMATION)) == 0)
+			if (VirtualQuery((void*)regionStart, &memoryInfo, sizeof(MEMORY_BASIC_INFORMATION)) == 0)
 			{
 				Log("VirtualQuery failed: %i", GetLastError());
-				continue;
+				break;
 			}
-			uintptr_t regionStart = (uintptr_t)memoryInfo.BaseAddress;
+			regionStart = (uintptr_t)memoryInfo.BaseAddress;
 			uintptr_t regionSize = (uintptr_t)memoryInfo.RegionSize;
 			uintptr_t regionEnd = regionStart + regionSize;
 			uintptr_t protection = (uintptr_t)memoryInfo.Protect;
@@ -153,7 +135,8 @@ namespace ModUtils
 
 			if ((protection == PAGE_EXECUTE_READWRITE || protection == PAGE_READWRITE) && state == MEM_COMMIT)
 			{
-				Log("Checking region: %p", memoryInfo.BaseAddress);
+				Log("Checking region: %p", regionStart);
+				currentAddress = regionStart;
 				while (currentAddress < regionEnd - pattern.size())
 				{
 					for (size_t i = 0; i < pattern.size(); i++)
@@ -177,14 +160,15 @@ namespace ModUtils
 						currentAddress++;
 					}
 				}
-				numRegionsChecked++;
 			}
 			else
 			{
-				currentAddress += memoryInfo.RegionSize;
 				Log("Skipped region: %p", regionStart);
 			}
+			numRegionsChecked++;
+			regionStart += memoryInfo.RegionSize;
 		}
+
 		Log("Stopped at: %p, num regions checked: %i", currentAddress, numRegionsChecked);
 		RaiseError("Could not find signature!");
 		return 0;
@@ -278,8 +262,7 @@ namespace ModUtils
 		{
 			for (DWORD controllerIndex = 0; controllerIndex < XUSER_MAX_COUNT; controllerIndex++)
 			{
-				XINPUT_STATE state;
-				ZeroMemory(&state, sizeof(XINPUT_STATE));
+				XINPUT_STATE state = { 0 };
 				DWORD result = XInputGetState(controllerIndex, &state);
 				if (result == ERROR_SUCCESS)
 				{
@@ -291,7 +274,7 @@ namespace ModUtils
 					{
 						modifierPressed = true;
 					}
-					else if (state.Gamepad.wButtons == (key + modifier))
+					else if (state.Gamepad.wButtons == (key | modifier))
 					{
 						keyPressed = true;
 						modifierPressed = true;

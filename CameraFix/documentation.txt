@@ -1,0 +1,645 @@
+0f 29 a6 ? ? ? ? 41 0f 28 cf 48 8b ce
+
+FUNCTION ABOVE:
+
+7FF7256FF840 - 48 83 EC 48           - sub rsp,48
+7FF7256FF844 - 0F28 22               - movaps xmm4,[rdx]
+7FF7256FF847 - 0F57 C9               - xorps xmm1,xmm1
+7FF7256FF84A - F3 0F10 42 08         - movss xmm0,[rdx+08]
+7FF7256FF84F - F3 0F10 52 04         - movss xmm2,[rdx+04]
+7FF7256FF854 - F3 0F10 1A            - movss xmm3,[rdx]
+7FF7256FF858 - 0F14 D8               - unpcklps xmm3,xmm0
+7FF7256FF85B - 0F28 C4               - movaps xmm0,xmm4
+7FF7256FF85E - 0F14 D1               - unpcklps xmm2,xmm1
+7FF7256FF861 - 0F28 CC               - movaps xmm1,xmm4
+7FF7256FF864 - 0F14 DA               - unpcklps xmm3,xmm2
+7FF7256FF867 - 0F58 59 40            - addps xmm3,[rcx+40]
+7FF7256FF86B - 0F29 59 40            - movaps [rcx+40],xmm3
+7FF7256FF86F - 0F58 81 A0000000      - addps xmm0,[rcx+000000A0]
+7FF7256FF876 - 0F29 81 A0000000      - movaps [rcx+000000A0],xmm0
+7FF7256FF87D - 0F28 C4               - movaps xmm0,xmm4
+7FF7256FF880 - 0F58 89 B0000000      - addps xmm1,[rcx+000000B0]
+7FF7256FF887 - 0F29 89 B0000000      - movaps [rcx+000000B0],xmm1
+7FF7256FF88E - 0F58 81 C0000000      - addps xmm0,[rcx+000000C0]
+7FF7256FF895 - 0F29 81 C0000000      - movaps [rcx+000000C0],xmm0
+7FF7256FF89C - 0F28 C4               - movaps xmm0,xmm4
+7FF7256FF89F - 0F28 89 D0000000      - movaps xmm1,[rcx+000000D0]
+7FF7256FF8A6 - 0F58 CC               - addps xmm1,xmm4
+7FF7256FF8A9 - 0F29 89 D0000000      - movaps [rcx+000000D0],xmm1
+7FF7256FF8B0 - 0F28 CC               - movaps xmm1,xmm4
+7FF7256FF8B3 - 0F58 81 E0000000      - addps xmm0,[rcx+000000E0]
+7FF7256FF8BA - 0F29 81 E0000000      - movaps [rcx+000000E0],xmm0
+7FF7256FF8C1 - 0F58 89 F0000000      - addps xmm1,[rcx+000000F0]
+7FF7256FF8C8 - 0F29 89 F0000000      - movaps [rcx+000000F0],xmm1
+7FF7256FF8CF - 0F28 CC               - movaps xmm1,xmm4
+7FF7256FF8D2 - 0F28 81 00010000      - movaps xmm0,[rcx+00000100]
+7FF7256FF8D9 - 0F58 C4               - addps xmm0,xmm4
+7FF7256FF8DC - 0F29 81 00010000      - movaps [rcx+00000100],xmm0
+7FF7256FF8E3 - 0F58 89 10010000      - addps xmm1,[rcx+00000110]
+7FF7256FF8EA - 0F28 C1               - movaps xmm0,xmm1
+7FF7256FF8ED - F3 0F11 4C 24 20      - movss [rsp+20],xmm1
+7FF7256FF8F3 - 0FC6 C1 55            - shufps xmm0,xmm1,55
+7FF7256FF8F7 - F3 0F11 44 24 24      - movss [rsp+24],xmm0
+7FF7256FF8FD - F3 0F10 05 A7EF1204   - movss xmm0,[7FF72982E8AC]
+7FF7256FF905 - F3 0F11 44 24 2C      - movss [rsp+2C],xmm0
+7FF7256FF90B - 0FC6 C9 AA            - shufps xmm1,xmm1,-56
+7FF7256FF90F - F3 0F11 4C 24 28      - movss [rsp+28],xmm1
+7FF7256FF915 - 0F28 4C 24 20         - movaps xmm1,[rsp+20]
+7FF7256FF91A - 0F29 89 10010000      - movaps [rcx+00000110],xmm1
+7FF7256FF921 - 0F28 81 50040000      - movaps xmm0,[rcx+00000450]
+7FF7256FF928 - 0F58 C4               - addps xmm0,xmm4
+7FF7256FF92B - 0F29 81 50040000      - movaps [rcx+00000450],xmm0
+7FF7256FF932 - 0F28 89 F0020000      - movaps xmm1,[rcx+000002F0]
+7FF7256FF939 - 0F58 CC               - addps xmm1,xmm4
+7FF7256FF93C - 0F29 89 F0020000      - movaps [rcx+000002F0],xmm1
+7FF7256FF943 - 0F28 81 00030000      - movaps xmm0,[rcx+00000300]
+7FF7256FF94A - 0F58 C4               - addps xmm0,xmm4
+7FF7256FF94D - 0F29 81 00030000      - movaps [rcx+00000300],xmm0
+7FF7256FF954 - 48 81 C1 10020000     - add rcx,00000210
+7FF7256FF95B - 48 83 C4 48           - add rsp,48
+7FF7256FF95F - E9 EC8F9E00           - jmp 7FF7260E8950
+7FF7256FF964 - 53                    - push rbx
+7FF7256FF965 - 8B 14 24              - mov edx,[rsp]
+7FF7256FF968 - 5B                    - pop rbx
+7FF7256FF969 - 57                    - push rdi
+7FF7256FF96A - 59                    - pop rcx
+7FF7256FF96B - E9 05360901           - jmp 7FF726792F75
+7FF7256FF970 - 40 53                 - push rbx
+7FF7256FF972 - 48 83 EC 30           - sub rsp,30
+7FF7256FF976 - 49 8B C0              - mov rax,r8
+7FF7256FF979 - 4C 8B CA              - mov r9,rdx
+7FF7256FF97C - 0F28 C3               - movaps xmm0,xmm3
+7FF7256FF97F - 4C 8D 44 24 20        - lea r8,[rsp+20]
+7FF7256FF984 - 0FC6 C0 00            - shufps xmm0,xmm0,00
+7FF7256FF988 - 48 8B D9              - mov rbx,rcx
+7FF7256FF98B - 48 8B D0              - mov rdx,rax
+7FF7256FF98E - 0F29 44 24 20         - movaps [rsp+20],xmm0
+7FF7256FF993 - 49 8B C9              - mov rcx,r9
+7FF7256FF996 - E8 8526DAFF           - call 7FF7254A2020
+7FF7256FF99B - 0F29 03               - movaps [rbx],xmm0
+7FF7256FF99E - 48 8B C3              - mov rax,rbx
+7FF7256FF9A1 - 48 83 C4 30           - add rsp,30
+7FF7256FF9A5 - 5B                    - pop rbx
+7FF7256FF9A6 - C3                    - ret 
+
+
+
+
+RELEVANT FUNCTION:
+
+7FF7256FF9A7 - 48 89 04 24           - mov [rsp],rax
+7FF7256FF9AB - E9 946DBE04           - jmp 7FF72A2E6744
+7FF7256FF9B0 - 40 55                 - push rbp
+7FF7256FF9B2 - 53                    - push rbx
+7FF7256FF9B3 - 56                    - push rsi
+7FF7256FF9B4 - 57                    - push rdi
+7FF7256FF9B5 - 41 56                 - push r14
+7FF7256FF9B7 - 41 57                 - push r15
+7FF7256FF9B9 - 48 8D AC 24 98FEFFFF  - lea rbp,[rsp-00000168]
+7FF7256FF9C1 - 48 81 EC 68020000     - sub rsp,00000268
+7FF7256FF9C8 - 44 0F29 BC 24 C0010000  - movaps [rsp+000001C0],xmm15
+7FF7256FF9D1 - 48 8B 05 78CA7A03     - mov rax,[7FF728EAC450]
+7FF7256FF9D8 - 48 33 C4              - xor rax,rsp
+7FF7256FF9DB - 48 89 85 B0000000     - mov [rbp+000000B0],rax
+7FF7256FF9E2 - 4C 8B 35 5F4A8C03     - mov r14,[7FF728FC4448]
+7FF7256FF9E9 - 4D 8B F9              - mov r15,r9
+7FF7256FF9EC - 49 8B D8              - mov rbx,r8
+7FF7256FF9EF - 44 0F28 F9            - movaps xmm15,xmm1
+7FF7256FF9F3 - 48 8B F1              - mov rsi,rcx
+7FF7256FF9F6 - 4D 85 F6              - test r14,r14
+7FF7256FF9F9 - 75 2E                 - jne 7FF7256FFA29
+7FF7256FF9FB - 48 8D 0D 3FA28A03     - lea rcx,[7FF728FA9C41]
+7FF7256FFA02 - E8 6900A701           - call 7FF72716FA70
+7FF7256FFA07 - 4C 8B C8              - mov r9,rax
+7FF7256FFA0A - 4C 8D 05 D73BE202     - lea r8,[7FF7285235E8]
+7FF7256FFA11 - BA B4000000           - mov edx,000000B4
+7FF7256FFA16 - 48 8D 0D 03705602     - lea rcx,[7FF727C66A20]
+7FF7256FFA1D - E8 0E84A601           - call 7FF727167E30
+7FF7256FFA22 - 4C 8B 35 1F4A8C03     - mov r14,[7FF728FC4448]
+7FF7256FFA29 - 0F28 96 90020000      - movaps xmm2,[rsi+00000290]
+7FF7256FFA30 - 48 8D 8E 8C040000     - lea rcx,[rsi+0000048C]
+7FF7256FFA37 - 0F28 86 80020000      - movaps xmm0,[rsi+00000280]
+7FF7256FFA3E - F3 0F10 8E D0020000   - movss xmm1,[rsi+000002D0]
+7FF7256FFA46 - 4D 8B B6 98000000     - mov r14,[r14+00000098]
+7FF7256FFA4D - F3 0F59 C9            - mulss xmm1,xmm1
+7FF7256FFA51 - 0FC6 C0 44            - shufps xmm0,xmm0,44
+7FF7256FFA55 - 0FC6 D2 44            - shufps xmm2,xmm2,44
+7FF7256FFA59 - 0F5C D0               - subps xmm2,xmm0
+7FF7256FFA5C - 0F28 D9               - movaps xmm3,xmm1
+7FF7256FFA5F - 0F28 86 80020000      - movaps xmm0,[rsi+00000280]
+7FF7256FFA66 - 0FC6 C0 44            - shufps xmm0,xmm0,44
+7FF7256FFA6A - 0FC6 DB 00            - shufps xmm3,xmm3,00
+7FF7256FFA6E - 0FC6 D2 44            - shufps xmm2,xmm2,44
+7FF7256FFA72 - 0F59 D3               - mulps xmm2,xmm3
+7FF7256FFA75 - 0FC6 D2 44            - shufps xmm2,xmm2,44
+7FF7256FFA79 - 0F58 D0               - addps xmm2,xmm0
+7FF7256FFA7C - 0F29 96 70020000      - movaps [rsi+00000270],xmm2
+7FF7256FFA83 - 0F28 8E C0020000      - movaps xmm1,[rsi+000002C0]
+7FF7256FFA8A - 0F28 86 B0020000      - movaps xmm0,[rsi+000002B0]
+7FF7256FFA91 - 0FC6 C9 44            - shufps xmm1,xmm1,44
+7FF7256FFA95 - 0FC6 C0 44            - shufps xmm0,xmm0,44
+7FF7256FFA99 - 0F5C C8               - subps xmm1,xmm0
+7FF7256FFA9C - 0F28 86 B0020000      - movaps xmm0,[rsi+000002B0]
+7FF7256FFAA3 - 0FC6 C0 44            - shufps xmm0,xmm0,44
+7FF7256FFAA7 - 0FC6 C9 44            - shufps xmm1,xmm1,44
+7FF7256FFAAB - 0F59 CB               - mulps xmm1,xmm3
+7FF7256FFAAE - 0FC6 C9 44            - shufps xmm1,xmm1,44
+7FF7256FFAB2 - 0F58 C8               - addps xmm1,xmm0
+7FF7256FFAB5 - 0F29 8E A0020000      - movaps [rsi+000002A0],xmm1
+7FF7256FFABC - 41 0F28 CF            - movaps xmm1,xmm15
+7FF7256FFAC0 - E8 DB9E9E00           - call 7FF7260E99A0
+7FF7256FFAC5 - 80 BE 12030000 00     - cmp byte ptr [rsi+00000312],00
+7FF7256FFACC - BF 01000000           - mov edi,00000001
+7FF7256FFAD1 - 75 0D                 - jne 7FF7256FFAE0
+7FF7256FFAD3 - 80 3D 261C8B03 00     - cmp byte ptr [7FF728FB1700],00
+7FF7256FFADA - 75 04                 - jne 7FF7256FFAE0
+7FF7256FFADC - 33 C0                 - xor eax,eax
+7FF7256FFADE - EB 02                 - jmp 7FF7256FFAE2
+7FF7256FFAE0 - 8B C7                 - mov eax,edi
+7FF7256FFAE2 - 88 86 12030000        - mov [rsi+00000312],al
+7FF7256FFAE8 - 88 05 131C8B03        - mov [7FF728FB1701],al
+7FF7256FFAEE - 48 85 DB              - test rbx,rbx
+7FF7256FFAF1 - 0F84 D9070000         - je 7FF7257002D0
+7FF7256FFAF7 - 4D 85 FF              - test r15,r15
+7FF7256FFAFA - 0F84 D0070000         - je 7FF7257002D0
+7FF7256FFB00 - 44 0F29 8C 24 20020000  - movaps [rsp+00000220],xmm9
+7FF7256FFB09 - 48 8B CB              - mov rcx,rbx
+7FF7256FFB0C - 44 0F29 9C 24 00020000  - movaps [rsp+00000200],xmm11
+7FF7256FFB15 - E8 86D70300           - call 7FF72573D2A0
+7FF7256FFB1A - 84 C0                 - test al,al
+7FF7256FFB1C - 74 17                 - je 7FF7256FFB35
+7FF7256FFB1E - 48 8B 83 90010000     - mov rax,[rbx+00000190]
+7FF7256FFB25 - 48 8B 88 E8000000     - mov rcx,[rax+000000E8]
+7FF7256FFB2C - E8 3FC80B00           - call 7FF7257BC370
+7FF7256FFB31 - 84 C0                 - test al,al
+7FF7256FFB33 - 75 02                 - jne 7FF7256FFB37
+7FF7256FFB35 - 33 FF                 - xor edi,edi
+7FF7256FFB37 - 41 0F28 CF            - movaps xmm1,xmm15
+7FF7256FFB3B - 0F29 B4 24 50020000   - movaps [rsp+00000250],xmm6
+7FF7256FFB43 - 48 8B CE              - mov rcx,rsi
+7FF7256FFB46 - 40 88 BE 88040000     - mov [rsi+00000488],dil
+7FF7256FFB4D - E8 FE180000           - call 7FF725701450
+7FF7256FFB52 - 0F10 86 20010000      - movups xmm0,[rsi+00000120]
+7FF7256FFB59 - 48 8D 55 F0           - lea rdx,[rbp-10]
+7FF7256FFB5D - 49 8B CF              - mov rcx,r15
+7FF7256FFB60 - 44 0F10 9E 30010000   - movups xmm11,[rsi+00000130]
+7FF7256FFB68 - 0F29 45 E0            - movaps [rbp-20],xmm0
+7FF7256FFB6C - E8 9F9D0300           - call 7FF725739910
+7FF7256FFB71 - 0F28 05 3819C402      - movaps xmm0,[7FF7283414B0]
+7FF7256FFB78 - 0F28 0D 4119C402      - movaps xmm1,[7FF7283414C0]
+7FF7256FFB7F - F3 44 0F10 0D B0F5E202  - movss xmm9,[7FF72852F138]
+7FF7256FFB88 - 0F29 44 24 40         - movaps [rsp+40],xmm0
+7FF7256FFB8D - 0F28 05 3C19C402      - movaps xmm0,[7FF7283414D0]
+7FF7256FFB94 - 0F29 44 24 60         - movaps [rsp+60],xmm0
+7FF7256FFB99 - 0F57 C0               - xorps xmm0,xmm0
+7FF7256FFB9C - 0F29 4C 24 50         - movaps [rsp+50],xmm1
+7FF7256FFBA1 - 0F28 0D 3819C402      - movaps xmm1,[7FF7283414E0]
+7FF7256FFBA8 - 45 0FC6 DB 55         - shufps xmm11,xmm11,55
+7FF7256FFBAD - 44 0F2E D8            - ucomiss xmm11,xmm0
+7FF7256FFBB1 - 0F29 4C 24 70         - movaps [rsp+70],xmm1
+7FF7256FFBB6 - 7A 06                 - jp 7FF7256FFBBE
+7FF7256FFBB8 - 0F84 13030000         - je 7FF7256FFED1
+7FF7256FFBBE - F3 0F10 75 F0         - movss xmm6,[rbp-10]
+7FF7256FFBC3 - 41 0F28 C3            - movaps xmm0,xmm11
+7FF7256FFBC7 - 0F29 BC 24 40020000   - movaps [rsp+00000240],xmm7
+7FF7256FFBCF - F3 0F10 7D F4         - movss xmm7,[rbp-0C]
+7FF7256FFBD4 - 44 0F29 84 24 30020000  - movaps [rsp+00000230],xmm8
+7FF7256FFBDD - 0F28 D7               - movaps xmm2,xmm7
+7FF7256FFBE0 - F3 44 0F10 45 F8      - movss xmm8,[rbp-08]
+7FF7256FFBE6 - 44 0F29 94 24 10020000  - movaps [rsp+00000210],xmm10
+7FF7256FFBEF - 44 0F29 A4 24 F0010000  - movaps [rsp+000001F0],xmm12
+7FF7256FFBF8 - 41 0F14 D1            - unpcklps xmm2,xmm9
+7FF7256FFBFC - 44 0F29 AC 24 E0010000  - movaps [rsp+000001E0],xmm13
+7FF7256FFC05 - 44 0F29 B4 24 D0010000  - movaps [rsp+000001D0],xmm14
+7FF7256FFC0E - 44 0F28 F6            - movaps xmm14,xmm6
+7FF7256FFC12 - 45 0F14 F0            - unpcklps xmm14,xmm8
+7FF7256FFC16 - 44 0F14 F2            - unpcklps xmm14,xmm2
+7FF7256FFC1A - E8 F1C80C02           - call 7FF7277CC510
+7FF7256FFC1F - 45 0F57 D2            - xorps xmm10,xmm10
+7FF7256FFC23 - F3 44 0F10 D0         - movss xmm10,xmm0
+7FF7256FFC28 - 41 0F28 C3            - movaps xmm0,xmm11
+7FF7256FFC2C - E8 DFC30C02           - call 7FF7277CC010
+7FF7256FFC31 - 44 0F28 25 A7A0E002   - movaps xmm12,[7FF728509CE0]
+7FF7256FFC39 - 0F57 C9               - xorps xmm1,xmm1
+7FF7256FFC3C - 44 0F28 2D ECA0E002   - movaps xmm13,[7FF728509D30]
+7FF7256FFC44 - F3 0F10 C8            - movss xmm1,xmm0
+7FF7256FFC48 - 44 0F28 1D 50A1E002   - movaps xmm11,[7FF728509DA0]
+7FF7256FFC50 - F3 0F10 05 D802E302   - movss xmm0,[7FF72852FF30]
+7FF7256FFC58 - 44 0F57 C0            - xorps xmm8,xmm0
+7FF7256FFC5C - 44 0FC6 D1 CC         - shufps xmm10,xmm1,-34
+7FF7256FFC61 - 0F57 F0               - xorps xmm6,xmm0
+7FF7256FFC64 - 0F57 F8               - xorps xmm7,xmm0
+7FF7256FFC67 - 0F28 DE               - movaps xmm3,xmm6
+7FF7256FFC6A - 41 0F28 E2            - movaps xmm4,xmm10
+7FF7256FFC6E - 41 0F14 D8            - unpcklps xmm3,xmm8
+7FF7256FFC72 - 0F28 D7               - movaps xmm2,xmm7
+7FF7256FFC75 - 41 0F14 D1            - unpcklps xmm2,xmm9
+7FF7256FFC79 - 41 0F28 C5            - movaps xmm0,xmm13
+7FF7256FFC7D - 41 0FC6 C5 00         - shufps xmm0,xmm13,00
+7FF7256FFC82 - 45 0F28 CD            - movaps xmm9,xmm13
+7FF7256FFC86 - 45 0FC6 CD AA         - shufps xmm9,xmm13,-56
+7FF7256FFC8B - 41 0F28 CD            - movaps xmm1,xmm13
+7FF7256FFC8F - 41 0FC6 CD FF         - shufps xmm1,xmm13,-01
+7FF7256FFC94 - 45 0F28 C4            - movaps xmm8,xmm12
+7FF7256FFC98 - 45 0FC6 C4 AA         - shufps xmm8,xmm12,-56
+7FF7256FFC9D - 41 0F28 F3            - movaps xmm6,xmm11
+7FF7256FFCA1 - 45 0F59 CA            - mulps xmm9,xmm10
+7FF7256FFCA5 - 45 0F59 C2            - mulps xmm8,xmm10
+7FF7256FFCA9 - 41 0FC6 E2 C6         - shufps xmm4,xmm10,-3A
+7FF7256FFCAE - 0F59 25 4BA2E002      - mulps xmm4,[7FF728509F00]
+7FF7256FFCB5 - 0F14 DA               - unpcklps xmm3,xmm2
+7FF7256FFCB8 - 0F28 15 D1A1E002      - movaps xmm2,[7FF728509E90]
+7FF7256FFCBF - 0F59 CA               - mulps xmm1,xmm2
+7FF7256FFCC2 - 0F59 C4               - mulps xmm0,xmm4
+7FF7256FFCC5 - 41 0FC6 F3 AA         - shufps xmm6,xmm11,-56
+7FF7256FFCCA - 41 0F59 F2            - mulps xmm6,xmm10
+7FF7256FFCCE - 44 0F58 C8            - addps xmm9,xmm0
+7FF7256FFCD2 - 41 0F28 C5            - movaps xmm0,xmm13
+7FF7256FFCD6 - 41 0FC6 C5 55         - shufps xmm0,xmm13,55
+7FF7256FFCDB - 41 0F59 C4            - mulps xmm0,xmm12
+7FF7256FFCDF - 0F58 C8               - addps xmm1,xmm0
+7FF7256FFCE2 - 41 0F28 C4            - movaps xmm0,xmm12
+7FF7256FFCE6 - 41 0FC6 C4 00         - shufps xmm0,xmm12,00
+7FF7256FFCEB - 0F59 C4               - mulps xmm0,xmm4
+7FF7256FFCEE - 44 0F58 C9            - addps xmm9,xmm1
+7FF7256FFCF2 - 41 0F28 CC            - movaps xmm1,xmm12
+7FF7256FFCF6 - 41 0FC6 CC FF         - shufps xmm1,xmm12,-01
+7FF7256FFCFB - 44 0F58 C0            - addps xmm8,xmm0
+7FF7256FFCFF - 0F59 CA               - mulps xmm1,xmm2
+7FF7256FFD02 - 41 0F28 C4            - movaps xmm0,xmm12
+7FF7256FFD06 - 41 0FC6 C4 55         - shufps xmm0,xmm12,55
+7FF7256FFD0B - 41 0F59 C4            - mulps xmm0,xmm12
+7FF7256FFD0F - 0F58 C8               - addps xmm1,xmm0
+7FF7256FFD12 - 41 0F28 C3            - movaps xmm0,xmm11
+7FF7256FFD16 - 41 0FC6 C3 00         - shufps xmm0,xmm11,00
+7FF7256FFD1B - 0F59 C4               - mulps xmm0,xmm4
+7FF7256FFD1E - 44 0F58 C1            - addps xmm8,xmm1
+7FF7256FFD22 - 41 0F28 CB            - movaps xmm1,xmm11
+7FF7256FFD26 - 41 0FC6 CB FF         - shufps xmm1,xmm11,-01
+7FF7256FFD2B - 0F58 F0               - addps xmm6,xmm0
+7FF7256FFD2E - 0F59 CA               - mulps xmm1,xmm2
+7FF7256FFD31 - 41 0F28 C3            - movaps xmm0,xmm11
+7FF7256FFD35 - 41 0FC6 C3 55         - shufps xmm0,xmm11,55
+7FF7256FFD3A - 41 0F59 C4            - mulps xmm0,xmm12
+7FF7256FFD3E - 0F28 FB               - movaps xmm7,xmm3
+7FF7256FFD41 - 0FC6 FB FF            - shufps xmm7,xmm3,-01
+7FF7256FFD45 - 41 0F28 E9            - movaps xmm5,xmm9
+7FF7256FFD49 - 0F59 FA               - mulps xmm7,xmm2
+7FF7256FFD4C - 0F58 C8               - addps xmm1,xmm0
+7FF7256FFD4F - 41 0FC6 E9 FF         - shufps xmm5,xmm9,-01
+7FF7256FFD54 - 0F28 C3               - movaps xmm0,xmm3
+7FF7256FFD57 - 41 0F59 EE            - mulps xmm5,xmm14
+7FF7256FFD5B - 0FC6 C3 55            - shufps xmm0,xmm3,55
+7FF7256FFD5F - 41 0F59 C4            - mulps xmm0,xmm12
+7FF7256FFD63 - 0F58 F1               - addps xmm6,xmm1
+7FF7256FFD66 - 0F28 CB               - movaps xmm1,xmm3
+7FF7256FFD69 - 0FC6 CB 00            - shufps xmm1,xmm3,00
+7FF7256FFD6D - 0F59 CC               - mulps xmm1,xmm4
+7FF7256FFD70 - 41 0F28 E0            - movaps xmm4,xmm8
+7FF7256FFD74 - 0F58 F8               - addps xmm7,xmm0
+7FF7256FFD77 - 0FC6 DB AA            - shufps xmm3,xmm3,-56
+7FF7256FFD7B - 41 0F59 DA            - mulps xmm3,xmm10
+7FF7256FFD7F - 41 0F28 C1            - movaps xmm0,xmm9
+7FF7256FFD83 - 41 0FC6 C1 55         - shufps xmm0,xmm9,55
+7FF7256FFD88 - 41 0F59 C4            - mulps xmm0,xmm12
+7FF7256FFD8C - 0F58 CB               - addps xmm1,xmm3
+7FF7256FFD8F - 41 0FC6 E0 FF         - shufps xmm4,xmm8,-01
+7FF7256FFD94 - 41 0F59 E6            - mulps xmm4,xmm14
+7FF7256FFD98 - 0F28 DE               - movaps xmm3,xmm6
+7FF7256FFD9B - 0F58 E8               - addps xmm5,xmm0
+7FF7256FFD9E - 0FC6 DE FF            - shufps xmm3,xmm6,-01
+7FF7256FFDA2 - 41 0F28 C0            - movaps xmm0,xmm8
+7FF7256FFDA6 - 41 0F59 DE            - mulps xmm3,xmm14
+7FF7256FFDAA - 0F58 F9               - addps xmm7,xmm1
+7FF7256FFDAD - 41 0FC6 C0 55         - shufps xmm0,xmm8,55
+7FF7256FFDB2 - 41 0F59 C4            - mulps xmm0,xmm12
+7FF7256FFDB6 - 41 0F28 C9            - movaps xmm1,xmm9
+7FF7256FFDBA - 41 0FC6 C9 AA         - shufps xmm1,xmm9,-56
+7FF7256FFDBF - 41 0F59 CB            - mulps xmm1,xmm11
+7FF7256FFDC3 - 0F28 D7               - movaps xmm2,xmm7
+7FF7256FFDC6 - 45 0FC6 C9 00         - shufps xmm9,xmm9,00
+7FF7256FFDCB - 0F58 E0               - addps xmm4,xmm0
+7FF7256FFDCE - 0FC6 D7 FF            - shufps xmm2,xmm7,-01
+7FF7256FFDD2 - 0F28 C6               - movaps xmm0,xmm6
+7FF7256FFDD5 - 45 0F59 CD            - mulps xmm9,xmm13
+7FF7256FFDD9 - 0FC6 C6 55            - shufps xmm0,xmm6,55
+7FF7256FFDDD - 41 0F59 C4            - mulps xmm0,xmm12
+7FF7256FFDE1 - 41 0F58 C9            - addps xmm1,xmm9
+7FF7256FFDE5 - 41 0F59 D6            - mulps xmm2,xmm14
+7FF7256FFDE9 - 0F58 D8               - addps xmm3,xmm0
+7FF7256FFDEC - 0F28 C7               - movaps xmm0,xmm7
+7FF7256FFDEF - 0FC6 C7 55            - shufps xmm0,xmm7,55
+7FF7256FFDF3 - 0F58 E9               - addps xmm5,xmm1
+7FF7256FFDF6 - 41 0F59 C4            - mulps xmm0,xmm12
+7FF7256FFDFA - 41 0F28 C8            - movaps xmm1,xmm8
+7FF7256FFDFE - 41 0FC6 C8 AA         - shufps xmm1,xmm8,-56
+7FF7256FFE03 - 41 0F59 CB            - mulps xmm1,xmm11
+7FF7256FFE07 - 0F58 D0               - addps xmm2,xmm0
+7FF7256FFE0A - 45 0FC6 C0 00         - shufps xmm8,xmm8,00
+7FF7256FFE0F - 45 0F59 C5            - mulps xmm8,xmm13
+7FF7256FFE13 - 0F28 C5               - movaps xmm0,xmm5
+7FF7256FFE16 - 41 0F58 C8            - addps xmm1,xmm8
+7FF7256FFE1A - 0F58 E1               - addps xmm4,xmm1
+7FF7256FFE1D - 0F28 CE               - movaps xmm1,xmm6
+7FF7256FFE20 - 0FC6 CE AA            - shufps xmm1,xmm6,-56
+7FF7256FFE24 - 41 0F59 CB            - mulps xmm1,xmm11
+7FF7256FFE28 - 0FC6 F6 00            - shufps xmm6,xmm6,00
+7FF7256FFE2C - 41 0F59 F5            - mulps xmm6,xmm13
+7FF7256FFE30 - 0F58 CE               - addps xmm1,xmm6
+7FF7256FFE33 - 0F58 D9               - addps xmm3,xmm1
+7FF7256FFE36 - 0F28 CF               - movaps xmm1,xmm7
+7FF7256FFE39 - 0FC6 CF AA            - shufps xmm1,xmm7,-56
+7FF7256FFE3D - 41 0F59 CB            - mulps xmm1,xmm11
+7FF7256FFE41 - 0FC6 FF 00            - shufps xmm7,xmm7,00
+7FF7256FFE45 - 41 0F59 FD            - mulps xmm7,xmm13
+7FF7256FFE49 - 0F58 CF               - addps xmm1,xmm7
+7FF7256FFE4C - 0F58 D1               - addps xmm2,xmm1
+7FF7256FFE4F - 0F57 C9               - xorps xmm1,xmm1
+7FF7256FFE52 - 0FC6 C1 E8            - shufps xmm0,xmm1,-18
+7FF7256FFE56 - 0FC6 E8 D4            - shufps xmm5,xmm0,-2C
+7FF7256FFE5A - 0F28 C4               - movaps xmm0,xmm4
+7FF7256FFE5D - 0FC6 C1 E8            - shufps xmm0,xmm1,-18
+7FF7256FFE61 - 0FC6 E0 D4            - shufps xmm4,xmm0,-2C
+7FF7256FFE65 - 0F29 6C 24 40         - movaps [rsp+40],xmm5
+7FF7256FFE6A - F3 44 0F10 0D C5F2E202  - movss xmm9,[7FF72852F138]
+7FF7256FFE73 - 0F28 C3               - movaps xmm0,xmm3
+7FF7256FFE76 - 44 0F28 B4 24 D0010000  - movaps xmm14,[rsp+000001D0]
+7FF7256FFE7F - 44 0F28 AC 24 E0010000  - movaps xmm13,[rsp+000001E0]
+7FF7256FFE88 - 44 0F28 A4 24 F0010000  - movaps xmm12,[rsp+000001F0]
+7FF7256FFE91 - 44 0F28 94 24 10020000  - movaps xmm10,[rsp+00000210]
+7FF7256FFE9A - 44 0F28 84 24 30020000  - movaps xmm8,[rsp+00000230]
+7FF7256FFEA3 - 0F28 BC 24 40020000   - movaps xmm7,[rsp+00000240]
+7FF7256FFEAB - 0FC6 C1 E8            - shufps xmm0,xmm1,-18
+7FF7256FFEAF - 0FC6 D8 D4            - shufps xmm3,xmm0,-2C
+7FF7256FFEB3 - 0F28 C2               - movaps xmm0,xmm2
+7FF7256FFEB6 - 0FC6 05 E2E91204 E8   - shufps xmm0,[7FF72982E8A0],-18
+7FF7256FFEBE - 0FC6 D0 D4            - shufps xmm2,xmm0,-2C
+7FF7256FFEC2 - 0F29 54 24 70         - movaps [rsp+70],xmm2
+7FF7256FFEC7 - 0F29 64 24 50         - movaps [rsp+50],xmm4
+7FF7256FFECC - 0F29 5C 24 60         - movaps [rsp+60],xmm3
+7FF7256FFED1 - 48 8D 54 24 40        - lea rdx,[rsp+40]
+7FF7256FFED6 - 48 8D 4E 10           - lea rcx,[rsi+10]
+7FF7256FFEDA - E8 5150DDFF           - call 7FF7254D4F30
+7FF7256FFEDF - 48 8D 54 24 40        - lea rdx,[rsp+40]
+7FF7256FFEE4 - 48 8D 4D A0           - lea rcx,[rbp-60]
+7FF7256FFEE8 - E8 A3F4EAFF           - call 7FF7255AF390
+7FF7256FFEED - 48 8B D0              - mov rdx,rax
+7FF7256FFEF0 - 48 8D 4E 70           - lea rcx,[rsi+70]
+7FF7256FFEF4 - E8 87DFFFFF           - call 7FF7256FDE80
+7FF7256FFEF9 - 0F28 5D E0            - movaps xmm3,[rbp-20]
+7FF7256FFEFD - 48 8D 8E 10020000     - lea rcx,[rsi+00000210]
+7FF7256FFF04 - 0F28 C3               - movaps xmm0,xmm3
+7FF7256FFF07 - 4C 8D 45 E0           - lea r8,[rbp-20]
+7FF7256FFF0B - 0F58 46 40            - addps xmm0,[rsi+40]
+7FF7256FFF0F - 48 8D 54 24 40        - lea rdx,[rsp+40]
+7FF7256FFF14 - 0F29 46 40            - movaps [rsi+40],xmm0
+7FF7256FFF18 - 0F28 86 A0000000      - movaps xmm0,[rsi+000000A0]
+7FF7256FFF1F - 0F58 C3               - addps xmm0,xmm3
+7FF7256FFF22 - 0F29 86 A0000000      - movaps [rsi+000000A0],xmm0
+7FF7256FFF29 - 0F28 C3               - movaps xmm0,xmm3
+7FF7256FFF2C - 0F58 86 B0000000      - addps xmm0,[rsi+000000B0]
+7FF7256FFF33 - 0F29 86 B0000000      - movaps [rsi+000000B0],xmm0
+7FF7256FFF3A - 0F28 8E C0000000      - movaps xmm1,[rsi+000000C0]
+7FF7256FFF41 - 0F58 CB               - addps xmm1,xmm3
+7FF7256FFF44 - 0F29 8E C0000000      - movaps [rsi+000000C0],xmm1
+7FF7256FFF4B - 0F28 86 D0000000      - movaps xmm0,[rsi+000000D0]
+7FF7256FFF52 - 0F58 C3               - addps xmm0,xmm3
+7FF7256FFF55 - 0F29 86 D0000000      - movaps [rsi+000000D0],xmm0
+7FF7256FFF5C - 0F28 C3               - movaps xmm0,xmm3
+7FF7256FFF5F - 0F28 8E E0000000      - movaps xmm1,[rsi+000000E0]
+7FF7256FFF66 - 0F58 CB               - addps xmm1,xmm3
+7FF7256FFF69 - 0F29 8E E0000000      - movaps [rsi+000000E0],xmm1
+7FF7256FFF70 - 0F58 86 F0000000      - addps xmm0,[rsi+000000F0]
+7FF7256FFF77 - 0F29 86 F0000000      - movaps [rsi+000000F0],xmm0
+7FF7256FFF7E - 0F28 8E 00010000      - movaps xmm1,[rsi+00000100]
+7FF7256FFF85 - 0F58 CB               - addps xmm1,xmm3
+7FF7256FFF88 - 0F29 8E 00010000      - movaps [rsi+00000100],xmm1
+7FF7256FFF8F - 0F28 96 10010000      - movaps xmm2,[rsi+00000110]
+7FF7256FFF96 - 0F58 D3               - addps xmm2,xmm3
+7FF7256FFF99 - 0F28 C2               - movaps xmm0,xmm2
+7FF7256FFF9C - F3 0F11 55 80         - movss [rbp-80],xmm2
+7FF7256FFFA1 - 0FC6 C2 55            - shufps xmm0,xmm2,55
+7FF7256FFFA5 - F3 0F11 45 84         - movss [rbp-7C],xmm0
+7FF7256FFFAA - F3 0F10 05 FAE81204   - movss xmm0,[7FF72982E8AC]
+7FF7256FFFB2 - 0FC6 D2 AA            - shufps xmm2,xmm2,-56
+7FF7256FFFB6 - F3 0F11 45 8C         - movss [rbp-74],xmm0
+7FF7256FFFBB - F3 0F11 55 88         - movss [rbp-78],xmm2
+7FF7256FFFC0 - 0F28 4D 80            - movaps xmm1,[rbp-80]
+7FF7256FFFC4 - 0F29 8E 10010000      - movaps [rsi+00000110],xmm1
+7FF7256FFFCB - E8 D0889E00           - call 7FF7260E88A0
+7FF7256FFFD0 - 0F28 46 10            - movaps xmm0,[rsi+10]
+7FF7256FFFD4 - 0F28 4E 20            - movaps xmm1,[rsi+20]
+7FF7256FFFD8 - F3 0F10 9E AC010000   - movss xmm3,[rsi+000001AC]
+7FF7256FFFE0 - 0F29 44 24 40         - movaps [rsp+40],xmm0
+7FF7256FFFE5 - 0F28 46 30            - movaps xmm0,[rsi+30]
+7FF7256FFFE9 - 0F29 44 24 60         - movaps [rsp+60],xmm0
+7FF7256FFFEE - 0F28 46 70            - movaps xmm0,[rsi+70]
+7FF7256FFFF2 - 0F29 45 00            - movaps [rbp+00],xmm0
+7FF7256FFFF6 - 0F28 86 80000000      - movaps xmm0,[rsi+00000080]
+7FF7256FFFFD - 0F29 45 10            - movaps [rbp+10],xmm0
+7FF725700001 - 0F28 86 90000000      - movaps xmm0,[rsi+00000090]
+7FF725700008 - 0F29 45 20            - movaps [rbp+20],xmm0
+7FF72570000C - 0F28 86 A0000000      - movaps xmm0,[rsi+000000A0]
+7FF725700013 - 0F29 45 30            - movaps [rbp+30],xmm0
+7FF725700017 - 0F28 86 B0000000      - movaps xmm0,[rsi+000000B0]
+7FF72570001E - 0F29 45 40            - movaps [rbp+40],xmm0
+7FF725700022 - 0F28 86 C0000000      - movaps xmm0,[rsi+000000C0]
+7FF725700029 - 0F29 45 50            - movaps [rbp+50],xmm0
+7FF72570002D - 0F28 86 D0000000      - movaps xmm0,[rsi+000000D0]
+7FF725700034 - 0F29 45 60            - movaps [rbp+60],xmm0
+7FF725700038 - 0F28 86 E0000000      - movaps xmm0,[rsi+000000E0]
+7FF72570003F - 0F29 45 70            - movaps [rbp+70],xmm0
+7FF725700043 - 0F28 86 F0000000      - movaps xmm0,[rsi+000000F0]
+7FF72570004A - 0F29 85 80000000      - movaps [rbp+00000080],xmm0
+7FF725700051 - 0F28 86 00010000      - movaps xmm0,[rsi+00000100]
+7FF725700058 - 0F29 85 90000000      - movaps [rbp+00000090],xmm0
+7FF72570005F - 0F28 86 10010000      - movaps xmm0,[rsi+00000110]
+7FF725700066 - 0F29 4C 24 50         - movaps [rsp+50],xmm1
+7FF72570006B - 0F28 4E 40            - movaps xmm1,[rsi+40]
+7FF72570006F - 0F29 85 A0000000      - movaps [rbp+000000A0],xmm0
+7FF725700076 - 0F29 4C 24 70         - movaps [rsp+70],xmm1
+7FF72570007B - 44 0F28 9C 24 00020000  - movaps xmm11,[rsp+00000200]
+7FF725700084 - 0F57 C0               - xorps xmm0,xmm0
+7FF725700087 - 0F2F D8               - comiss xmm3,xmm0
+7FF72570008A - 76 3E                 - jna 7FF7257000CA
+7FF72570008C - 0F28 D1               - movaps xmm2,xmm1
+7FF72570008F - 0F5C 96 D0000000      - subps xmm2,[rsi+000000D0]
+7FF725700096 - 0F59 D2               - mulps xmm2,xmm2
+7FF725700099 - 0F28 CA               - movaps xmm1,xmm2
+7FF72570009C - 0FC6 CA 66            - shufps xmm1,xmm2,66
+7FF7257000A0 - F3 0F58 D1            - addss xmm2,xmm1
+7FF7257000A4 - 0F28 C1               - movaps xmm0,xmm1
+7FF7257000A7 - 0FC6 C1 55            - shufps xmm0,xmm1,55
+7FF7257000AB - F3 0F58 D0            - addss xmm2,xmm0
+7FF7257000AF - 0FC6 D2 00            - shufps xmm2,xmm2,00
+7FF7257000B3 - 0F51 C2               - sqrtps xmm0,xmm2
+7FF7257000B6 - F3 0F59 D8            - mulss xmm3,xmm0
+7FF7257000BA - F3 0F5F 1D 5EF0E202   - maxss xmm3,[7FF72852F120]
+7FF7257000C2 - F3 0F11 9E B0010000   - movss [rsi+000001B0],xmm3
+7FF7257000CA - 4C 8D 44 24 30        - lea r8,[rsp+30]
+7FF7257000CF - C6 44 24 30 00        - mov byte ptr [rsp+30],00
+7FF7257000D4 - 41 0F28 CF            - movaps xmm1,xmm15
+7FF7257000D8 - 48 8B CE              - mov rcx,rsi
+7FF7257000DB - E8 B0350000           - call 7FF725703690
+7FF7257000E0 - 4C 8D 4D 00           - lea r9,[rbp+00]
+7FF7257000E4 - 4D 8B C7              - mov r8,r15
+7FF7257000E7 - 41 0F28 CF            - movaps xmm1,xmm15
+7FF7257000EB - 48 8B CE              - mov rcx,rsi
+7FF7257000EE - E8 7D210000           - call 7FF725702270
+7FF7257000F3 - F3 0F10 8E DC010000   - movss xmm1,[rsi+000001DC]
+7FF7257000FB - 41 0F28 D1            - movaps xmm2,xmm9
+7FF7257000FF - 0F28 9E A0000000      - movaps xmm3,[rsi+000000A0]
+7FF725700106 - F3 0F5C D1            - subss xmm2,xmm1
+7FF72570010A - 0F5C 5D 30            - subps xmm3,[rbp+30]
+7FF72570010E - F3 0F59 96 64010000   - mulss xmm2,[rsi+00000164]
+7FF725700116 - F3 0F58 D1            - addss xmm2,xmm1
+7FF72570011A - 0FC6 D2 00            - shufps xmm2,xmm2,00
+7FF72570011E - 0F59 D3               - mulps xmm2,xmm3
+7FF725700121 - 0F58 96 F0000000      - addps xmm2,[rsi+000000F0]
+7FF725700128 - 0F29 96 F0000000      - movaps [rsi+000000F0],xmm2
+7FF72570012F - F3 0F10 86 DC010000   - movss xmm0,[rsi+000001DC]
+7FF725700137 - 0F28 9E A0000000      - movaps xmm3,[rsi+000000A0]
+7FF72570013E - F3 44 0F5C C8         - subss xmm9,xmm0
+7FF725700143 - 0F5C 5D 30            - subps xmm3,[rbp+30]
+7FF725700147 - F3 44 0F59 8E 64010000  - mulss xmm9,[rsi+00000164]
+7FF725700150 - F3 44 0F58 C8         - addss xmm9,xmm0
+7FF725700155 - 41 0F28 C9            - movaps xmm1,xmm9
+7FF725700159 - 44 0F28 8C 24 20020000  - movaps xmm9,[rsp+00000220]
+7FF725700162 - 0FC6 C9 00            - shufps xmm1,xmm1,00
+7FF725700166 - 0F59 CB               - mulps xmm1,xmm3
+7FF725700169 - 0F58 8E 00010000      - addps xmm1,[rsi+00000100]
+7FF725700170 - 0F29 8E 00010000      - movaps [rsi+00000100],xmm1
+7FF725700177 - 80 BE 15030000 00     - cmp byte ptr [rsi+00000315],00
+7FF72570017E - 74 0A                 - je 7FF72570018A
+7FF725700180 - 48 8B CE              - mov rcx,rsi
+7FF725700183 - E8 48450000           - call 7FF7257046D0
+7FF725700188 - EB 78                 - jmp 7FF725700202
+7FF72570018A - 80 BE 10030000 00     - cmp byte ptr [rsi+00000310],00
+7FF725700191 - 74 13                 - je 7FF7257001A6
+7FF725700193 - 4C 8D 44 24 40        - lea r8,[rsp+40]
+7FF725700198 - 41 0F28 CF            - movaps xmm1,xmm15
+7FF72570019C - 48 8B CE              - mov rcx,rsi
+7FF72570019F - E8 1C360000           - call 7FF7257037C0
+7FF7257001A4 - EB 5C                 - jmp 7FF725700202
+7FF7257001A6 - 80 BE 31030000 00     - cmp byte ptr [rsi+00000331],00
+7FF7257001AD - 74 0A                 - je 7FF7257001B9
+7FF7257001AF - 48 8B CE              - mov rcx,rsi
+7FF7257001B2 - E8 49010000           - call 7FF725700300
+7FF7257001B7 - EB 49                 - jmp 7FF725700202
+7FF7257001B9 - 0F28 86 E0000000      - movaps xmm0,[rsi+000000E0]
+7FF7257001C0 - 48 8D 4D E0           - lea rcx,[rbp-20]
+7FF7257001C4 - F3 0F10 8E 54010000   - movss xmm1,[rsi+00000154]
+7FF7257001CC - 0F5C C2               - subps xmm0,xmm2
+7FF7257001CF - 0F29 45 E0            - movaps [rbp-20],xmm0
+7FF7257001D3 - E8 08A9FFFF           - call 7FF7256FAAE0
+7FF7257001D8 - F3 0F10 8E 50010000   - movss xmm1,[rsi+00000150]
+7FF7257001E0 - 48 8D 4D E0           - lea rcx,[rbp-20]
+7FF7257001E4 - 0F28 F0               - movaps xmm6,xmm0
+7FF7257001E7 - E8 44A8FFFF           - call 7FF7256FAA30
+7FF7257001EC - 0F28 DE               - movaps xmm3,xmm6
+7FF7257001EF - 0F28 E0               - movaps xmm4,xmm0
+7FF7257001F2 - 0F14 E0               - unpcklps xmm4,xmm0
+7FF7257001F5 - 0F14 DE               - unpcklps xmm3,xmm6
+7FF7257001F8 - 0F14 E3               - unpcklps xmm4,xmm3
+7FF7257001FB - 0F29 A6 50010000      - movaps [rsi+00000150],xmm4             <------- NOP THIS
+7FF725700202 - 41 0F28 CF            - movaps xmm1,xmm15
+7FF725700206 - 48 8B CE              - mov rcx,rsi
+7FF725700209 - E8 122F0000           - call 7FF725703120
+7FF72570020E - 44 0FB6 44 24 30      - movzx r8d,byte ptr [rsp+30]
+7FF725700214 - 41 0F28 CF            - movaps xmm1,xmm15
+7FF725700218 - 48 8B CE              - mov rcx,rsi
+7FF72570021B - E8 00180000           - call 7FF725701A20
+7FF725700220 - 4D 8B C7              - mov r8,r15
+7FF725700223 - 41 0F28 CF            - movaps xmm1,xmm15
+7FF725700227 - 48 8B CE              - mov rcx,rsi
+7FF72570022A - E8 31080000           - call 7FF725700A60
+7FF72570022F - 48 8D 45 00           - lea rax,[rbp+00]
+7FF725700233 - 4D 8B C6              - mov r8,r14
+7FF725700236 - 4C 8D 4C 24 40        - lea r9,[rsp+40]
+7FF72570023B - 48 89 44 24 20        - mov [rsp+20],rax
+7FF725700240 - 41 0F28 CF            - movaps xmm1,xmm15
+7FF725700244 - 48 8B CE              - mov rcx,rsi
+7FF725700247 - E8 B4300000           - call 7FF725703300
+7FF72570024C - 4D 8B C6              - mov r8,r14
+7FF72570024F - 41 0F28 CF            - movaps xmm1,xmm15
+7FF725700253 - 48 8B CE              - mov rcx,rsi
+7FF725700256 - E8 15460000           - call 7FF725704870
+7FF72570025B - 4D 8B C6              - mov r8,r14
+7FF72570025E - 41 0F28 CF            - movaps xmm1,xmm15
+7FF725700262 - 48 8B CE              - mov rcx,rsi
+7FF725700265 - E8 36220000           - call 7FF7257024A0
+7FF72570026A - 4D 8B C6              - mov r8,r14
+7FF72570026D - 41 0F28 CF            - movaps xmm1,xmm15
+7FF725700271 - 48 8B CE              - mov rcx,rsi
+7FF725700274 - E8 970A0000           - call 7FF725700D10
+7FF725700279 - 0FB6 86 10030000      - movzx eax,byte ptr [rsi+00000310]
+7FF725700280 - 4C 8D 45 00           - lea r8,[rbp+00]
+7FF725700284 - 48 8D 54 24 40        - lea rdx,[rsp+40]
+7FF725700289 - 88 86 9B040000        - mov [rsi+0000049B],al
+7FF72570028F - 48 8B CE              - mov rcx,rsi
+7FF725700292 - C6 86 15030000 00     - mov byte ptr [rsi+00000315],00
+7FF725700299 - 66 C7 86 10030000 0000 - mov word ptr [rsi+00000310],0000
+7FF7257002A2 - C6 86 12030000 00     - mov byte ptr [rsi+00000312],00
+7FF7257002A9 - C6 86 31030000 00     - mov byte ptr [rsi+00000331],00
+7FF7257002B0 - E8 1B1E0000           - call 7FF7257020D0
+7FF7257002B5 - 49 8B D6              - mov rdx,r14
+7FF7257002B8 - 48 8B CE              - mov rcx,rsi
+7FF7257002BB - E8 D0010000           - call 7FF725700490
+7FF7257002C0 - 48 8B CE              - mov rcx,rsi
+7FF7257002C3 - E8 D8440000           - call 7FF7257047A0
+7FF7257002C8 - 0F28 B4 24 50020000   - movaps xmm6,[rsp+00000250]
+7FF7257002D0 - 48 8B 8D B0000000     - mov rcx,[rbp+000000B0]
+7FF7257002D7 - 48 33 CC              - xor rcx,rsp
+7FF7257002DA - E8 A1700A02           - call 7FF7277A7380
+7FF7257002DF - 44 0F28 BC 24 C0010000  - movaps xmm15,[rsp+000001C0]
+7FF7257002E8 - 48 81 C4 68020000     - add rsp,00000268
+7FF7257002EF - 41 5F                 - pop r15
+7FF7257002F1 - 41 5E                 - pop r14
+7FF7257002F3 - 5F                    - pop rdi
+7FF7257002F4 - 5E                    - pop rsi
+7FF7257002F5 - 5B                    - pop rbx
+7FF7257002F6 - 5D                    - pop rbp
+7FF7257002F7 - C3                    - ret 
+
+
+FUNCTION BELOW:
+
+7FF725700300 - 40 53                 - push rbx
+7FF725700302 - 48 83 EC 60           - sub rsp,60
+7FF725700306 - 48 8B 05 43C17A03     - mov rax,[7FF728EAC450]
+7FF72570030D - 48 33 C4              - xor rax,rsp
+7FF725700310 - 48 89 44 24 50        - mov [rsp+50],rax
+7FF725700315 - F3 0F10 81 90000000   - movss xmm0,[rcx+00000090]
+7FF72570031D - 48 8B D9              - mov rbx,rcx
+7FF725700320 - F3 0F10 89 98000000   - movss xmm1,[rcx+00000098]
+7FF725700328 - 8B 81 38030000        - mov eax,[rcx+00000338]
+7FF72570032E - 80 B9 30030000 00     - cmp byte ptr [rcx+00000330],00
+7FF725700335 - F3 0F11 4C 24 38      - movss [rsp+38],xmm1
+7FF72570033B - F3 0F11 44 24 30      - movss [rsp+30],xmm0
+7FF725700341 - C7 44 24 34 00000000  - mov [rsp+34],00000000
+7FF725700349 - C7 44 24 3C 00000000  - mov [rsp+3C],00000000
+7FF725700351 - 0F28 44 24 30         - movaps xmm0,[rsp+30]
+7FF725700356 - C6 81 32030000 01     - mov byte ptr [rcx+00000332],01
+7FF72570035D - 89 81 34030000        - mov [rcx+00000334],eax
+7FF725700363 - F3 0F10 89 54010000   - movss xmm1,[rcx+00000154]
+7FF72570036B - 48 8D 4C 24 30        - lea rcx,[rsp+30]
+7FF725700370 - 66 0F7F 44 24 30      - movdqa [rsp+30],xmm0
+7FF725700376 - 74 0F                 - je 7FF725700387
+7FF725700378 - C7 44 24 20 00000000  - mov [rsp+20],00000000
+7FF725700380 - E8 2BA7FFFF           - call 7FF7256FAAB0
+7FF725700385 - EB 13                 - jmp 7FF72570039A
+7FF725700387 - E8 24A7FFFF           - call 7FF7256FAAB0
+7FF72570038C - F3 0F10 8B 60010000   - movss xmm1,[rbx+00000160]
+7FF725700394 - F3 0F11 4C 24 20      - movss [rsp+20],xmm1
+7FF72570039A - 33 C0                 - xor eax,eax
+7FF72570039C - F3 0F11 44 24 24      - movss [rsp+24],xmm0
+7FF7257003A2 - 48 89 44 24 28        - mov [rsp+28],rax
+7FF7257003A7 - 0F28 44 24 20         - movaps xmm0,[rsp+20]
+7FF7257003AC - 0F11 83 40030000      - movups [rbx+00000340],xmm0
+7FF7257003B3 - 48 8B 4C 24 50        - mov rcx,[rsp+50]
+7FF7257003B8 - 48 33 CC              - xor rcx,rsp
+7FF7257003BB - E8 C06F0A02           - call 7FF7277A7380
+7FF7257003C0 - 48 83 C4 60           - add rsp,60
+7FF7257003C4 - 5B                    - pop rbx
+7FF7257003C5 - C3                    - ret 
+

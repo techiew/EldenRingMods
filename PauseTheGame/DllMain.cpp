@@ -2,17 +2,16 @@
 #include <xinput.h>
 
 #include "ModUtils.h"
-#include "ini.h"
 
 using namespace ModUtils;
 using namespace mINI;
 
 static bool gamePaused = false;
 static uintptr_t patchAddress = 0;
-static WORD key = 0x50;
-static WORD modifier = HK_NONE;
-static WORD controllerKey = 0x0010;
-static WORD controllerModifier = HK_NONE;
+static unsigned int key = 0x50;
+static unsigned int modifier = HK_NONE;
+static unsigned int controllerKey = 0x0010;
+static unsigned int controllerModifier = HK_NONE;
 
 void TogglePause()
 {
@@ -30,59 +29,60 @@ void TogglePause()
 	}
 }
 
-void ReadIniFile()
+std::string HexToString(uintptr_t hex)
+{
+	std::ostringstream stream;
+	stream << "0x" << std::hex << hex;
+	return stream.str();
+}
+
+uintptr_t HexStringToHex(std::string hexString)
+{
+	std::istringstream stream(hexString);
+	uintptr_t hex = 0;
+	stream >> std::hex >> hex;
+	return hex;
+}
+
+unsigned int FilterKeyValue(std::string hexString, unsigned int defaultValue)
+{
+	if (hexString.length() > 2 && hexString[0] == '0' && hexString[1] == 'x')
+	{
+		hexString = hexString.substr(2, hexString.length());
+		return HexStringToHex(hexString);
+	}
+	else if(!hexString.empty())
+	{
+		RaiseError("Invalid hex value in config file: '" + hexString + "'! Format: 0x<Number>. Using default keybind.");
+	}
+	return defaultValue;
+}
+
+void ReadConfig()
 {
 	INIFile config(GetModuleFolderPath() + "\\pause_keybind.ini");
 	INIStructure ini;
-	bool readSuccess = config.read(ini);
-	if (readSuccess)
+
+	if (config.read(ini))
 	{
-		std::stringstream key1(ini["keyboard"]["key1"]);
-		std::stringstream key2(ini["keyboard"]["key2"]);
-		std::stringstream controllerKey1(ini["controller"]["key1"]);
-		std::stringstream controllerKey2(ini["controller"]["key2"]);
-
-		// Avoid setting the key values if the config has not been changed,
-		// this might be a temporary workaround for people who have had issues.
-		// I guess we'll see.
-		if (key1.str() != "0x50")
-		{
-			key1 >> std::hex >> key;
-			Log("New key1");
-		}
-
-		if (key2.str() != "0x07")
-		{
-			key2 >> std::hex >> modifier;
-			Log("New key2");
-		}
-
-		if (controllerKey1.str() != "0x0010")
-		{
-			controllerKey1 >> std::hex >> controllerKey;
-			Log("New controllerKey1");
-		}
-
-		if (controllerKey2.str() != "0x07")
-		{
-			controllerKey2 >> std::hex >> controllerModifier;
-			Log("New controllerKey2");
-		}
-
-		Log("key1: %i", key);
-		Log("key2: %i", modifier);
-		Log("controllerKey1: %i", controllerKey);
-		Log("controllerKey2: %i", controllerModifier);
+		key = FilterKeyValue(ini["keyboard"].get("key1"), key);
+		modifier = FilterKeyValue(ini["keyboard"].get("key2"), modifier);
+		controllerKey = FilterKeyValue(ini["controller"].get("key1"), controllerKey);
+		controllerModifier = FilterKeyValue(ini["controller"].get("key2"), controllerModifier);
 	}
 	else
 	{
-		ini["keyboard"]["key1"] = "0x50";
-		ini["keyboard"]["key2"] = "0x07";
-		ini["controller"]["key1"] = "0x0010";
-		ini["controller"]["key2"] = "0x07";
-		config.generate(ini, true);
-		Log("Created new .ini");
+		ini["keyboard"]["key1"] = HexToString(key);
+		ini["keyboard"]["key2"] = HexToString(modifier);
+		ini["controller"]["key1"] = HexToString(controllerKey);
+		ini["controller"]["key2"] = HexToString(controllerModifier);
+		config.write(ini, true);
 	}
+
+	Log("key: 0x%x", key);
+	Log("modifier: 0x%x", modifier);
+	Log("controllerKey: 0x%x", controllerKey);
+	Log("controllerModifier: 0x%x", controllerModifier);
 }
 
 DWORD WINAPI MainThread(LPVOID lpParam)
@@ -95,7 +95,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 		return 1;
 	}
 
-	ReadIniFile();
+	ReadConfig();
 
 	while (true)
 	{

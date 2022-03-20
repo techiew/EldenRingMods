@@ -1,0 +1,691 @@
+8b 01 85 c0 74 42 44 8b 59 04
+
+FUNCTION ABOVE:
+
+7FF726CB1E00 - 48 89 5C 24 18        - mov [rsp+18],rbx
+7FF726CB1E05 - 57                    - push rdi
+7FF726CB1E06 - 48 83 EC 40           - sub rsp,40
+7FF726CB1E0A - 48 8B 05 3FA61F02     - mov rax,[7FF728EAC450]
+7FF726CB1E11 - 48 33 C4              - xor rax,rsp
+7FF726CB1E14 - 48 89 44 24 38        - mov [rsp+38],rax
+7FF726CB1E19 - 48 8B 81 28010000     - mov rax,[rcx+00000128]
+7FF726CB1E20 - 48 8B FA              - mov rdi,rdx
+7FF726CB1E23 - 48 8B 98 00010000     - mov rbx,[rax+00000100]
+7FF726CB1E2A - 48 85 DB              - test rbx,rbx
+7FF726CB1E2D - 74 5E                 - je 7FF726CB1E8D
+7FF726CB1E2F - 80 B8 3F010000 00     - cmp byte ptr [rax+0000013F],00
+7FF726CB1E36 - 75 55                 - jne 7FF726CB1E8D
+7FF726CB1E38 - 48 8B 43 70           - mov rax,[rbx+70]
+7FF726CB1E3C - 48 8D 4B 70           - lea rcx,[rbx+70]
+7FF726CB1E40 - 33 D2                 - xor edx,edx
+7FF726CB1E42 - FF 50 08              - call qword ptr [rax+08]
+7FF726CB1E45 - 48 8B 8F C8250000     - mov rcx,[rdi+000025C8]
+7FF726CB1E4C - 4C 8D 44 24 20        - lea r8,[rsp+20]
+7FF726CB1E51 - BA 01000000           - mov edx,00000001
+7FF726CB1E56 - 48 89 44 24 20        - mov [rsp+20],rax
+7FF726CB1E5B - E8 C050FFFF           - call 7FF726CA6F20
+7FF726CB1E60 - 0F28 05 09D68701      - movaps xmm0,[7FF72852F470]
+7FF726CB1E67 - 48 8D 4B 70           - lea rcx,[rbx+70]
+7FF726CB1E6B - 48 8B 43 70           - mov rax,[rbx+70]
+7FF726CB1E6F - 33 D2                 - xor edx,edx
+7FF726CB1E71 - 0F11 44 24 28         - movups [rsp+28],xmm0
+7FF726CB1E76 - FF 50 08              - call qword ptr [rax+08]
+7FF726CB1E79 - 48 8B 8F C8250000     - mov rcx,[rdi+000025C8]
+7FF726CB1E80 - 4C 8D 44 24 28        - lea r8,[rsp+28]
+7FF726CB1E85 - 48 8B D0              - mov rdx,rax
+7FF726CB1E88 - E8 F354FFFF           - call 7FF726CA7380
+7FF726CB1E8D - 48 8B 4C 24 38        - mov rcx,[rsp+38]
+7FF726CB1E92 - 48 33 CC              - xor rcx,rsp
+7FF726CB1E95 - E8 E654AF00           - call 7FF7277A7380
+7FF726CB1E9A - 48 8B 5C 24 60        - mov rbx,[rsp+60]
+7FF726CB1E9F - 48 83 C4 40           - add rsp,40
+7FF726CB1EA3 - 5F                    - pop rdi
+7FF726CB1EA4 - C3                    - ret 
+
+
+RELEVANT FUNCTION:
+
+7FF726CB1EA5 - 90                    - nop 
+7FF726CB1EA6 - 87 7F 78              - xchg [rdi+78],edi
+7FF726CB1EA9 - 5B                    - pop rbx
+7FF726CB1EAA - 90                    - nop 
+7FF726CB1EAB - E9 10E40586           - jmp 7FF6ACD102C0
+7FF726CB1EB0 - 48 8B C4              - mov rax,rsp
+7FF726CB1EB3 - 55                    - push rbp
+7FF726CB1EB4 - 41 54                 - push r12
+7FF726CB1EB6 - 41 55                 - push r13
+7FF726CB1EB8 - 41 56                 - push r14
+7FF726CB1EBA - 41 57                 - push r15
+7FF726CB1EBC - 48 8D A8 B8FCFFFF     - lea rbp,[rax-00000348]
+7FF726CB1EC3 - 48 81 EC 20040000     - sub rsp,00000420
+7FF726CB1ECA - 48 C7 45 B8 FEFFFFFF  - mov qword ptr [rbp-48],FFFFFFFFFFFFFFFE
+7FF726CB1ED2 - 48 89 58 10           - mov [rax+10],rbx
+7FF726CB1ED6 - 48 89 70 18           - mov [rax+18],rsi
+7FF726CB1EDA - 48 89 78 20           - mov [rax+20],rdi
+7FF726CB1EDE - 0F29 70 C8            - movaps [rax-38],xmm6
+7FF726CB1EE2 - 48 8B 05 67A51F02     - mov rax,[7FF728EAC450]
+7FF726CB1EE9 - 48 33 C4              - xor rax,rsp
+7FF726CB1EEC - 48 89 85 00030000     - mov [rbp+00000300],rax
+7FF726CB1EF3 - 8B C2                 - mov eax,edx
+7FF726CB1EF5 - 89 54 24 50           - mov [rsp+50],edx
+7FF726CB1EF9 - 4C 8B E1              - mov r12,rcx
+7FF726CB1EFC - 4C 8B A9 58010000     - mov r13,[rcx+00000158]
+7FF726CB1F03 - 4C 89 6D C0           - mov [rbp-40],r13
+7FF726CB1F07 - 48 8B 99 28010000     - mov rbx,[rcx+00000128]
+7FF726CB1F0E - 48 3B 99 30010000     - cmp rbx,[rcx+00000130]
+7FF726CB1F15 - 0F84 07080000         - je 7FF726CB2722
+7FF726CB1F1B - 45 33 F6              - xor r14d,r14d
+7FF726CB1F1E - F3 0F10 35 0AE08701   - movss xmm6,[7FF72852FF30]
+7FF726CB1F26 - 83 F8 FF              - cmp eax,-01
+7FF726CB1F29 - 74 0C                 - je 7FF726CB1F37
+7FF726CB1F2B - 3B 83 28010000        - cmp eax,[rbx+00000128]
+7FF726CB1F31 - 0F85 D6070000         - jne 7FF726CB270D
+7FF726CB1F37 - 8B 83 28010000        - mov eax,[rbx+00000128]
+7FF726CB1F3D - 4C 8D 0C 40           - lea r9,[rax+rax*2]
+7FF726CB1F41 - 4D 03 C9              - add r9,r9
+7FF726CB1F44 - 47 8B 84 CC A8030000  - mov r8d,[r12+r9*8+000003A8]
+7FF726CB1F4C - 47 8B 94 CC AC030000  - mov r10d,[r12+r9*8+000003AC]
+7FF726CB1F54 - 48 8D 48 14           - lea rcx,[rax+14]
+7FF726CB1F58 - 48 8D 0C 49           - lea rcx,[rcx+rcx*2]
+7FF726CB1F5C - 48 C1 E1 04           - shl rcx,04
+7FF726CB1F60 - 49 03 CC              - add rcx,r12
+7FF726CB1F63 - 8B 01                 - mov eax,[rcx]                   <---- CHANGE TO 0x8b, 0x01, 0x85, 0xc0, 0xeb, 0x42, 0x44, 0x8b, 0x59, 0x04
+7FF726CB1F65 - 85 C0                 - test eax,eax
+7FF726CB1F67 - 74 42                 - je 7FF726CB1FAB
+7FF726CB1F69 - 44 8B 59 04           - mov r11d,[rcx+04]
+7FF726CB1F6D - 45 85 DB              - test r11d,r11d
+7FF726CB1F70 - 74 39                 - je 7FF726CB1FAB
+7FF726CB1F72 - 41 8B D3              - mov edx,r11d
+7FF726CB1F75 - 41 0FAF D0            - imul edx,r8d
+7FF726CB1F79 - 41 0FAF C2            - imul eax,r10d
+7FF726CB1F7D - 3B D0                 - cmp edx,eax
+7FF726CB1F7F - 74 2A                 - je 7FF726CB1FAB
+7FF726CB1F81 - 76 0D                 - jna 7FF726CB1F90
+7FF726CB1F83 - 33 D2                 - xor edx,edx
+7FF726CB1F85 - 41 F7 F3              - div r11d
+7FF726CB1F88 - 89 83 08010000        - mov [rbx+00000108],eax
+7FF726CB1F8E - EB 22                 - jmp 7FF726CB1FB2
+7FF726CB1F90 - 44 89 83 08010000     - mov [rbx+00000108],r8d
+7FF726CB1F97 - 44 0FAF 41 04         - imul r8d,[rcx+04]
+7FF726CB1F9C - 33 D2                 - xor edx,edx
+7FF726CB1F9E - 41 8B C0              - mov eax,r8d
+7FF726CB1FA1 - F7 31                 - div [rcx]
+7FF726CB1FA3 - 89 83 0C010000        - mov [rbx+0000010C],eax
+7FF726CB1FA9 - EB 0E                 - jmp 7FF726CB1FB9
+7FF726CB1FAB - 44 89 83 08010000     - mov [rbx+00000108],r8d
+7FF726CB1FB2 - 44 89 93 0C010000     - mov [rbx+0000010C],r10d
+7FF726CB1FB9 - F3 43 0F10 8C CC CC030000  - movss xmm1,[r12+r9*8+000003CC]
+7FF726CB1FC3 - 44 8B 93 08010000     - mov r10d,[rbx+00000108]
+7FF726CB1FCA - 41 83 C2 03           - add r10d,03
+7FF726CB1FCE - 41 83 E2 FC           - and r10d,-04
+7FF726CB1FD2 - 44 8B 83 0C010000     - mov r8d,[rbx+0000010C]
+7FF726CB1FD9 - 41 83 C0 03           - add r8d,03
+7FF726CB1FDD - 41 83 E0 FC           - and r8d,-04
+7FF726CB1FE1 - 0F57 C0               - xorps xmm0,xmm0
+7FF726CB1FE4 - F3 49 0F2A C2         - cvtsi2ss xmm0,r10
+7FF726CB1FE9 - F3 0F59 C1            - mulss xmm0,xmm1
+7FF726CB1FED - F3 48 0F2C C0         - cvttss2si rax,xmm0
+7FF726CB1FF2 - 83 C0 03              - add eax,03
+7FF726CB1FF5 - 83 E0 FC              - and eax,-04
+7FF726CB1FF8 - 89 83 08010000        - mov [rbx+00000108],eax
+7FF726CB1FFE - 0F57 C0               - xorps xmm0,xmm0
+7FF726CB2001 - F3 49 0F2A C0         - cvtsi2ss xmm0,r8
+7FF726CB2006 - F3 0F59 C1            - mulss xmm0,xmm1
+7FF726CB200A - F3 48 0F2C C0         - cvttss2si rax,xmm0
+7FF726CB200F - 83 C0 03              - add eax,03
+7FF726CB2012 - 83 E0 FC              - and eax,-04
+7FF726CB2015 - 89 83 0C010000        - mov [rbx+0000010C],eax
+7FF726CB201B - 43 8B 94 CC A8030000  - mov edx,[r12+r9*8+000003A8]
+7FF726CB2023 - 43 8B 8C CC AC030000  - mov ecx,[r12+r9*8+000003AC]
+7FF726CB202B - 0F57 C0               - xorps xmm0,xmm0
+7FF726CB202E - 41 3B D2              - cmp edx,r10d
+7FF726CB2031 - 72 0E                 - jb 7FF726CB2041
+7FF726CB2033 - 41 2B D2              - sub edx,r10d
+7FF726CB2036 - D1 EA                 - shr edx,1
+7FF726CB2038 - 8B C2                 - mov eax,edx
+7FF726CB203A - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+7FF726CB203F - EB 0F                 - jmp 7FF726CB2050
+7FF726CB2041 - 41 8B C2              - mov eax,r10d
+7FF726CB2044 - 2B C2                 - sub eax,edx
+7FF726CB2046 - D1 E8                 - shr eax,1
+7FF726CB2048 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+7FF726CB204D - 0F57 C6               - xorps xmm0,xmm6
+7FF726CB2050 - F3 0F11 83 10010000   - movss [rbx+00000110],xmm0
+7FF726CB2058 - 0F57 C0               - xorps xmm0,xmm0
+7FF726CB205B - 41 3B C8              - cmp ecx,r8d
+7FF726CB205E - 72 0E                 - jb 7FF726CB206E
+7FF726CB2060 - 41 2B C8              - sub ecx,r8d
+7FF726CB2063 - D1 E9                 - shr ecx,1
+7FF726CB2065 - 8B C1                 - mov eax,ecx
+7FF726CB2067 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+7FF726CB206C - EB 0F                 - jmp 7FF726CB207D
+7FF726CB206E - 41 8B C0              - mov eax,r8d
+7FF726CB2071 - 2B C1                 - sub eax,ecx
+7FF726CB2073 - D1 E8                 - shr eax,1
+7FF726CB2075 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+7FF726CB207A - 0F57 C6               - xorps xmm0,xmm6
+7FF726CB207D - F3 0F11 83 14010000   - movss [rbx+00000114],xmm0
+7FF726CB2085 - 0F57 C0               - xorps xmm0,xmm0
+7FF726CB2088 - F3 49 0F2A C2         - cvtsi2ss xmm0,r10
+7FF726CB208D - F3 0F11 83 18010000   - movss [rbx+00000118],xmm0
+7FF726CB2095 - 0F57 C9               - xorps xmm1,xmm1
+7FF726CB2098 - F3 49 0F2A C8         - cvtsi2ss xmm1,r8
+7FF726CB209D - F3 0F11 8B 1C010000   - movss [rbx+0000011C],xmm1
+7FF726CB20A5 - 44 89 B3 20010000     - mov [rbx+00000120],r14d
+7FF726CB20AC - C7 83 24010000 0000803F - mov [rbx+00000124],3F800000
+7FF726CB20B6 - 48 8D 53 78           - lea rdx,[rbx+78]
+7FF726CB20BA - 45 33 C9              - xor r9d,r9d
+7FF726CB20BD - 4C 8D 83 D8000000     - lea r8,[rbx+000000D8]
+7FF726CB20C4 - 48 8B 0B              - mov rcx,[rbx]
+7FF726CB20C7 - E8 B4424900           - call 7FF727146380
+7FF726CB20CC - 41 8B FE              - mov edi,r14d
+7FF726CB20CF - 83 BB D8000000 00     - cmp dword ptr [rbx+000000D8],00
+7FF726CB20D6 - 0F86 9F000000         - jbe 7FF726CB217B
+7FF726CB20DC - 0F1F 40 00            - nop dword ptr [rax+00]
+7FF726CB20E0 - 8B F7                 - mov esi,edi
+7FF726CB20E2 - 48 8B 4C F3 78        - mov rcx,[rbx+rsi*8+78]
+7FF726CB20E7 - 48 85 C9              - test rcx,rcx
+7FF726CB20EA - 74 7E                 - je 7FF726CB216A
+7FF726CB20EC - 48 83 C1 20           - add rcx,20
+7FF726CB20F0 - 48 8D 95 70020000     - lea rdx,[rbp+00000270]
+7FF726CB20F7 - E8 042A4800           - call 7FF727134B00
+7FF726CB20FC - 4C 8D 34 F3           - lea r14,[rbx+rsi*8]
+7FF726CB2100 - 49 83 BE 90000000 00  - cmp qword ptr [r14+00000090],00
+7FF726CB2108 - 75 60                 - jne 7FF726CB216A
+7FF726CB210A - 33 C0                 - xor eax,eax
+7FF726CB210C - 48 89 45 A0           - mov [rbp-60],rax
+7FF726CB2110 - 48 89 45 A8           - mov [rbp-58],rax
+7FF726CB2114 - 48 89 45 AC           - mov [rbp-54],rax
+7FF726CB2118 - 8B 85 80020000        - mov eax,[rbp+00000280]
+7FF726CB211E - 89 45 A0              - mov [rbp-60],eax
+7FF726CB2121 - B8 04000000           - mov eax,00000004
+7FF726CB2126 - 83 BD 84020000 01     - cmp dword ptr [rbp+00000284],01
+7FF726CB212D - B9 06000000           - mov ecx,00000006
+7FF726CB2132 - 0F47 C1               - cmova eax,ecx
+7FF726CB2135 - 88 45 A4              - mov [rbp-5C],al
+7FF726CB2138 - 33 C0                 - xor eax,eax
+7FF726CB213A - 89 45 A8              - mov [rbp-58],eax
+7FF726CB213D - C7 45 B0 01000000     - mov [rbp-50],00000001
+7FF726CB2144 - 49 8B 0C 24           - mov rcx,[r12]
+7FF726CB2148 - E8 F3390000           - call 7FF726CB5B40
+7FF726CB214D - 48 8B C8              - mov rcx,rax
+7FF726CB2150 - 4C 89 6C 24 20        - mov [rsp+20],r13
+7FF726CB2155 - 4C 8D 4D A0           - lea r9,[rbp-60]
+7FF726CB2159 - 4C 8B 44 F3 78        - mov r8,[rbx+rsi*8+78]
+7FF726CB215E - 49 8D 96 90000000     - lea rdx,[r14+00000090]
+7FF726CB2165 - E8 06354800           - call 7FF727135670
+7FF726CB216A - FF C7                 - inc edi
+7FF726CB216C - 3B BB D8000000        - cmp edi,[rbx+000000D8]
+7FF726CB2172 - 0F82 68FFFFFF         - jb 7FF726CB20E0
+7FF726CB2178 - 45 33 F6              - xor r14d,r14d
+7FF726CB217B - 48 8B 43 78           - mov rax,[rbx+78]
+7FF726CB217F - 48 85 C0              - test rax,rax
+7FF726CB2182 - 74 0F                 - je 7FF726CB2193
+7FF726CB2184 - 48 89 43 68           - mov [rbx+68],rax
+7FF726CB2188 - 48 8B 83 90000000     - mov rax,[rbx+00000090]
+7FF726CB218F - 48 89 43 70           - mov [rbx+70],rax
+7FF726CB2193 - 48 83 BB E8000000 00  - cmp qword ptr [rbx+000000E8],00
+7FF726CB219B - 0F85 99000000         - jne 7FF726CB223A
+7FF726CB21A1 - 4D 8B C5              - mov r8,r13
+7FF726CB21A4 - BA 10000000           - mov edx,00000010
+7FF726CB21A9 - B9 A0000000           - mov ecx,000000A0
+7FF726CB21AE - E8 AD634B00           - call 7FF727168560
+7FF726CB21B3 - 48 89 45 C8           - mov [rbp-38],rax
+7FF726CB21B7 - 48 85 C0              - test rax,rax
+7FF726CB21BA - 74 0D                 - je 7FF726CB21C9
+7FF726CB21BC - 48 8B C8              - mov rcx,rax
+7FF726CB21BF - E8 EC730E00           - call 7FF726D995B0
+7FF726CB21C4 - 48 8B C8              - mov rcx,rax
+7FF726CB21C7 - EB 03                 - jmp 7FF726CB21CC
+7FF726CB21C9 - 49 8B CE              - mov rcx,r14
+7FF726CB21CC - 48 89 8B E8000000     - mov [rbx+000000E8],rcx
+7FF726CB21D3 - 48 8D 43 28           - lea rax,[rbx+28]
+7FF726CB21D7 - 4C 89 74 24 48        - mov [rsp+48],r14
+7FF726CB21DC - 4C 89 74 24 40        - mov [rsp+40],r14
+7FF726CB21E1 - 4C 89 74 24 38        - mov [rsp+38],r14
+7FF726CB21E6 - C7 44 24 30 00010000  - mov [rsp+30],00000100
+7FF726CB21EE - 48 89 44 24 28        - mov [rsp+28],rax
+7FF726CB21F3 - C7 44 24 20 01000000  - mov [rsp+20],00000001
+7FF726CB21FB - 41 B9 14000000        - mov r9d,00000014
+7FF726CB2201 - 44 8B 83 0C010000     - mov r8d,[rbx+0000010C]
+7FF726CB2208 - 8B 93 08010000        - mov edx,[rbx+00000108]
+7FF726CB220E - E8 CD790E00           - call 7FF726D99BE0
+7FF726CB2213 - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
+7FF726CB221A - 48 83 C1 08           - add rcx,08
+7FF726CB221E - E8 2D664B00           - call 7FF727168850
+7FF726CB2223 - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
+7FF726CB222A - 48 8B 01              - mov rax,[rcx]
+7FF726CB222D - 48 8D 15 4C784E01     - lea rdx,[7FF728199A80]
+7FF726CB2234 - FF 90 90000000        - call qword ptr [rax+00000090]
+7FF726CB223A - 41 8B F6              - mov esi,r14d
+7FF726CB223D - 83 BB D8000000 00     - cmp dword ptr [rbx+000000D8],00
+7FF726CB2244 - 0F86 8E000000         - jbe 7FF726CB22D8
+7FF726CB224A - 66 0F1F 44 00 00      - nop word ptr [rax+rax+00]
+7FF726CB2250 - 8B FE                 - mov edi,esi
+7FF726CB2252 - 48 83 BC FB A8000000 00 - cmp qword ptr [rbx+rdi*8+000000A8],00
+7FF726CB225B - 75 6D                 - jne 7FF726CB22CA
+7FF726CB225D - 4D 8B C5              - mov r8,r13
+7FF726CB2260 - BA 10000000           - mov edx,00000010
+7FF726CB2265 - B9 A0000000           - mov ecx,000000A0
+7FF726CB226A - E8 F1624B00           - call 7FF727168560
+7FF726CB226F - 48 89 45 D0           - mov [rbp-30],rax
+7FF726CB2273 - 48 85 C0              - test rax,rax
+7FF726CB2276 - 74 0D                 - je 7FF726CB2285
+7FF726CB2278 - 48 8B C8              - mov rcx,rax
+7FF726CB227B - E8 404A0000           - call 7FF726CB6CC0
+7FF726CB2280 - 48 8B C8              - mov rcx,rax
+7FF726CB2283 - EB 03                 - jmp 7FF726CB2288
+7FF726CB2285 - 49 8B CE              - mov rcx,r14
+7FF726CB2288 - 48 89 8C FB A8000000  - mov [rbx+rdi*8+000000A8],rcx
+7FF726CB2290 - 48 8B 01              - mov rax,[rcx]
+7FF726CB2293 - 45 33 C0              - xor r8d,r8d
+7FF726CB2296 - 48 8B 54 FB 78        - mov rdx,[rbx+rdi*8+78]
+7FF726CB229B - FF 90 C0000000        - call qword ptr [rax+000000C0]
+7FF726CB22A1 - 48 8B 8C FB A8000000  - mov rcx,[rbx+rdi*8+000000A8]
+7FF726CB22A9 - 48 83 C1 08           - add rcx,08
+7FF726CB22AD - E8 9E654B00           - call 7FF727168850
+7FF726CB22B2 - 48 8B 8C FB A8000000  - mov rcx,[rbx+rdi*8+000000A8]
+7FF726CB22BA - 48 8B 01              - mov rax,[rcx]
+7FF726CB22BD - 48 8D 15 DC774E01     - lea rdx,[7FF728199AA0]
+7FF726CB22C4 - FF 90 90000000        - call qword ptr [rax+00000090]
+7FF726CB22CA - FF C6                 - inc esi
+7FF726CB22CC - 3B B3 D8000000        - cmp esi,[rbx+000000D8]
+7FF726CB22D2 - 0F82 78FFFFFF         - jb 7FF726CB2250
+7FF726CB22D8 - 48 8B 0B              - mov rcx,[rbx]
+7FF726CB22DB - E8 60414900           - call 7FF727146440
+7FF726CB22E0 - 88 83 3C010000        - mov [rbx+0000013C],al
+7FF726CB22E6 - 33 D2                 - xor edx,edx
+7FF726CB22E8 - 44 8D 42 58           - lea r8d,[rdx+58]
+7FF726CB22EC - 48 8D 8D 10020000     - lea rcx,[rbp+00000210]
+7FF726CB22F3 - E8 3868B100           - call 7FF7277C8B30
+7FF726CB22F8 - 48 8D 95 10020000     - lea rdx,[rbp+00000210]
+7FF726CB22FF - 48 8B 0B              - mov rcx,[rbx]
+7FF726CB2302 - E8 B9404900           - call 7FF7271463C0
+7FF726CB2307 - 4D 8B C5              - mov r8,r13
+7FF726CB230A - BA 10000000           - mov edx,00000010
+7FF726CB230F - B9 A0000000           - mov ecx,000000A0
+7FF726CB2314 - E8 47624B00           - call 7FF727168560
+7FF726CB2319 - 48 89 45 D8           - mov [rbp-28],rax
+7FF726CB231D - 48 85 C0              - test rax,rax
+7FF726CB2320 - 74 0A                 - je 7FF726CB232C
+7FF726CB2322 - 48 8B C8              - mov rcx,rax
+7FF726CB2325 - E8 96490000           - call 7FF726CB6CC0
+7FF726CB232A - EB 03                 - jmp 7FF726CB232F
+7FF726CB232C - 49 8B C6              - mov rax,r14
+7FF726CB232F - 48 89 83 F0000000     - mov [rbx+000000F0],rax
+7FF726CB2336 - 48 C7 44 24 60 00000000 - mov qword ptr [rsp+60],00000000
+7FF726CB233F - 44 89 74 24 68        - mov [rsp+68],r14d
+7FF726CB2344 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001
+7FF726CB234C - C7 44 24 70 01000000  - mov [rsp+70],00000001
+7FF726CB2354 - 48 C7 44 24 74 01000000 - mov qword ptr [rsp+74],00000001
+7FF726CB235D - 44 89 74 24 7C        - mov [rsp+7C],r14d
+7FF726CB2362 - 4C 89 75 80           - mov [rbp-80],r14
+7FF726CB2366 - C6 45 88 00           - mov byte ptr [rbp-78],00
+7FF726CB236A - 33 D2                 - xor edx,edx
+7FF726CB236C - 48 8D 4D F8           - lea rcx,[rbp-08]
+7FF726CB2370 - E8 FB6B82FE           - call 7FF7254D8F70
+7FF726CB2375 - 0F10 00               - movups xmm0,[rax]
+7FF726CB2378 - 0F11 45 8C            - movups [rbp-74],xmm0
+7FF726CB237C - 8B 83 08010000        - mov eax,[rbx+00000108]
+7FF726CB2382 - 89 44 24 60           - mov [rsp+60],eax
+7FF726CB2386 - 8B 83 0C010000        - mov eax,[rbx+0000010C]
+7FF726CB238C - 89 44 24 64           - mov [rsp+64],eax
+7FF726CB2390 - 48 8B 8B A8000000     - mov rcx,[rbx+000000A8]
+7FF726CB2397 - 48 8B 01              - mov rax,[rcx]
+7FF726CB239A - FF 50 30              - call qword ptr [rax+30]
+7FF726CB239D - 89 44 24 68           - mov [rsp+68],eax
+7FF726CB23A1 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001
+7FF726CB23A9 - 48 8B 43 28           - mov rax,[rbx+28]
+7FF726CB23AD - 48 89 44 24 74        - mov [rsp+74],rax
+7FF726CB23B2 - 41 0F10 84 24 D4010000  - movups xmm0,[r12+000001D4]
+7FF726CB23BB - 0F11 45 8C            - movups [rbp-74],xmm0
+7FF726CB23BF - 45 33 C9              - xor r9d,r9d
+7FF726CB23C2 - 45 33 C0              - xor r8d,r8d
+7FF726CB23C5 - 48 8D 54 24 60        - lea rdx,[rsp+60]
+7FF726CB23CA - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
+7FF726CB23D1 - E8 1A4A0000           - call 7FF726CB6DF0
+7FF726CB23D6 - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
+7FF726CB23DD - 48 83 C1 08           - add rcx,08
+7FF726CB23E1 - E8 6A644B00           - call 7FF727168850
+7FF726CB23E6 - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
+7FF726CB23ED - 48 8B 01              - mov rax,[rcx]
+7FF726CB23F0 - 48 8D 15 C9764E01     - lea rdx,[7FF728199AC0]
+7FF726CB23F7 - FF 90 90000000        - call qword ptr [rax+00000090]
+7FF726CB23FD - 4C 8B 05 D49CB602     - mov r8,[7FF72981C0D8]
+7FF726CB2404 - 4C 89 45 E0           - mov [rbp-20],r8
+7FF726CB2408 - BA 08000000           - mov edx,00000008
+7FF726CB240D - 8D 4A 60              - lea ecx,[rdx+60]
+7FF726CB2410 - E8 4B614B00           - call 7FF727168560
+7FF726CB2415 - 48 89 45 E8           - mov [rbp-18],rax
+7FF726CB2419 - 48 85 C0              - test rax,rax
+7FF726CB241C - 74 0D                 - je 7FF726CB242B
+7FF726CB241E - 49 8B D5              - mov rdx,r13
+7FF726CB2421 - 48 8B C8              - mov rcx,rax
+7FF726CB2424 - E8 276A0F00           - call 7FF726DA8E50
+7FF726CB2429 - EB 03                 - jmp 7FF726CB242E
+7FF726CB242B - 49 8B C6              - mov rax,r14
+7FF726CB242E - 48 89 83 F8000000     - mov [rbx+000000F8],rax
+7FF726CB2435 - 48 8D 4D 70           - lea rcx,[rbp+70]
+7FF726CB2439 - E8 52ED7FFE           - call 7FF7254B1190
+7FF726CB243E - 90                    - nop 
+7FF726CB243F - 48 8D 8D 20010000     - lea rcx,[rbp+00000120]
+7FF726CB2446 - E8 45ED7FFE           - call 7FF7254B1190
+7FF726CB244B - 90                    - nop 
+7FF726CB244C - 4C 89 75 30           - mov [rbp+30],r14
+7FF726CB2450 - 4C 89 75 38           - mov [rbp+38],r14
+7FF726CB2454 - 0F57 C0               - xorps xmm0,xmm0
+7FF726CB2457 - 66 0F7F 45 40         - movdqa [rbp+40],xmm0
+7FF726CB245C - 0F57 C9               - xorps xmm1,xmm1
+7FF726CB245F - 66 0F7F 4D 50         - movdqa [rbp+50],xmm1
+7FF726CB2464 - 48 C7 45 60 01000000  - mov qword ptr [rbp+60],00000001
+7FF726CB246C - C7 45 68 01000000     - mov [rbp+68],00000001
+7FF726CB2473 - C6 45 6C 00           - mov byte ptr [rbp+6C],00
+7FF726CB2477 - C7 85 E0010000 00000001 - mov [rbp+000001E0],01000000
+7FF726CB2481 - C6 85 E4010000 00     - mov byte ptr [rbp+000001E4],00
+7FF726CB2488 - 48 C7 85 E8010000 00000000 - mov qword ptr [rbp+000001E8],00000000
+7FF726CB2493 - 45 33 C0              - xor r8d,r8d
+7FF726CB2496 - 48 8D 15 27788501     - lea rdx,[7FF728509CC4]
+7FF726CB249D - 48 8D 4D 70           - lea rcx,[rbp+70]
+7FF726CB24A1 - E8 0AFB7FFE           - call 7FF7254B1FB0
+7FF726CB24A6 - 45 33 C0              - xor r8d,r8d
+7FF726CB24A9 - 48 8D 15 14788501     - lea rdx,[7FF728509CC4]
+7FF726CB24B0 - 48 8D 8D 20010000     - lea rcx,[rbp+00000120]
+7FF726CB24B7 - E8 F4FA7FFE           - call 7FF7254B1FB0
+7FF726CB24BC - 4C 89 B5 D0010000     - mov [rbp+000001D0],r14
+7FF726CB24C3 - 4C 89 B5 D8010000     - mov [rbp+000001D8],r14
+7FF726CB24CA - 33 D2                 - xor edx,edx
+7FF726CB24CC - 48 8D 4D 08           - lea rcx,[rbp+08]
+7FF726CB24D0 - E8 9B6A82FE           - call 7FF7254D8F70
+7FF726CB24D5 - 0F10 00               - movups xmm0,[rax]
+7FF726CB24D8 - 0F29 85 F0010000      - movaps [rbp+000001F0],xmm0
+7FF726CB24DF - 0F57 C9               - xorps xmm1,xmm1
+7FF726CB24E2 - 66 0F7F 8D 00020000   - movdqa [rbp+00000200],xmm1
+7FF726CB24EA - C6 45 6C 00           - mov byte ptr [rbp+6C],00
+7FF726CB24EE - 48 8B 83 F0000000     - mov rax,[rbx+000000F0]
+7FF726CB24F5 - 48 89 45 40           - mov [rbp+40],rax
+7FF726CB24F9 - 48 8D 48 70           - lea rcx,[rax+70]
+7FF726CB24FD - 48 8B 01              - mov rax,[rcx]
+7FF726CB2500 - 33 D2                 - xor edx,edx
+7FF726CB2502 - FF 50 08              - call qword ptr [rax+08]
+7FF726CB2505 - 48 89 45 50           - mov [rbp+50],rax
+7FF726CB2509 - 33 D2                 - xor edx,edx
+7FF726CB250B - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
+7FF726CB2512 - E8 49790E00           - call 7FF726D99E60
+7FF726CB2517 - 48 89 45 58           - mov [rbp+58],rax
+7FF726CB251B - 48 8B 83 E8000000     - mov rax,[rbx+000000E8]
+7FF726CB2522 - 48 89 45 48           - mov [rbp+48],rax
+7FF726CB2526 - 4C 89 B5 00020000     - mov [rbp+00000200],r14
+7FF726CB252D - 48 8B 43 28           - mov rax,[rbx+28]
+7FF726CB2531 - 48 89 45 60           - mov [rbp+60],rax
+7FF726CB2535 - 8B 83 08010000        - mov eax,[rbx+00000108]
+7FF726CB253B - 89 45 30              - mov [rbp+30],eax
+7FF726CB253E - 8B 83 0C010000        - mov eax,[rbx+0000010C]
+7FF726CB2544 - 89 45 34              - mov [rbp+34],eax
+7FF726CB2547 - C6 85 E0010000 00     - mov byte ptr [rbp+000001E0],00
+7FF726CB254E - 45 33 C0              - xor r8d,r8d
+7FF726CB2551 - 48 8D 55 30           - lea rdx,[rbp+30]
+7FF726CB2555 - 48 8B 8B F8000000     - mov rcx,[rbx+000000F8]
+7FF726CB255C - E8 3F720F00           - call 7FF726DA97A0
+7FF726CB2561 - 90                    - nop 
+7FF726CB2562 - 48 8B 85 C0010000     - mov rax,[rbp+000001C0]
+7FF726CB2569 - 48 83 F8 08           - cmp rax,08
+7FF726CB256D - 72 28                 - jb 7FF726CB2597
+7FF726CB256F - 48 FF C0              - inc rax
+7FF726CB2572 - 48 83 F8 40           - cmp rax,40
+7FF726CB2576 - 76 18                 - jna 7FF726CB2590
+7FF726CB2578 - 4C 8D 05 51448701     - lea r8,[7FF7285269D0]
+7FF726CB257F - BA 31010000           - mov edx,00000131
+7FF726CB2584 - 48 8D 0D D5764E01     - lea rcx,[7FF728199C60]
+7FF726CB258B - E8 A0584B00           - call 7FF727167E30
+7FF726CB2590 - 80 A5 A1010000 FD     - and byte ptr [rbp+000001A1],-03
+7FF726CB2597 - 48 C7 85 C0010000 07000000 - mov qword ptr [rbp+000001C0],00000007
+7FF726CB25A2 - 4C 89 B5 B8010000     - mov [rbp+000001B8],r14
+7FF726CB25A9 - 66 44 89 B5 A8010000  - mov [rbp+000001A8],r14w
+7FF726CB25B1 - 48 8B 85 10010000     - mov rax,[rbp+00000110]
+7FF726CB25B8 - 48 83 F8 08           - cmp rax,08
+7FF726CB25BC - 72 22                 - jb 7FF726CB25E0
+7FF726CB25BE - 48 FF C0              - inc rax
+7FF726CB25C1 - 48 83 F8 40           - cmp rax,40
+7FF726CB25C5 - 76 19                 - jna 7FF726CB25E0
+7FF726CB25C7 - 4C 8D 05 02448701     - lea r8,[7FF7285269D0]
+7FF726CB25CE - BA 31010000           - mov edx,00000131
+7FF726CB25D3 - 48 8D 0D 86764E01     - lea rcx,[7FF728199C60]
+7FF726CB25DA - E8 51584B00           - call 7FF727167E30
+7FF726CB25DF - 90                    - nop 
+7FF726CB25E0 - 4D 8B C5              - mov r8,r13
+7FF726CB25E3 - BA 10000000           - mov edx,00000010
+7FF726CB25E8 - B9 A0000000           - mov ecx,000000A0
+7FF726CB25ED - E8 6E5F4B00           - call 7FF727168560
+7FF726CB25F2 - 48 89 45 F0           - mov [rbp-10],rax
+7FF726CB25F6 - 48 85 C0              - test rax,rax
+7FF726CB25F9 - 74 0A                 - je 7FF726CB2605
+7FF726CB25FB - 48 8B C8              - mov rcx,rax
+7FF726CB25FE - E8 BD460000           - call 7FF726CB6CC0
+7FF726CB2603 - EB 03                 - jmp 7FF726CB2608
+7FF726CB2605 - 49 8B C6              - mov rax,r14
+7FF726CB2608 - 48 89 83 00010000     - mov [rbx+00000100],rax
+7FF726CB260F - BF 00220600           - mov edi,00062200
+7FF726CB2614 - 41 80 BC 24 E7010000 00 - cmp byte ptr [r12+000001E7],00
+7FF726CB261D - B8 00200600           - mov eax,00062000
+7FF726CB2622 - 0F44 F8               - cmove edi,eax
+7FF726CB2625 - 48 C7 44 24 60 00000000 - mov qword ptr [rsp+60],00000000
+7FF726CB262E - 44 89 74 24 68        - mov [rsp+68],r14d
+7FF726CB2633 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001
+7FF726CB263B - C7 44 24 70 01000000  - mov [rsp+70],00000001
+7FF726CB2643 - 48 C7 44 24 74 01000000 - mov qword ptr [rsp+74],00000001
+7FF726CB264C - 44 89 74 24 7C        - mov [rsp+7C],r14d
+7FF726CB2651 - 4C 89 75 80           - mov [rbp-80],r14
+7FF726CB2655 - C6 45 88 00           - mov byte ptr [rbp-78],00
+7FF726CB2659 - 33 D2                 - xor edx,edx
+7FF726CB265B - 48 8D 4D 18           - lea rcx,[rbp+18]
+7FF726CB265F - E8 0C6982FE           - call 7FF7254D8F70
+7FF726CB2664 - 8B 83 08010000        - mov eax,[rbx+00000108]
+7FF726CB266A - 89 44 24 60           - mov [rsp+60],eax
+7FF726CB266E - 8B 83 0C010000        - mov eax,[rbx+0000010C]
+7FF726CB2674 - 89 44 24 64           - mov [rsp+64],eax
+7FF726CB2678 - C7 44 24 68 1C000000  - mov [rsp+68],0000001C
+7FF726CB2680 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001
+7FF726CB2688 - 48 8B 43 28           - mov rax,[rbx+28]
+7FF726CB268C - 48 89 44 24 74        - mov [rsp+74],rax
+7FF726CB2691 - 89 7C 24 7C           - mov [rsp+7C],edi
+7FF726CB2695 - 4C 89 75 80           - mov [rbp-80],r14
+7FF726CB2699 - 0F28 05 D0CD8701      - movaps xmm0,[7FF72852F470]
+7FF726CB26A0 - 0F11 45 8C            - movups [rbp-74],xmm0
+7FF726CB26A4 - 45 33 C9              - xor r9d,r9d
+7FF726CB26A7 - 45 33 C0              - xor r8d,r8d
+7FF726CB26AA - 48 8D 54 24 60        - lea rdx,[rsp+60]
+7FF726CB26AF - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
+7FF726CB26B6 - E8 35470000           - call 7FF726CB6DF0
+7FF726CB26BB - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
+7FF726CB26C2 - 48 83 C1 08           - add rcx,08
+7FF726CB26C6 - E8 85614B00           - call 7FF727168850
+7FF726CB26CB - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
+7FF726CB26D2 - 48 8B 01              - mov rax,[rcx]
+7FF726CB26D5 - 48 8D 15 0C744E01     - lea rdx,[7FF728199AE8]
+7FF726CB26DC - FF 90 90000000        - call qword ptr [rax+00000090]
+7FF726CB26E2 - 66 C7 83 3E010000 0100 - mov word ptr [rbx+0000013E],0001
+7FF726CB26EB - 83 BB 28010000 00     - cmp dword ptr [rbx+00000128],00
+7FF726CB26F2 - 75 15                 - jne 7FF726CB2709
+7FF726CB26F4 - 44 8B 83 0C010000     - mov r8d,[rbx+0000010C]
+7FF726CB26FB - 8B 93 08010000        - mov edx,[rbx+00000108]
+7FF726CB2701 - 49 8B CC              - mov rcx,r12
+7FF726CB2704 - E8 57190000           - call 7FF726CB4060
+7FF726CB2709 - 8B 44 24 50           - mov eax,[rsp+50]
+7FF726CB270D - 48 81 C3 70010000     - add rbx,00000170
+7FF726CB2714 - 49 3B 9C 24 30010000  - cmp rbx,[r12+00000130]
+7FF726CB271C - 0F85 04F8FFFF         - jne 7FF726CB1F26
+7FF726CB2722 - 48 8B 8D 00030000     - mov rcx,[rbp+00000300]
+7FF726CB2729 - 48 33 CC              - xor rcx,rsp
+7FF726CB272C - E8 4F4CAF00           - call 7FF7277A7380
+7FF726CB2731 - 4C 8D 9C 24 20040000  - lea r11,[rsp+00000420]
+7FF726CB2739 - 49 8B 5B 38           - mov rbx,[r11+38]
+7FF726CB273D - 49 8B 73 40           - mov rsi,[r11+40]
+7FF726CB2741 - 49 8B 7B 48           - mov rdi,[r11+48]
+7FF726CB2745 - 41 0F28 73 F0         - movaps xmm6,[r11-10]
+7FF726CB274A - 49 8B E3              - mov rsp,r11
+7FF726CB274D - 41 5F                 - pop r15
+7FF726CB274F - 41 5E                 - pop r14
+7FF726CB2751 - 41 5D                 - pop r13
+7FF726CB2753 - 41 5C                 - pop r12
+7FF726CB2755 - 5D                    - pop rbp
+7FF726CB2756 - C3                    - ret 
+
+FUNCTION BELOW:
+
+7FF726CB2758 - 8B 41 0C              - mov eax,[rcx+0C]
+7FF726CB275B - 25 FFFFFF3F           - and eax,3FFFFFFF
+7FF726CB2760 - 40 53                 - push rbx
+7FF726CB2762 - 41 55                 - push r13
+7FF726CB2764 - 41 57                 - push r15
+7FF726CB2766 - 48 83 EC 30           - sub rsp,30
+7FF726CB276A - 48 8B 99 28010000     - mov rbx,[rcx+00000128]
+7FF726CB2771 - 44 8B FA              - mov r15d,edx
+7FF726CB2774 - 4C 8B E9              - mov r13,rcx
+7FF726CB2777 - 48 3B 99 30010000     - cmp rbx,[rcx+00000130]
+7FF726CB277E - 0F84 2D020000         - je 7FF726CB29B1
+7FF726CB2784 - 48 89 6C 24 50        - mov [rsp+50],rbp
+7FF726CB2789 - 48 89 74 24 58        - mov [rsp+58],rsi
+7FF726CB278E - 48 89 7C 24 60        - mov [rsp+60],rdi
+7FF726CB2793 - 4C 89 64 24 28        - mov [rsp+28],r12
+7FF726CB2798 - 45 33 E4              - xor r12d,r12d
+7FF726CB279B - 4C 89 74 24 20        - mov [rsp+20],r14
+7FF726CB27A0 - 41 83 FF FF           - cmp r15d,-01
+7FF726CB27A4 - 74 0D                 - je 7FF726CB27B3
+7FF726CB27A6 - 44 39 BB 28010000     - cmp [rbx+00000128],r15d
+7FF726CB27AD - 0F85 D1010000         - jne 7FF726CB2984
+7FF726CB27B3 - 48 8B BB 00010000     - mov rdi,[rbx+00000100]
+7FF726CB27BA - 48 85 FF              - test rdi,rdi
+7FF726CB27BD - 74 36                 - je 7FF726CB27F5
+7FF726CB27BF - 48 8D 4F 08           - lea rcx,[rdi+08]
+7FF726CB27C3 - E8 C8604B00           - call 7FF727168890
+7FF726CB27C8 - 83 F8 01              - cmp eax,01
+7FF726CB27CB - 75 0A                 - jne 7FF726CB27D7
+7FF726CB27CD - 48 8B 07              - mov rax,[rdi]
+7FF726CB27D0 - 48 8B CF              - mov rcx,rdi
+7FF726CB27D3 - FF 10                 - call qword ptr [rax]
+7FF726CB27D5 - EB 17                 - jmp 7FF726CB27EE
+7FF726CB27D7 - 85 C0                 - test eax,eax
+7FF726CB27D9 - 7F 13                 - jg 7FF726CB27EE
+7FF726CB27DB - 4C 8D 05 5E228701     - lea r8,[7FF728524A40]
+7FF726CB27E2 - BA AB000000           - mov edx,000000AB
+7FF726CB27E7 - 33 C9                 - xor ecx,ecx
+7FF726CB27E9 - E8 42564B00           - call 7FF727167E30
+7FF726CB27EE - 4C 89 A3 00010000     - mov [rbx+00000100],r12
+7FF726CB27F5 - 48 8B B3 F8000000     - mov rsi,[rbx+000000F8]
+7FF726CB27FC - 48 85 F6              - test rsi,rsi
+7FF726CB27FF - 74 24                 - je 7FF726CB2825
+7FF726CB2801 - 48 8B 06              - mov rax,[rsi]
+7FF726CB2804 - 33 D2                 - xor edx,edx
+7FF726CB2806 - 48 8B 3D CB98B602     - mov rdi,[7FF72981C0D8]
+7FF726CB280D - 48 8B CE              - mov rcx,rsi
+7FF726CB2810 - FF 10                 - call qword ptr [rax]
+7FF726CB2812 - 48 8B 07              - mov rax,[rdi]
+7FF726CB2815 - 48 8B D6              - mov rdx,rsi
+7FF726CB2818 - 48 8B CF              - mov rcx,rdi
+7FF726CB281B - FF 50 68              - call qword ptr [rax+68]
+7FF726CB281E - 4C 89 A3 F8000000     - mov [rbx+000000F8],r12
+7FF726CB2825 - 48 8B BB F0000000     - mov rdi,[rbx+000000F0]
+7FF726CB282C - 48 85 FF              - test rdi,rdi
+7FF726CB282F - 74 36                 - je 7FF726CB2867
+7FF726CB2831 - 48 8D 4F 08           - lea rcx,[rdi+08]
+7FF726CB2835 - E8 56604B00           - call 7FF727168890
+7FF726CB283A - 83 F8 01              - cmp eax,01
+7FF726CB283D - 75 0A                 - jne 7FF726CB2849
+7FF726CB283F - 48 8B 07              - mov rax,[rdi]
+7FF726CB2842 - 48 8B CF              - mov rcx,rdi
+7FF726CB2845 - FF 10                 - call qword ptr [rax]
+7FF726CB2847 - EB 17                 - jmp 7FF726CB2860
+7FF726CB2849 - 85 C0                 - test eax,eax
+7FF726CB284B - 7F 13                 - jg 7FF726CB2860
+7FF726CB284D - 4C 8D 05 EC218701     - lea r8,[7FF728524A40]
+7FF726CB2854 - BA AB000000           - mov edx,000000AB
+7FF726CB2859 - 33 C9                 - xor ecx,ecx
+7FF726CB285B - E8 D0554B00           - call 7FF727167E30
+7FF726CB2860 - 4C 89 A3 F0000000     - mov [rbx+000000F0],r12
+7FF726CB2867 - 48 8B BB E8000000     - mov rdi,[rbx+000000E8]
+7FF726CB286E - 48 85 FF              - test rdi,rdi
+7FF726CB2871 - 74 36                 - je 7FF726CB28A9
+7FF726CB2873 - 48 8D 4F 08           - lea rcx,[rdi+08]
+7FF726CB2877 - E8 14604B00           - call 7FF727168890
+7FF726CB287C - 83 F8 01              - cmp eax,01
+7FF726CB287F - 75 0A                 - jne 7FF726CB288B
+7FF726CB2881 - 48 8B 07              - mov rax,[rdi]
+7FF726CB2884 - 48 8B CF              - mov rcx,rdi
+7FF726CB2887 - FF 10                 - call qword ptr [rax]
+7FF726CB2889 - EB 17                 - jmp 7FF726CB28A2
+7FF726CB288B - 85 C0                 - test eax,eax
+7FF726CB288D - 7F 13                 - jg 7FF726CB28A2
+7FF726CB288F - 4C 8D 05 AA218701     - lea r8,[7FF728524A40]
+7FF726CB2896 - BA AB000000           - mov edx,000000AB
+7FF726CB289B - 33 C9                 - xor ecx,ecx
+7FF726CB289D - E8 8E554B00           - call 7FF727167E30
+7FF726CB28A2 - 4C 89 A3 E8000000     - mov [rbx+000000E8],r12
+7FF726CB28A9 - 41 8B F4              - mov esi,r12d
+7FF726CB28AC - 44 39 A3 D8000000     - cmp [rbx+000000D8],r12d
+7FF726CB28B3 - 0F86 CB000000         - jbe 7FF726CB2984
+7FF726CB28B9 - 0F1F 80 00000000      - nop dword ptr [rax+00000000]
+7FF726CB28C0 - 8B EE                 - mov ebp,esi
+7FF726CB28C2 - 4C 8B B4 EB C0000000  - mov r14,[rbx+rbp*8+000000C0]
+7FF726CB28CA - 4D 85 F6              - test r14,r14
+7FF726CB28CD - 74 2B                 - je 7FF726CB28FA
+7FF726CB28CF - 49 8B CE              - mov rcx,r14
+7FF726CB28D2 - E8 991B4C00           - call 7FF727174470
+7FF726CB28D7 - 4D 8B 06              - mov r8,[r14]
+7FF726CB28DA - 33 D2                 - xor edx,edx
+7FF726CB28DC - 49 8B CE              - mov rcx,r14
+7FF726CB28DF - 48 8B F8              - mov rdi,rax
+7FF726CB28E2 - 41 FF 10              - call qword ptr [r8]
+7FF726CB28E5 - 4C 8B 07              - mov r8,[rdi]
+7FF726CB28E8 - 49 8B D6              - mov rdx,r14
+7FF726CB28EB - 48 8B CF              - mov rcx,rdi
+7FF726CB28EE - 41 FF 50 68           - call qword ptr [r8+68]
+7FF726CB28F2 - 4C 89 A4 EB C0000000  - mov [rbx+rbp*8+000000C0],r12
+7FF726CB28FA - 48 8B BC EB A8000000  - mov rdi,[rbx+rbp*8+000000A8]
+7FF726CB2902 - 48 85 FF              - test rdi,rdi
+7FF726CB2905 - 74 37                 - je 7FF726CB293E
+7FF726CB2907 - 48 8D 4F 08           - lea rcx,[rdi+08]
+7FF726CB290B - E8 805F4B00           - call 7FF727168890
+7FF726CB2910 - 83 F8 01              - cmp eax,01
+7FF726CB2913 - 75 0A                 - jne 7FF726CB291F
+7FF726CB2915 - 48 8B 07              - mov rax,[rdi]
+7FF726CB2918 - 48 8B CF              - mov rcx,rdi
+7FF726CB291B - FF 10                 - call qword ptr [rax]
+7FF726CB291D - EB 17                 - jmp 7FF726CB2936
+7FF726CB291F - 85 C0                 - test eax,eax
+7FF726CB2921 - 7F 13                 - jg 7FF726CB2936
+7FF726CB2923 - 4C 8D 05 16218701     - lea r8,[7FF728524A40]
+7FF726CB292A - BA AB000000           - mov edx,000000AB
+7FF726CB292F - 33 C9                 - xor ecx,ecx
+7FF726CB2931 - E8 FA544B00           - call 7FF727167E30
+7FF726CB2936 - 4C 89 A4 EB A8000000  - mov [rbx+rbp*8+000000A8],r12
+7FF726CB293E - 4C 8B B4 EB 90000000  - mov r14,[rbx+rbp*8+00000090]
+7FF726CB2946 - 4D 85 F6              - test r14,r14
+7FF726CB2949 - 74 2B                 - je 7FF726CB2976
+7FF726CB294B - 49 8B CE              - mov rcx,r14
+7FF726CB294E - E8 1D1B4C00           - call 7FF727174470
+7FF726CB2953 - 4D 8B 06              - mov r8,[r14]
+7FF726CB2956 - 33 D2                 - xor edx,edx
+7FF726CB2958 - 49 8B CE              - mov rcx,r14
+7FF726CB295B - 48 8B F8              - mov rdi,rax
+7FF726CB295E - 41 FF 10              - call qword ptr [r8]
+7FF726CB2961 - 4C 8B 07              - mov r8,[rdi]
+7FF726CB2964 - 49 8B D6              - mov rdx,r14
+7FF726CB2967 - 48 8B CF              - mov rcx,rdi
+7FF726CB296A - 41 FF 50 68           - call qword ptr [r8+68]
+7FF726CB296E - 4C 89 A4 EB 90000000  - mov [rbx+rbp*8+00000090],r12
+7FF726CB2976 - FF C6                 - inc esi
+7FF726CB2978 - 3B B3 D8000000        - cmp esi,[rbx+000000D8]
+7FF726CB297E - 0F82 3CFFFFFF         - jb 7FF726CB28C0
+7FF726CB2984 - 48 81 C3 70010000     - add rbx,00000170
+7FF726CB298B - 49 3B 9D 30010000     - cmp rbx,[r13+00000130]
+7FF726CB2992 - 0F85 08FEFFFF         - jne 7FF726CB27A0
+7FF726CB2998 - 4C 8B 74 24 20        - mov r14,[rsp+20]
+7FF726CB299D - 4C 8B 64 24 28        - mov r12,[rsp+28]
+7FF726CB29A2 - 48 8B 7C 24 60        - mov rdi,[rsp+60]
+7FF726CB29A7 - 48 8B 74 24 58        - mov rsi,[rsp+58]
+7FF726CB29AC - 48 8B 6C 24 50        - mov rbp,[rsp+50]
+7FF726CB29B1 - 48 83 C4 30           - add rsp,30
+7FF726CB29B5 - 41 5F                 - pop r15
+7FF726CB29B7 - 41 5D                 - pop r13
+7FF726CB29B9 - 5B                    - pop rbx
+7FF726CB29BA - C3                    - ret 
