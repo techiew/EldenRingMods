@@ -8,6 +8,7 @@ A collection of mods I've made for Elden Ring. For use with [Elden Mod Loader](h
 - [Remove black bars](https://www.nexusmods.com/eldenring/mods/175)
 - [Fix the camera](https://www.nexusmods.com/eldenring/mods/118)
 - [Pause the game](https://www.nexusmods.com/eldenring/mods/43)
+- [Adjust the FoV](https://www.nexusmods.com/eldenring/mods/325)
 
 ### Credits
 - Thanks to **uberhalit** for his [EldenRingFpsUnlockAndMore](https://github.com/uberhalit/EldenRingFpsUnlockAndMore) code.
