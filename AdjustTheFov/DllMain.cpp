@@ -1,14 +1,34 @@
 #include <Windows.h>
+#include <xmmintrin.h>
 
 #include "ModUtils.h"
 
 using namespace ModUtils;
+using namespace mINI;
 
 extern "C" {
 	void FovAdjust();
-	float fov = 100.0f;
+	__m128 fov = _mm_setr_ps(48.0f, 0.0f, 0.0f, 0.0f);
 	uintptr_t returnAddress = 0;
 	uintptr_t resolvedRelativeAddress = 0;
+}
+
+void ReadConfig()
+{
+	INIFile config(GetModuleFolderPath() + "\\config.ini");
+	INIStructure ini;
+
+	if (config.read(ini))
+	{
+		fov = _mm_setr_ps(std::stof(ini["fov"].get("value")), 0.0f, 0.0f, 0.0f);
+	} 
+	else
+	{
+		ini["fov"]["value"] = "48";
+		config.write(ini, true);
+	}
+
+	Log("Field of view: %f", fov.m128_f32[0]);
 }
 
 DWORD WINAPI MainThread(LPVOID lpParam)
@@ -18,14 +38,17 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	std::vector<uint8_t> originalBytes(9, 0x90);
 	intptr_t unresolvedRelativeAddress = 0;
 	uintptr_t hookAddress = SigScan(pattern);
+
 	if (hookAddress != 0)
 	{
+		ReadConfig();
+
 		DWORD oldProtection = 0;
 		DWORD oldProtection2 = 0;
 
 		VirtualProtect((void*)hookAddress, originalBytes.size(), PAGE_EXECUTE_READWRITE, &oldProtection);
 		memcpy(&originalBytes[0], (void*)hookAddress, originalBytes.size());
-		memcpy(&unresolvedRelativeAddress, (void*)(hookAddress + 10), sizeof(intptr_t));
+		memcpy(&unresolvedRelativeAddress, (void*)(hookAddress + 10), 4);
 		VirtualProtect((void*)hookAddress, originalBytes.size(), oldProtection, &oldProtection);
 
 		Log("Unresolved relative addr: %x", unresolvedRelativeAddress);
@@ -35,10 +58,11 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 		VirtualProtect((void*)&FovAdjust, originalBytes.size(), oldProtection2, &oldProtection2);
 
 		returnAddress = hookAddress + 14;
-		resolvedRelativeAddress = hookAddress - unresolvedRelativeAddress;
+		resolvedRelativeAddress = returnAddress + unresolvedRelativeAddress;
 
 		Hook(hookAddress, (uintptr_t)&FovAdjust);
 	}
+
 	CloseLog();
 	return 0;
 }
