@@ -139,7 +139,7 @@ namespace ModUtils
 		uintptr_t regionStart = GetProcessBaseAddress(processId);
 		Log("Process name: %s", GetModuleName(false).c_str());
 		Log("Process ID: %i", processId);
-		Log("Process base address: %i", regionStart);
+		Log("Process base address: %lx", regionStart);
 
 		std::string patternString = "";
 		for (auto bytes : pattern)
