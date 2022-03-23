@@ -16,9 +16,9 @@ namespace ModUtils
 {
 	static std::string muModuleName = "";
 	static HWND muWindow = NULL;
-	static FILE* logFile = nullptr;
-	static bool logOpened = false;
-	static bool enumWindowsCalled = false;
+	static FILE* muLogFile = nullptr;
+	static bool muLogOpened = false;
+	static bool muRetrievedWindowHandle = false;
 	static const int MASKED = 0xffff;
 	constexpr unsigned char HK_NONE = 0x07;
 
@@ -57,30 +57,30 @@ namespace ModUtils
 			muModuleName = GetModuleName(true);
 		}
 
-		if (logFile == nullptr && !logOpened)
+		if (muLogFile == nullptr && !muLogOpened)
 		{
 			CreateDirectoryA(std::string("mods\\" + muModuleName).c_str(), NULL);
-			fopen_s(&logFile, std::string("mods\\" + muModuleName + "\\log.txt").c_str(), "w");
-			logOpened = true;
+			fopen_s(&muLogFile, std::string("mods\\" + muModuleName + "\\log.txt").c_str(), "w");
+			muLogOpened = true;
 		}
 
 		va_list args;
 		va_start(args, msg);
 		vprintf(std::string(muModuleName + " > " + msg + "\n").c_str(), args);
-		if (logFile != nullptr)
+		if (muLogFile != nullptr)
 		{
-			vfprintf(logFile, std::string(muModuleName + " > " + msg + "\n").c_str(), args);
-			fflush(logFile);
+			vfprintf(muLogFile, std::string(muModuleName + " > " + msg + "\n").c_str(), args);
+			fflush(muLogFile);
 		}
 		va_end(args);
 	}
 
 	inline void CloseLog()
 	{
-		if (logFile != nullptr)
+		if (muLogFile != nullptr)
 		{
-			fclose(logFile);
-			logFile = nullptr;
+			fclose(muLogFile);
+			muLogFile = nullptr;
 		}
 	}
 
@@ -139,7 +139,7 @@ namespace ModUtils
 		uintptr_t regionStart = GetProcessBaseAddress(processId);
 		Log("Process name: %s", GetModuleName(false).c_str());
 		Log("Process ID: %i", processId);
-		Log("Process base address: %lx", regionStart);
+		Log("Process base address: 0x%lx", regionStart);
 
 		std::string patternString = "";
 		for (auto bytes : pattern)
@@ -275,7 +275,7 @@ namespace ModUtils
 		return false;
 	}
 
-	BOOL CALLBACK GetApplicationWindow(HWND hwnd, LPARAM lParam)
+	BOOL CALLBACK EnumWindowHandles(HWND hwnd, LPARAM lParam)
 	{
 		DWORD processId = NULL;
 		GetWindowThreadProcessId(hwnd, &processId);
@@ -284,24 +284,57 @@ namespace ModUtils
 			if (processId == GetCurrentProcessId())
 			{
 				muWindow = hwnd;
-				Log("Application window found");
-				return false;
+				Log("Found window belonging to ER");
 			}
 		}
 		return true;
+	}
+
+	bool GetWindowHandle()
+	{
+		Log("Finding application window...");
+		for (size_t i = 0; i < 10; i++)
+		{
+			muWindow = FindWindowExA(NULL, NULL, NULL, "ELDEN RING™");
+			if (muWindow != NULL)
+			{
+				Log("FindWindowExA: found window handle");
+				break;
+			}
+			Sleep(1000);
+		}
+
+		// Backup method
+		if (muWindow == NULL)
+		{
+			Log("Enumerating windows...");
+			EnumWindows(&EnumWindowHandles, NULL);
+			Sleep(2000);
+		}
+
+		return (muWindow == NULL) ? false : true;
 	}
 
 	inline bool CheckHotkey(WORD key, WORD modifier = HK_NONE, bool checkController = false)
 	{
 		static std::vector<unsigned int> notReleasedKeys;
 
-		if (!enumWindowsCalled)
+		if (!muRetrievedWindowHandle)
 		{
-			EnumWindows(&GetApplicationWindow, NULL);
-			enumWindowsCalled = true;
+			if (GetWindowHandle())
+			{
+				char buffer[100];
+				GetWindowTextA(muWindow, buffer, 100);
+				Log("Found application window: %s", buffer);
+			}
+			else
+			{
+				Log("Failed to get window handle, inputs will be detected globally");
+			}
+			muRetrievedWindowHandle = true;
 		}
 
-		if (muWindow != GetForegroundWindow())
+		if(muWindow != NULL && muWindow != GetForegroundWindow()) 
 		{
 			return false;
 		}
