@@ -139,7 +139,7 @@ namespace ModUtils
 		uintptr_t regionStart = GetProcessBaseAddress(processId);
 		Log("Process name: %s", GetModuleName(false).c_str());
 		Log("Process ID: %i", processId);
-		Log("Process base address: 0x%lx", regionStart);
+		Log("Process base address: 0x%llX", regionStart);
 
 		std::string patternString = "";
 		for (auto bytes : pattern)
@@ -279,12 +279,16 @@ namespace ModUtils
 	{
 		DWORD processId = NULL;
 		GetWindowThreadProcessId(hwnd, &processId);
-		if (processId != NULL)
+		if (processId == GetCurrentProcessId())
 		{
-			if (processId == GetCurrentProcessId())
+			char buffer[100];
+			GetWindowTextA(hwnd, buffer, 100);
+			Log("Found window belonging to ER: %s", buffer);
+			if (std::string(buffer).find("ELDEN RING") != std::string::npos)
 			{
+				Log("%s handle selected", buffer);
 				muWindow = hwnd;
-				Log("Found window belonging to ER");
+				return false;
 			}
 		}
 		return true;
@@ -295,13 +299,16 @@ namespace ModUtils
 		Log("Finding application window...");
 		for (size_t i = 0; i < 10; i++)
 		{
-			muWindow = FindWindowExA(NULL, NULL, NULL, "ELDEN RING™");
-			if (muWindow != NULL)
+			Sleep(1000);
+			HWND hwnd = FindWindowExA(NULL, NULL, NULL, "ELDEN RING™");
+			DWORD processId = 0;
+			GetWindowThreadProcessId(hwnd, &processId);
+			if (processId == GetCurrentProcessId())
 			{
+				muWindow = hwnd;
 				Log("FindWindowExA: found window handle");
 				break;
 			}
-			Sleep(1000);
 		}
 
 		// Backup method
@@ -309,7 +316,6 @@ namespace ModUtils
 		{
 			Log("Enumerating windows...");
 			EnumWindows(&EnumWindowHandles, NULL);
-			Sleep(2000);
 		}
 
 		return (muWindow == NULL) ? false : true;

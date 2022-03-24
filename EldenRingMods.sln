@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PauseTheGame", "PauseTheGame\PauseTheGame.vcxproj", "{90273855-A4BD-4A80-A712-B55B336D928E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisableRuneLoss", "DisableRuneLoss\DisableRuneLoss.vcxproj", "{E19918AD-EDA8-4FE3-83A7-D00C2D134F9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|x64 = Release|x64
@@ -45,6 +47,8 @@ Global
 		{42DEF6A1-381D-48CB-8FEE-9EF7621ED0EB}.Release|x64.Build.0 = Release|x64
 		{90273855-A4BD-4A80-A712-B55B336D928E}.Release|x64.ActiveCfg = Release|x64
 		{90273855-A4BD-4A80-A712-B55B336D928E}.Release|x64.Build.0 = Release|x64
+		{E19918AD-EDA8-4FE3-83A7-D00C2D134F9A}.Release|x64.ActiveCfg = Release|x64
+		{E19918AD-EDA8-4FE3-83A7-D00C2D134F9A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
