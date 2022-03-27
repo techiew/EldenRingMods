@@ -51,7 +51,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 		memcpy(&unresolvedRelativeAddress, (void*)(hookAddress + 10), 4);
 		VirtualProtect((void*)hookAddress, originalBytes.size(), oldProtection, &oldProtection);
 
-		Log("Unresolved relative addr: %x", unresolvedRelativeAddress);
+		Log("Unresolved relative addr: 0x%llX", unresolvedRelativeAddress);
 
 		VirtualProtect((void*)&FovAdjust, originalBytes.size(), PAGE_EXECUTE_READWRITE, &oldProtection2);
 		memcpy(&FovAdjust, &originalBytes[0], originalBytes.size());

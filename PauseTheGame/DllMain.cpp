@@ -88,7 +88,7 @@ void ReadConfig()
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating PauseTheGame...");
-	std::vector<uint16_t> pattern = { 0x0f, 0x84, MASKED, MASKED, MASKED, MASKED, 0xc6, 0x83, MASKED, MASKED, 0x00, 0x00, 0x00, 0x48, 0x8d, MASKED, MASKED, MASKED, MASKED, MASKED, 0x48, 0x89, MASKED, MASKED, 0x89 };
+	std::vector<uint16_t> pattern = { 0x0f, 0x84, MASKED, MASKED, MASKED, MASKED, 0xc6, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x8d, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x89, MASKED, MASKED, 0x89, MASKED, MASKED, MASKED, 0x8b, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x85, MASKED, 0x75 };
 	patchAddress = SigScan(pattern);
 	if (patchAddress == 0)
 	{
