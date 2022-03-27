@@ -67,6 +67,7 @@ int main()
 			convertedSignature.erase(convertedSignature.length() - 1);
 		}
 
+		// Copy the converted signature to clipboard
 		HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, convertedSignature.length());
 		memcpy(GlobalLock(hMem), convertedSignature.c_str(), convertedSignature.length());
 		GlobalUnlock(hMem);

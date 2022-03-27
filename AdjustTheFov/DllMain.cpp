@@ -34,13 +34,15 @@ void ReadConfig()
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating AdjustTheFov...");
-	std::vector<uint16_t> pattern = { 0x48, 0x8d, 0x4c, 0x24, 0x20, 0x44, 0x0f, 0x28, 0xc8, 0xe8, MASKED, MASKED, MASKED, MASKED, 0x80, 0xbb, 0x88, 0x04, 0x00, 0x00, 0x00, 0x44, 0x0f, 0x28, 0xe0 };
+	std::vector<uint16_t> pattern = { 0x8d, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, 0x80, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, 0xf3, MASKED, 0x0f, 0x10, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x57, MASKED, 0xf3, MASKED, 0x0f, 0x59 };
 	std::vector<uint8_t> originalBytes(9, 0x90);
 	intptr_t unresolvedRelativeAddress = 0;
 	uintptr_t hookAddress = SigScan(pattern);
 
 	if (hookAddress != 0)
 	{
+		hookAddress -= 1;
+
 		ReadConfig();
 
 		DWORD oldProtection = 0;

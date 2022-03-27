@@ -228,9 +228,9 @@ namespace ModUtils
 	inline bool Replace(uintptr_t address, std::vector<uint16_t> originalBytes, std::vector<uint8_t> newBytes)
 	{
 		std::vector<uint8_t> truncatedOriginalBytes;
-		for (auto bytes : originalBytes)
+		for (auto byte : originalBytes)
 		{
-			truncatedOriginalBytes.push_back((uint8_t)bytes);
+			truncatedOriginalBytes.push_back((uint8_t)byte);
 		}
 
 		std::string bufferString = "";
