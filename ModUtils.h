@@ -1,5 +1,3 @@
-#pragma once
-
 #include <Windows.h>
 #include <string>
 #include <cstdarg>
@@ -9,6 +7,8 @@
 #include <vector>
 #include <xinput.h>
 #include <sstream>
+#include <map>
+#include <chrono>
 
 #include "ini.h"
 
@@ -18,10 +18,51 @@ namespace ModUtils
 	static HWND muWindow = NULL;
 	static FILE* muLogFile = nullptr;
 	static bool muLogOpened = false;
-	static bool muRetrievedWindowHandle = false;
-	static const int MASKED = 0xffff;
-	constexpr unsigned char HK_NONE = 0x07;
+	static constexpr int MASKED = 0xffff;
+	static constexpr unsigned char HK_NONE = 0x07;
 
+#ifndef TIMER_CLASS
+#define TIMER_CLASS
+	class Timer
+	{
+	public:
+		Timer(unsigned int millis)
+		{
+			m_interval = millis;
+		}
+
+		bool Check()
+		{
+			auto now = std::chrono::system_clock::now();
+			if (m_resetOnNextCheck)
+			{
+				m_lastExecutionTime = now;
+				m_resetOnNextCheck = false;
+				return false;
+			}
+
+			auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_lastExecutionTime);
+			if (diff.count() >= m_interval)
+			{
+				m_lastExecutionTime = now;
+				return true;
+			}
+
+			return false;
+		}
+
+		void Reset()
+		{
+			m_resetOnNextCheck = true;
+		}
+	private:
+		unsigned int m_interval = 0;
+		bool m_resetOnNextCheck = true;
+		std::chrono::system_clock::time_point m_lastExecutionTime;
+	};
+#endif
+
+	// Gets the name of the .dll which the mod code is running in
 	inline std::string GetModuleName(bool thisModule = true)
 	{
 		static char dummy = 'x';
@@ -45,11 +86,13 @@ namespace ModUtils
 		return moduleName;
 	}
 
+	// Gets the path to the current mod relative to the game root folder
 	inline std::string GetModuleFolderPath()
 	{
 		return std::string("mods\\" + GetModuleName(true));
 	}
 
+	// Logs both to std::out and to a log file simultaneously
 	inline void Log(std::string msg, ...)
 	{
 		if (muModuleName == "")
@@ -75,6 +118,7 @@ namespace ModUtils
 		va_end(args);
 	}
 
+	// The log should preferably be closed when code execution is finished
 	inline void CloseLog()
 	{
 		if (muLogFile != nullptr)
@@ -84,6 +128,7 @@ namespace ModUtils
 		}
 	}
 
+	// Shows a popup with a warning and logs that same warning.
 	inline void RaiseError(std::string error)
 	{
 		if (muModuleName == "")
@@ -94,7 +139,8 @@ namespace ModUtils
 		MessageBox(NULL, error.c_str(), muModuleName.c_str(), MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
 	}
 
-	DWORD_PTR GetProcessBaseAddress(DWORD processId)
+	// Gets the base address of the game's memory.
+	inline DWORD_PTR GetProcessBaseAddress(DWORD processId)
 	{
 		DWORD_PTR baseAddress = 0;
 		HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
@@ -133,6 +179,7 @@ namespace ModUtils
 		return baseAddress;
 	}
 
+	// Scans the whole memory of the main process module for the given signature.
 	inline uintptr_t SigScan(std::vector<uint16_t> pattern)
 	{
 		DWORD processId = GetCurrentProcessId();
@@ -161,7 +208,7 @@ namespace ModUtils
 
 		size_t numRegionsChecked = 0;
 		uintptr_t currentAddress = 0;
-		while (numRegionsChecked < 50000)
+		while (numRegionsChecked < 10000)
 		{
 			MEMORY_BASIC_INFORMATION memoryInfo = { 0 };
 			if (VirtualQuery((void*)regionStart, &memoryInfo, sizeof(MEMORY_BASIC_INFORMATION)) == 0)
@@ -225,6 +272,7 @@ namespace ModUtils
 		return 0;
 	}
 
+	// Replaces the memory at a given address with newBytes. Performs memory comparison with originalBytes to stop unintended memory modification.
 	inline bool Replace(uintptr_t address, std::vector<uint16_t> originalBytes, std::vector<uint8_t> newBytes)
 	{
 		std::vector<uint8_t> truncatedOriginalBytes;
@@ -275,7 +323,8 @@ namespace ModUtils
 		return false;
 	}
 
-	BOOL CALLBACK EnumWindowHandles(HWND hwnd, LPARAM lParam)
+	// Winapi callback that receives all active window handles one by one.
+	inline BOOL CALLBACK EnumWindowHandles(HWND hwnd, LPARAM lParam)
 	{
 		DWORD processId = NULL;
 		GetWindowThreadProcessId(hwnd, &processId);
@@ -294,12 +343,14 @@ namespace ModUtils
 		return true;
 	}
 
+	// Uses different methods to try and get the main window handle for Elden Ring.
 	bool GetWindowHandle()
 	{
 		Log("Finding application window...");
-		for (size_t i = 0; i < 10; i++)
+
+		for (size_t i = 0; i < 1000; i++)
 		{
-			Sleep(1000);
+			Sleep(20);
 			HWND hwnd = FindWindowExA(NULL, NULL, NULL, "ELDEN RING™");
 			DWORD processId = 0;
 			GetWindowThreadProcessId(hwnd, &processId);
@@ -321,11 +372,13 @@ namespace ModUtils
 		return (muWindow == NULL) ? false : true;
 	}
 
+	// Checks if a hotkey or a combination of hotkeys is pressed.
 	inline bool CheckHotkey(WORD key, WORD modifier = HK_NONE, bool checkController = false)
 	{
 		static std::vector<unsigned int> notReleasedKeys;
+		static bool retrievedWindowHandle = false;
 
-		if (!muRetrievedWindowHandle)
+		if (!retrievedWindowHandle)
 		{
 			if (GetWindowHandle())
 			{
@@ -337,7 +390,7 @@ namespace ModUtils
 			{
 				Log("Failed to get window handle, inputs will be detected globally");
 			}
-			muRetrievedWindowHandle = true;
+			retrievedWindowHandle = true;
 		}
 
 		if(muWindow != NULL && muWindow != GetForegroundWindow()) 
@@ -410,15 +463,57 @@ namespace ModUtils
 		return true;
 	}
 
+	// Disables or enables the memory protection in a given region. Remembers and restores the original memory protection type of the given addresses.
+	inline void ToggleMemoryProtection(bool protectionEnabled, uintptr_t address, size_t size)
+	{
+		static std::map<uintptr_t, DWORD> protectionHistory;
+		if (protectionEnabled && protectionHistory.find(address) != protectionHistory.end())
+		{
+			VirtualProtect((void*)address, size, protectionHistory[address], &protectionHistory[address]);
+			protectionHistory.erase(address);
+		}
+		else if(!protectionEnabled && protectionHistory.find(address) == protectionHistory.end())
+		{
+			DWORD oldProtection = 0;
+			VirtualProtect((void*)address, size, PAGE_EXECUTE_READWRITE, &oldProtection);
+			protectionHistory[address] = oldProtection;
+		}
+	}
+
+	// Copies memory after changing the permissions at both the source and destination so we don't get an access violation.
+	inline void MemCopy(uintptr_t destination, uintptr_t source, size_t numBytes)
+	{
+		ToggleMemoryProtection(false, destination, numBytes);
+		ToggleMemoryProtection(false, source, numBytes);
+		memcpy((void*)destination, (void*)source, numBytes);
+		ToggleMemoryProtection(true, source, numBytes);
+		ToggleMemoryProtection(true, destination, numBytes);
+	}
+
+	inline void MemSet(uintptr_t address, unsigned char byte, size_t numBytes)
+	{
+		ToggleMemoryProtection(false, address, numBytes);
+		memset((void*)address, byte, numBytes);
+		ToggleMemoryProtection(true, address, numBytes);
+	}
+
+	// Takes a 4-byte relative address and converts it to an absolute 8-byte address.
+	inline uintptr_t RelativeToAbsoluteAddress(uintptr_t relativeAddressLocation)
+	{
+		uintptr_t absoluteAddress = 0;
+		intptr_t relativeAddress = 0;
+		MemCopy((uintptr_t)&relativeAddress, relativeAddressLocation, 4);
+		absoluteAddress = relativeAddressLocation + 4 + relativeAddress;
+		return absoluteAddress;
+	}
+
+	// Places a 14-byte absolutely addressed jump from A to B.
 	inline void Hook(uintptr_t address, uintptr_t destination, size_t extraClearance = 0)
 	{
-		DWORD oldProtection;
 		size_t clearance = 14 + extraClearance;
-		VirtualProtect((void*)address, clearance, PAGE_EXECUTE_READWRITE, &oldProtection);
-		memset((void*)address, 0x90, clearance);
+		MemSet(address, 0x90, clearance);
 		*(uintptr_t*)address = 0x0000000025ff;
-		memcpy((void*)(address + 6), (void*)&destination, 8);
-		VirtualProtect((void*)address, clearance, oldProtection, &oldProtection);
+		MemCopy((address + 6), (uintptr_t)&destination, 8);
 		Log("Created jump from %p to %p with a clearance of %i", address, destination, clearance);
 	}
 }

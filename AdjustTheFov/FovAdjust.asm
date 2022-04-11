@@ -4,12 +4,12 @@ extern returnAddress : qword
 extern resolvedRelativeAddress : qword
 
 .code
-	FovAdjust PROC
-		REPEAT 9
+	FovAdjust proc
+		repeat 9
 			nop
-		ENDM
+		endm
 		call [resolvedRelativeAddress]
 		movaps xmm0,xmmword ptr [fov]
 		jmp qword ptr [returnAddress]
-	FovAdjust ENDP
+	FovAdjust endp
 end
