@@ -10,6 +10,8 @@ A collection of mods I've made for Elden Ring. For use with [Elden Mod Loader](h
 - [Pause the game](https://www.nexusmods.com/eldenring/mods/43)
 - [Adjust the FoV](https://www.nexusmods.com/eldenring/mods/325)
 - [Increase animation distance](https://www.nexusmods.com/eldenring/mods/349)
+- [Disable rune loss](https://www.nexusmods.com/eldenring/mods/376)
+- [Skip the intro](https://www.nexusmods.com/eldenring/mods/421)
 
 ### Credits
 - Thanks to **uberhalit** for his [EldenRingFpsUnlockAndMore](https://github.com/uberhalit/EldenRingFpsUnlockAndMore) code.
