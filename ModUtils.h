@@ -344,13 +344,12 @@ namespace ModUtils
 	}
 
 	// Uses different methods to try and get the main window handle for Elden Ring.
-	bool GetWindowHandle()
+	inline bool GetWindowHandle()
 	{
 		Log("Finding application window...");
 
-		for (size_t i = 0; i < 1000; i++)
+		for (size_t i = 0; i < 10000; i++)
 		{
-			Sleep(20);
 			HWND hwnd = FindWindowExA(NULL, NULL, NULL, "ELDEN RING™");
 			DWORD processId = 0;
 			GetWindowThreadProcessId(hwnd, &processId);
@@ -360,13 +359,22 @@ namespace ModUtils
 				Log("FindWindowExA: found window handle");
 				break;
 			}
+			Sleep(1);
 		}
 
 		// Backup method
 		if (muWindow == NULL)
 		{
 			Log("Enumerating windows...");
-			EnumWindows(&EnumWindowHandles, NULL);
+			for (size_t i = 0; i < 10000; i++)
+			{
+				EnumWindows(&EnumWindowHandles, NULL);
+				if (muWindow != NULL)
+				{
+					break;
+				}
+				Sleep(1);
+			}
 		}
 
 		return (muWindow == NULL) ? false : true;
@@ -490,6 +498,7 @@ namespace ModUtils
 		ToggleMemoryProtection(true, destination, numBytes);
 	}
 
+	// Simple wrapper around memset
 	inline void MemSet(uintptr_t address, unsigned char byte, size_t numBytes)
 	{
 		ToggleMemoryProtection(false, address, numBytes);
@@ -507,7 +516,7 @@ namespace ModUtils
 		return absoluteAddress;
 	}
 
-	// Places a 14-byte absolutely addressed jump from A to B.
+	// Places a 14-byte absolutely addressed jump from A to B. Add extra clearance when the jump doesn't fit cleanly.
 	inline void Hook(uintptr_t address, uintptr_t destination, size_t extraClearance = 0)
 	{
 		size_t clearance = 14 + extraClearance;
