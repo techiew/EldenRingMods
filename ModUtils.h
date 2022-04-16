@@ -343,7 +343,7 @@ namespace ModUtils
 		return true;
 	}
 
-	// Uses different methods to try and get the main window handle for Elden Ring.
+	// Attempts different methods to get the main window handle.
 	inline bool GetWindowHandle()
 	{
 		Log("Finding application window...");

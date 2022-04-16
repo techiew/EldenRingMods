@@ -3,15 +3,14 @@
 #include "ModUtils.h"
 
 using namespace ModUtils;
+using namespace mINI;
 
 HWND eldenRingWindow = NULL;
 HWND antiFlashbangWindow = NULL;
 
-extern "C" {
-	void OnIntroSkipped();
-	uintptr_t returnAddress = 0;
-	unsigned char introSkipped = 0;
-}
+bool skipIntroLogos = true;
+bool hideInitialWhiteScreen = true;
+unsigned int hideWhiteScreenDuration = 10000;
 
 void ShowAntiFlashbangWindow()
 {
@@ -34,7 +33,7 @@ void ShowAntiFlashbangWindow()
 
     RegisterClassEx(&wc);
 	antiFlashbangWindow = CreateWindowEx(
-		NULL,
+		WS_EX_TOPMOST,
 		className,
 		"Anti-flashbang window",
 		WS_POPUP,
@@ -54,55 +53,92 @@ void ShowAntiFlashbangWindow()
 	int x = eldenRingRect.left;
 	int y = eldenRingRect.top;
 
-	SetParent(antiFlashbangWindow, eldenRingWindow);
-	SetWindowPos(antiFlashbangWindow, NULL, x, y, width, height, NULL);
-	ShowWindow(antiFlashbangWindow, SW_MAXIMIZE);
+	SetWindowPos(antiFlashbangWindow, HWND_TOPMOST, x, y, width, height, NULL);
+	ShowWindow(antiFlashbangWindow, SW_SHOWNORMAL);
 	UpdateWindow(antiFlashbangWindow);
+}
+
+void ReadConfigFile()
+{
+	INIFile config(GetModuleFolderPath() + "\\config.ini");
+	INIStructure ini;
+
+	if (config.read(ini))
+	{
+		skipIntroLogos = stoi(ini["skip_the_intro"]["skip_intro_logos"]) > 0;
+		hideInitialWhiteScreen = stoi(ini["skip_the_intro"]["hide_initial_white_screen"]) > 0;
+		hideWhiteScreenDuration = stoi(ini["skip_the_intro"]["hide_initial_white_screen_duration"]);
+	}
+	else
+	{
+		ini["skip_the_intro"]["skip_intro_logos"] = "1";
+		ini["skip_the_intro"]["hide_initial_white_screen"] = "1";
+		ini["skip_the_intro"]["hide_initial_white_screen_duration"] = std::to_string(hideWhiteScreenDuration);
+		config.write(ini, true);
+	}
+
+	Log("Skip intro logos: %i", skipIntroLogos);
+	Log("Hide initial white screen: %i", hideInitialWhiteScreen);
+	Log("Hide initial white screen duration: %i", hideWhiteScreenDuration);
 }
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
-	if (GetWindowHandle())
+	ReadConfigFile();
+
+	if (hideInitialWhiteScreen)
 	{
-		eldenRingWindow = muWindow;
-	}
-    ShowAntiFlashbangWindow();
-
-	Log("Activating SkipTheIntro...");
-	std::vector<uint16_t> pattern = { 0xc6, MASKED, MASKED, MASKED, MASKED, MASKED, 0x01, MASKED, 0x03, 0x00, 0x00, 0x00, MASKED, 0x8b, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, 0xe9, MASKED, MASKED, MASKED, MASKED, MASKED, 0x8d };
-	std::vector<uint16_t> originalBytes = { 0x74 };
-	std::vector<uint8_t> newBytes = { 0x90, 0x90 };
-	uintptr_t patchAddress = SigScan(pattern);
-
-	if (patchAddress != 0)
-	{
-		patchAddress -= 60;
-
-		if (Replace(patchAddress, originalBytes, newBytes))
+		if (GetWindowHandle())
 		{
-			patchAddress -= 31;
-			size_t size = 19;
-			MemCopy((uintptr_t)&OnIntroSkipped, patchAddress, size);
-			returnAddress = patchAddress + size;
-			Hook(patchAddress, (uintptr_t)&OnIntroSkipped, size - 14);
+			eldenRingWindow = muWindow;
+		}
+		ShowAntiFlashbangWindow();
+	}
+
+	if (skipIntroLogos)
+	{
+		Log("Activating SkipTheIntro...");
+		std::vector<uint16_t> pattern = { 0xc6, MASKED, MASKED, MASKED, MASKED, MASKED, 0x01, MASKED, 0x03, 0x00, 0x00, 0x00, MASKED, 0x8b, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, 0xe9, MASKED, MASKED, MASKED, MASKED, MASKED, 0x8d };
+		std::vector<uint16_t> originalBytes = { 0x74 };
+		std::vector<uint8_t> newBytes = { 0x90, 0x90 };
+		uintptr_t patchAddress = SigScan(pattern);
+
+		if (patchAddress != 0)
+		{
+			patchAddress -= 60;
+			Replace(patchAddress, originalBytes, newBytes);
 		}
 	}
 
-    Timer forceDestroyTimer(60000);
-    MSG msg;
-    while (GetMessage(&msg, NULL, 0, 0) > 0)
-    {
-		if (introSkipped || forceDestroyTimer.Check())
+	if (hideInitialWhiteScreen)
+	{
+		Timer closeWindowTimer(hideWhiteScreenDuration);
+		while (true)
 		{
-			Log("Destroying window");
-			DestroyWindow(antiFlashbangWindow);
-			break;
-		}
+			if (closeWindowTimer.Check())
+			{
+				Log("Closing window");
+				SetWindowPos(antiFlashbangWindow, HWND_BOTTOM, 0, 0, 0, 0, NULL);
+				ShowWindow(antiFlashbangWindow, SW_HIDE);
+				PostMessage(antiFlashbangWindow, WM_CLOSE, NULL, NULL);
+			}
 
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-		Sleep(10);
-    }
+			MSG msg;
+			if (GetMessage(&msg, NULL, 0, 0) > 0)
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+
+			if (IsWindow(antiFlashbangWindow) == false)
+			{
+				Log("Exiting");
+				break;
+			}
+
+			Sleep(10);
+		}
+	}
 
 	CloseLog();
 	return 0;
