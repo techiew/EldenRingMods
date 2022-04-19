@@ -1,0 +1,162 @@
+SIGNATURE: b0 01 ? 8b ? e8 ? ? ? ? ? 8b ? ? ? 32 c0 ? 83 ? 28 c3
+
+FUNCTION ABOVE:
+
+eldenring.exe+584996 - 48 8B 03              - mov rax,[rbx]
+eldenring.exe+584999 - 53                    - push rbx
+eldenring.exe+58499A - 59                    - pop rcx
+eldenring.exe+58499B - E9 7107A101           - jmp eldenring.exe+1F95111
+eldenring.exe+5849A0 - 40 53                 - push rbx
+eldenring.exe+5849A2 - 48 83 EC 20           - sub rsp,20 { 32 }
+eldenring.exe+5849A6 - 48 8B 0D 3B5E6803     - mov rcx,[eldenring.exe+3C0A7E8] { (0) }
+eldenring.exe+5849AD - 8B DA                 - mov ebx,edx
+eldenring.exe+5849AF - 48 85 C9              - test rcx,rcx
+eldenring.exe+5849B2 - 75 2E                 - jne eldenring.exe+5849E2
+eldenring.exe+5849B4 - 48 8D 0D 47856703     - lea rcx,[eldenring.exe+3BFCF02] { (0) }
+eldenring.exe+5849BB - E8 002D8801           - call eldenring.exe+1E076C0
+eldenring.exe+5849C0 - 4C 8B C8              - mov r9,rax
+eldenring.exe+5849C3 - 4C 8D 05 5E69C102     - lea r8,[eldenring.exe+319B328] { (-1774554331) }
+eldenring.exe+5849CA - BA B4000000           - mov edx,000000B4 { 180 }
+eldenring.exe+5849CF - 48 8D 0D 4A803602     - lea rcx,[eldenring.exe+28ECA20] { ("w:\gr\patch104\source\library\fd4\dist_win64_vc2015\include\Cor") }
+eldenring.exe+5849D6 - E8 A5B08701           - call eldenring.exe+1DFFA80
+eldenring.exe+5849DB - 48 8B 0D 065E6803     - mov rcx,[eldenring.exe+3C0A7E8] { (0) }
+eldenring.exe+5849E2 - 48 8B 49 60           - mov rcx,[rcx+60]
+eldenring.exe+5849E6 - 8B D3                 - mov edx,ebx
+eldenring.exe+5849E8 - 48 83 C4 20           - add rsp,20 { 32 }
+eldenring.exe+5849EC - 5B                    - pop rbx
+eldenring.exe+5849ED - E9 8EA10600           - jmp eldenring.exe+5EEB80
+eldenring.exe+5849F2 - 48 85 DB              - test rbx,rbx
+eldenring.exe+5849F5 - 0F85 76A4BEFF         - jne eldenring.exe+16EE71
+eldenring.exe+5849FB - E9 C2DAE604           - jmp eldenring.exe+53F24C2
+eldenring.exe+584A00 - E9 8B690500           - jmp eldenring.exe+5DB390
+eldenring.exe+584A05 - CC                    - int 3 
+
+RELEVANT FUNCTION:
+
+eldenring.exe+584A06 - 70 5B                 - jo eldenring.exe+584A63
+eldenring.exe+584A08 - 7F 85                 - jg eldenring.exe+58498F
+eldenring.exe+584A0A - ED                    - in eax,dx
+eldenring.exe+584A0B - 17                    - pop ss
+eldenring.exe+584A0C - E3 5A                 - jecxz eldenring.exe+584A68
+eldenring.exe+584A0E - B2 59                 - mov dl,59 { 89 }
+eldenring.exe+584A10 - 48 83 C1 30           - add rcx,30 { 48 }
+eldenring.exe+584A14 - E9 97D00100           - jmp eldenring.exe+5A1AB0
+eldenring.exe+584A19 - 6A 18                 - push 18 { 24 }
+eldenring.exe+584A1B - E9 64D7A800           - jmp eldenring.exe+1012184
+eldenring.exe+584A20 - 48 83 EC 28           - sub rsp,28 { 40 }
+eldenring.exe+584A24 - 48 8B 0D BD5D6803     - mov rcx,[eldenring.exe+3C0A7E8] { (0) }
+eldenring.exe+584A2B - 48 85 C9              - test rcx,rcx
+eldenring.exe+584A2E - 0F84 97000000         - je eldenring.exe+584ACB
+eldenring.exe+584A34 - 48 8B 05 AD366803     - mov rax,[eldenring.exe+3C080E8] { (0) }
+eldenring.exe+584A3B - 48 89 5C 24 20        - mov [rsp+20],rbx
+eldenring.exe+584A40 - 48 85 C0              - test rax,rax
+eldenring.exe+584A43 - 75 35                 - jne eldenring.exe+584A7A
+eldenring.exe+584A45 - 48 8D 0D 80846703     - lea rcx,[eldenring.exe+3BFCECC] { (0) }
+eldenring.exe+584A4C - E8 6F2C8801           - call eldenring.exe+1E076C0
+eldenring.exe+584A51 - 4C 8B C8              - mov r9,rax
+eldenring.exe+584A54 - 4C 8D 05 CD68C102     - lea r8,[eldenring.exe+319B328] { (-1774554331) }
+eldenring.exe+584A5B - BA B4000000           - mov edx,000000B4 { 180 }
+eldenring.exe+584A60 - 48 8D 0D B97F3602     - lea rcx,[eldenring.exe+28ECA20] { ("w:\gr\patch104\source\library\fd4\dist_win64_vc2015\include\Cor") }
+eldenring.exe+584A67 - E8 14B08701           - call eldenring.exe+1DFFA80
+eldenring.exe+584A6C - 48 8B 0D 755D6803     - mov rcx,[eldenring.exe+3C0A7E8] { (0) }
+eldenring.exe+584A73 - 48 8B 05 6E366803     - mov rax,[eldenring.exe+3C080E8] { (0) }
+eldenring.exe+584A7A - 48 8B 98 68840100     - mov rbx,[rax+00018468]
+eldenring.exe+584A81 - 48 85 C9              - test rcx,rcx
+eldenring.exe+584A84 - 75 2E                 - jne eldenring.exe+584AB4
+eldenring.exe+584A86 - 48 8D 0D 75846703     - lea rcx,[eldenring.exe+3BFCF02] { (0) }
+eldenring.exe+584A8D - E8 2E2C8801           - call eldenring.exe+1E076C0
+eldenring.exe+584A92 - 4C 8B C8              - mov r9,rax
+eldenring.exe+584A95 - 4C 8D 05 8C68C102     - lea r8,[eldenring.exe+319B328] { (-1774554331) }
+eldenring.exe+584A9C - BA B4000000           - mov edx,000000B4 { 180 }
+eldenring.exe+584AA1 - 48 8D 0D 787F3602     - lea rcx,[eldenring.exe+28ECA20] { ("w:\gr\patch104\source\library\fd4\dist_win64_vc2015\include\Cor") }
+eldenring.exe+584AA8 - E8 D3AF8701           - call eldenring.exe+1DFFA80
+eldenring.exe+584AAD - 48 8B 0D 345D6803     - mov rcx,[eldenring.exe+3C0A7E8] { (0) }
+eldenring.exe+584AB4 - 48 8B 89 80000000     - mov rcx,[rcx+00000080]
+eldenring.exe+584ABB - 41 B0 01              - mov r8l,01 { 1 }
+eldenring.exe+584ABE - 48 8B D3              - mov rdx,rbx
+eldenring.exe+584AC1 - E8 4AB70500           - call eldenring.exe+5E0210			<----- NOP THIS
+eldenring.exe+584AC6 - 48 8B 5C 24 20        - mov rbx,[rsp+20]
+eldenring.exe+584ACB - 32 C0                 - xor al,al
+eldenring.exe+584ACD - 48 83 C4 28           - add rsp,28 { 40 }
+eldenring.exe+584AD1 - C3                    - ret 
+
+FUNCTION BELOW:
+
+eldenring.exe+584AD2 - 48 89 14 24           - mov [rsp],rdx
+eldenring.exe+584AD6 - 48 8B 4C 24 10        - mov rcx,[rsp+10]
+eldenring.exe+584ADB - E9 73504604           - jmp eldenring.exe+49E9B53
+eldenring.exe+584AE0 - 48 8B C4              - mov rax,rsp
+eldenring.exe+584AE3 - 57                    - push rdi
+eldenring.exe+584AE4 - 48 81 EC 80000000     - sub rsp,00000080 { 128 }
+eldenring.exe+584AEB - 48 8B F9              - mov rdi,rcx
+eldenring.exe+584AEE - 4C 89 78 D8           - mov [rax-28],r15
+eldenring.exe+584AF2 - 48 83 C1 71           - add rcx,71 { 113 }
+eldenring.exe+584AF6 - 48 C7 40 C8 FFFFFFFF  - mov qword ptr [rax-38],FFFFFFFFFFFFFFFF { -1 }
+eldenring.exe+584AFE - 4C 8D 40 08           - lea r8,[rax+08]
+eldenring.exe+584B02 - 48 C7 40 D0 FFFFFFFF  - mov qword ptr [rax-30],FFFFFFFFFFFFFFFF { -1 }
+eldenring.exe+584B0A - 48 8D 50 C8           - lea rdx,[rax-38]
+eldenring.exe+584B0E - C7 40 08 FFFFFFFF     - mov [rax+08],FFFFFFFF { -1 }
+eldenring.exe+584B15 - E8 46476900           - call eldenring.exe+C19260
+eldenring.exe+584B1A - 84 C0                 - test al,al
+eldenring.exe+584B1C - 0F84 C0000000         - je eldenring.exe+584BE2
+eldenring.exe+584B22 - 48 89 9C 24 98000000  - mov [rsp+00000098],rbx
+eldenring.exe+584B2A - 4C 89 64 24 70        - mov [rsp+70],r12
+eldenring.exe+584B2F - 45 33 E4              - xor r12d,r12d
+eldenring.exe+584B32 - 48 89 AC 24 A0000000  - mov [rsp+000000A0],rbp
+eldenring.exe+584B3A - 48 89 74 24 78        - mov [rsp+78],rsi
+eldenring.exe+584B3F - 4C 89 74 24 68        - mov [rsp+68],r14
+eldenring.exe+584B44 - 8B 5C 24 50           - mov ebx,[rsp+50]
+eldenring.exe+584B48 - 83 FB 47              - cmp ebx,47 { 71 }
+eldenring.exe+584B4B - 77 5C                 - ja eldenring.exe+584BA9
+eldenring.exe+584B4D - 8B 84 24 90000000     - mov eax,[rsp+00000090]
+eldenring.exe+584B54 - 48 8D 4F 30           - lea rcx,[rdi+30]
+eldenring.exe+584B58 - 8B 6C 24 58           - mov ebp,[rsp+58]
+eldenring.exe+584B5C - 8B D3                 - mov edx,ebx
+eldenring.exe+584B5E - 44 8B 74 24 54        - mov r14d,[rsp+54]
+eldenring.exe+584B63 - 44 8B CD              - mov r9d,ebp
+eldenring.exe+584B66 - 8B 74 24 5C           - mov esi,[rsp+5C]
+eldenring.exe+584B6A - 45 8B C6              - mov r8d,r14d
+eldenring.exe+584B6D - C6 44 24 40 01        - mov byte ptr [rsp+40],01 { 1 }
+eldenring.exe+584B72 - 89 44 24 38           - mov [rsp+38],eax
+eldenring.exe+584B76 - 48 89 7C 24 30        - mov [rsp+30],rdi
+eldenring.exe+584B7B - 4C 89 64 24 28        - mov [rsp+28],r12
+eldenring.exe+584B80 - 89 74 24 20           - mov [rsp+20],esi
+eldenring.exe+584B84 - E8 E7D30100           - call eldenring.exe+5A1F70
+eldenring.exe+584B89 - 48 8B 0D B8536803     - mov rcx,[eldenring.exe+3C09F48] { (0) }
+eldenring.exe+584B90 - 48 85 C9              - test rcx,rcx
+eldenring.exe+584B93 - 74 14                 - je eldenring.exe+584BA9
+eldenring.exe+584B95 - 48 8B 09              - mov rcx,[rcx]
+eldenring.exe+584B98 - 44 8B CD              - mov r9d,ebp
+eldenring.exe+584B9B - 45 8B C6              - mov r8d,r14d
+eldenring.exe+584B9E - 89 74 24 20           - mov [rsp+20],esi
+eldenring.exe+584BA2 - 8B D3                 - mov edx,ebx
+eldenring.exe+584BA4 - E8 57BDFFFF           - call eldenring.exe+580900
+eldenring.exe+584BA9 - 4C 8D 84 24 90000000  - lea r8,[rsp+00000090]
+eldenring.exe+584BB1 - 48 8D 54 24 50        - lea rdx,[rsp+50]
+eldenring.exe+584BB6 - 48 8D 4F 71           - lea rcx,[rdi+71]
+eldenring.exe+584BBA - E8 A1466900           - call eldenring.exe+C19260
+eldenring.exe+584BBF - 84 C0                 - test al,al
+eldenring.exe+584BC1 - 75 81                 - jne eldenring.exe+584B44
+eldenring.exe+584BC3 - 4C 8B 74 24 68        - mov r14,[rsp+68]
+eldenring.exe+584BC8 - 4C 8B 64 24 70        - mov r12,[rsp+70]
+eldenring.exe+584BCD - 48 8B 74 24 78        - mov rsi,[rsp+78]
+eldenring.exe+584BD2 - 48 8B AC 24 A0000000  - mov rbp,[rsp+000000A0]
+eldenring.exe+584BDA - 48 8B 9C 24 98000000  - mov rbx,[rsp+00000098]
+eldenring.exe+584BE2 - 48 8B 05 7FAE6803     - mov rax,[eldenring.exe+3C0FA68] { (0) }
+eldenring.exe+584BE9 - 4C 8B 7C 24 60        - mov r15,[rsp+60]
+eldenring.exe+584BEE - 48 85 C0              - test rax,rax
+eldenring.exe+584BF1 - 75 2E                 - jne eldenring.exe+584C21
+eldenring.exe+584BF3 - 48 8D 0D 97046803     - lea rcx,[eldenring.exe+3C05091] { (0) }
+eldenring.exe+584BFA - E8 C12A8801           - call eldenring.exe+1E076C0
+eldenring.exe+584BFF - 4C 8B C8              - mov r9,rax
+eldenring.exe+584C02 - 4C 8D 05 1F67C102     - lea r8,[eldenring.exe+319B328] { (-1774554331) }
+eldenring.exe+584C09 - BA B4000000           - mov edx,000000B4 { 180 }
+eldenring.exe+584C0E - 48 8D 0D 0B7E3602     - lea rcx,[eldenring.exe+28ECA20] { ("w:\gr\patch104\source\library\fd4\dist_win64_vc2015\include\Cor") }
+eldenring.exe+584C15 - E8 66AE8701           - call eldenring.exe+1DFFA80
+eldenring.exe+584C1A - 48 8B 05 47AE6803     - mov rax,[eldenring.exe+3C0FA68] { (0) }
+eldenring.exe+584C21 - 0FB6 4F 75            - movzx ecx,byte ptr [rdi+75]
+eldenring.exe+584C25 - 88 88 85000000        - mov [rax+00000085],cl
+eldenring.exe+584C2B - 48 81 C4 80000000     - add rsp,00000080 { 128 }
+eldenring.exe+584C32 - 5F                    - pop rdi
+
+
