@@ -1,691 +1,687 @@
-8b 01 85 c0 74 42 44 8b 59 04
+Signature: 74 50 ? 8b ? ? dc 03 00 00 ? 85 ? 74 ? ? 8b ? ? 0f af
 
 FUNCTION ABOVE:
 
-7FF726CB1E00 - 48 89 5C 24 18        - mov [rsp+18],rbx
-7FF726CB1E05 - 57                    - push rdi
-7FF726CB1E06 - 48 83 EC 40           - sub rsp,40
-7FF726CB1E0A - 48 8B 05 3FA61F02     - mov rax,[7FF728EAC450]
-7FF726CB1E11 - 48 33 C4              - xor rax,rsp
-7FF726CB1E14 - 48 89 44 24 38        - mov [rsp+38],rax
-7FF726CB1E19 - 48 8B 81 28010000     - mov rax,[rcx+00000128]
-7FF726CB1E20 - 48 8B FA              - mov rdi,rdx
-7FF726CB1E23 - 48 8B 98 00010000     - mov rbx,[rax+00000100]
-7FF726CB1E2A - 48 85 DB              - test rbx,rbx
-7FF726CB1E2D - 74 5E                 - je 7FF726CB1E8D
-7FF726CB1E2F - 80 B8 3F010000 00     - cmp byte ptr [rax+0000013F],00
-7FF726CB1E36 - 75 55                 - jne 7FF726CB1E8D
-7FF726CB1E38 - 48 8B 43 70           - mov rax,[rbx+70]
-7FF726CB1E3C - 48 8D 4B 70           - lea rcx,[rbx+70]
-7FF726CB1E40 - 33 D2                 - xor edx,edx
-7FF726CB1E42 - FF 50 08              - call qword ptr [rax+08]
-7FF726CB1E45 - 48 8B 8F C8250000     - mov rcx,[rdi+000025C8]
-7FF726CB1E4C - 4C 8D 44 24 20        - lea r8,[rsp+20]
-7FF726CB1E51 - BA 01000000           - mov edx,00000001
-7FF726CB1E56 - 48 89 44 24 20        - mov [rsp+20],rax
-7FF726CB1E5B - E8 C050FFFF           - call 7FF726CA6F20
-7FF726CB1E60 - 0F28 05 09D68701      - movaps xmm0,[7FF72852F470]
-7FF726CB1E67 - 48 8D 4B 70           - lea rcx,[rbx+70]
-7FF726CB1E6B - 48 8B 43 70           - mov rax,[rbx+70]
-7FF726CB1E6F - 33 D2                 - xor edx,edx
-7FF726CB1E71 - 0F11 44 24 28         - movups [rsp+28],xmm0
-7FF726CB1E76 - FF 50 08              - call qword ptr [rax+08]
-7FF726CB1E79 - 48 8B 8F C8250000     - mov rcx,[rdi+000025C8]
-7FF726CB1E80 - 4C 8D 44 24 28        - lea r8,[rsp+28]
-7FF726CB1E85 - 48 8B D0              - mov rdx,rax
-7FF726CB1E88 - E8 F354FFFF           - call 7FF726CA7380
-7FF726CB1E8D - 48 8B 4C 24 38        - mov rcx,[rsp+38]
-7FF726CB1E92 - 48 33 CC              - xor rcx,rsp
-7FF726CB1E95 - E8 E654AF00           - call 7FF7277A7380
-7FF726CB1E9A - 48 8B 5C 24 60        - mov rbx,[rsp+60]
-7FF726CB1E9F - 48 83 C4 40           - add rsp,40
-7FF726CB1EA3 - 5F                    - pop rdi
-7FF726CB1EA4 - C3                    - ret 
-
+eldenring.exe+1942C00 - 48 89 5C 24 18        - mov [rsp+18],rbx
+eldenring.exe+1942C05 - 57                    - push rdi
+eldenring.exe+1942C06 - 48 83 EC 40           - sub rsp,40 { 64 }
+eldenring.exe+1942C0A - 48 8B 05 DF531C02     - mov rax,[eldenring.exe+3B07FF0] { (-1667829764) }
+eldenring.exe+1942C11 - 48 33 C4              - xor rax,rsp
+eldenring.exe+1942C14 - 48 89 44 24 38        - mov [rsp+38],rax
+eldenring.exe+1942C19 - 48 8B 81 28010000     - mov rax,[rcx+00000128]
+eldenring.exe+1942C20 - 48 8B FA              - mov rdi,rdx
+eldenring.exe+1942C23 - 48 8B 98 00010000     - mov rbx,[rax+00000100]
+eldenring.exe+1942C2A - 48 85 DB              - test rbx,rbx
+eldenring.exe+1942C2D - 74 5E                 - je eldenring.exe+1942C8D
+eldenring.exe+1942C2F - 80 B8 3F010000 00     - cmp byte ptr [rax+0000013F],00 { 0 }
+eldenring.exe+1942C36 - 75 55                 - jne eldenring.exe+1942C8D
+eldenring.exe+1942C38 - 48 8B 43 70           - mov rax,[rbx+70]
+eldenring.exe+1942C3C - 48 8D 4B 70           - lea rcx,[rbx+70]
+eldenring.exe+1942C40 - 33 D2                 - xor edx,edx
+eldenring.exe+1942C42 - FF 50 08              - call qword ptr [rax+08]
+eldenring.exe+1942C45 - 48 8B 8F C8250000     - mov rcx,[rdi+000025C8]
+eldenring.exe+1942C4C - 4C 8D 44 24 20        - lea r8,[rsp+20]
+eldenring.exe+1942C51 - BA 01000000           - mov edx,00000001 { 1 }
+eldenring.exe+1942C56 - 48 89 44 24 20        - mov [rsp+20],rax
+eldenring.exe+1942C5B - E8 F050FFFF           - call eldenring.exe+1937D50
+eldenring.exe+1942C60 - 0F28 05 39458601      - movaps xmm0,[eldenring.exe+31A71A0] { (0) }
+eldenring.exe+1942C67 - 48 8D 4B 70           - lea rcx,[rbx+70]
+eldenring.exe+1942C6B - 48 8B 43 70           - mov rax,[rbx+70]
+eldenring.exe+1942C6F - 33 D2                 - xor edx,edx
+eldenring.exe+1942C71 - 0F11 44 24 28         - movups [rsp+28],xmm0
+eldenring.exe+1942C76 - FF 50 08              - call qword ptr [rax+08]
+eldenring.exe+1942C79 - 48 8B 8F C8250000     - mov rcx,[rdi+000025C8]
+eldenring.exe+1942C80 - 4C 8D 44 24 28        - lea r8,[rsp+28]
+eldenring.exe+1942C85 - 48 8B D0              - mov rdx,rax
+eldenring.exe+1942C88 - E8 2355FFFF           - call eldenring.exe+19381B0
+eldenring.exe+1942C8D - 48 8B 4C 24 38        - mov rcx,[rsp+38]
+eldenring.exe+1942C92 - 48 33 CC              - xor rcx,rsp
+eldenring.exe+1942C95 - E8 66C3AF00           - call eldenring.exe+243F000
+eldenring.exe+1942C9A - 48 8B 5C 24 60        - mov rbx,[rsp+60]
+eldenring.exe+1942C9F - 48 83 C4 40           - add rsp,40 { 64 }
+eldenring.exe+1942CA3 - 5F                    - pop rdi
+eldenring.exe+1942CA4 - C3                    - ret 
 
 RELEVANT FUNCTION:
 
-7FF726CB1EA5 - 90                    - nop 
-7FF726CB1EA6 - 87 7F 78              - xchg [rdi+78],edi
-7FF726CB1EA9 - 5B                    - pop rbx
-7FF726CB1EAA - 90                    - nop 
-7FF726CB1EAB - E9 10E40586           - jmp 7FF6ACD102C0
-7FF726CB1EB0 - 48 8B C4              - mov rax,rsp
-7FF726CB1EB3 - 55                    - push rbp
-7FF726CB1EB4 - 41 54                 - push r12
-7FF726CB1EB6 - 41 55                 - push r13
-7FF726CB1EB8 - 41 56                 - push r14
-7FF726CB1EBA - 41 57                 - push r15
-7FF726CB1EBC - 48 8D A8 B8FCFFFF     - lea rbp,[rax-00000348]
-7FF726CB1EC3 - 48 81 EC 20040000     - sub rsp,00000420
-7FF726CB1ECA - 48 C7 45 B8 FEFFFFFF  - mov qword ptr [rbp-48],FFFFFFFFFFFFFFFE
-7FF726CB1ED2 - 48 89 58 10           - mov [rax+10],rbx
-7FF726CB1ED6 - 48 89 70 18           - mov [rax+18],rsi
-7FF726CB1EDA - 48 89 78 20           - mov [rax+20],rdi
-7FF726CB1EDE - 0F29 70 C8            - movaps [rax-38],xmm6
-7FF726CB1EE2 - 48 8B 05 67A51F02     - mov rax,[7FF728EAC450]
-7FF726CB1EE9 - 48 33 C4              - xor rax,rsp
-7FF726CB1EEC - 48 89 85 00030000     - mov [rbp+00000300],rax
-7FF726CB1EF3 - 8B C2                 - mov eax,edx
-7FF726CB1EF5 - 89 54 24 50           - mov [rsp+50],edx
-7FF726CB1EF9 - 4C 8B E1              - mov r12,rcx
-7FF726CB1EFC - 4C 8B A9 58010000     - mov r13,[rcx+00000158]
-7FF726CB1F03 - 4C 89 6D C0           - mov [rbp-40],r13
-7FF726CB1F07 - 48 8B 99 28010000     - mov rbx,[rcx+00000128]
-7FF726CB1F0E - 48 3B 99 30010000     - cmp rbx,[rcx+00000130]
-7FF726CB1F15 - 0F84 07080000         - je 7FF726CB2722
-7FF726CB1F1B - 45 33 F6              - xor r14d,r14d
-7FF726CB1F1E - F3 0F10 35 0AE08701   - movss xmm6,[7FF72852FF30]
-7FF726CB1F26 - 83 F8 FF              - cmp eax,-01
-7FF726CB1F29 - 74 0C                 - je 7FF726CB1F37
-7FF726CB1F2B - 3B 83 28010000        - cmp eax,[rbx+00000128]
-7FF726CB1F31 - 0F85 D6070000         - jne 7FF726CB270D
-7FF726CB1F37 - 8B 83 28010000        - mov eax,[rbx+00000128]
-7FF726CB1F3D - 4C 8D 0C 40           - lea r9,[rax+rax*2]
-7FF726CB1F41 - 4D 03 C9              - add r9,r9
-7FF726CB1F44 - 47 8B 84 CC A8030000  - mov r8d,[r12+r9*8+000003A8]
-7FF726CB1F4C - 47 8B 94 CC AC030000  - mov r10d,[r12+r9*8+000003AC]
-7FF726CB1F54 - 48 8D 48 14           - lea rcx,[rax+14]
-7FF726CB1F58 - 48 8D 0C 49           - lea rcx,[rcx+rcx*2]
-7FF726CB1F5C - 48 C1 E1 04           - shl rcx,04
-7FF726CB1F60 - 49 03 CC              - add rcx,r12
-7FF726CB1F63 - 8B 01                 - mov eax,[rcx]                   <---- CHANGE TO 0x8b, 0x01, 0x85, 0xc0, 0xeb, 0x42, 0x44, 0x8b, 0x59, 0x04
-7FF726CB1F65 - 85 C0                 - test eax,eax
-7FF726CB1F67 - 74 42                 - je 7FF726CB1FAB
-7FF726CB1F69 - 44 8B 59 04           - mov r11d,[rcx+04]
-7FF726CB1F6D - 45 85 DB              - test r11d,r11d
-7FF726CB1F70 - 74 39                 - je 7FF726CB1FAB
-7FF726CB1F72 - 41 8B D3              - mov edx,r11d
-7FF726CB1F75 - 41 0FAF D0            - imul edx,r8d
-7FF726CB1F79 - 41 0FAF C2            - imul eax,r10d
-7FF726CB1F7D - 3B D0                 - cmp edx,eax
-7FF726CB1F7F - 74 2A                 - je 7FF726CB1FAB
-7FF726CB1F81 - 76 0D                 - jna 7FF726CB1F90
-7FF726CB1F83 - 33 D2                 - xor edx,edx
-7FF726CB1F85 - 41 F7 F3              - div r11d
-7FF726CB1F88 - 89 83 08010000        - mov [rbx+00000108],eax
-7FF726CB1F8E - EB 22                 - jmp 7FF726CB1FB2
-7FF726CB1F90 - 44 89 83 08010000     - mov [rbx+00000108],r8d
-7FF726CB1F97 - 44 0FAF 41 04         - imul r8d,[rcx+04]
-7FF726CB1F9C - 33 D2                 - xor edx,edx
-7FF726CB1F9E - 41 8B C0              - mov eax,r8d
-7FF726CB1FA1 - F7 31                 - div [rcx]
-7FF726CB1FA3 - 89 83 0C010000        - mov [rbx+0000010C],eax
-7FF726CB1FA9 - EB 0E                 - jmp 7FF726CB1FB9
-7FF726CB1FAB - 44 89 83 08010000     - mov [rbx+00000108],r8d
-7FF726CB1FB2 - 44 89 93 0C010000     - mov [rbx+0000010C],r10d
-7FF726CB1FB9 - F3 43 0F10 8C CC CC030000  - movss xmm1,[r12+r9*8+000003CC]
-7FF726CB1FC3 - 44 8B 93 08010000     - mov r10d,[rbx+00000108]
-7FF726CB1FCA - 41 83 C2 03           - add r10d,03
-7FF726CB1FCE - 41 83 E2 FC           - and r10d,-04
-7FF726CB1FD2 - 44 8B 83 0C010000     - mov r8d,[rbx+0000010C]
-7FF726CB1FD9 - 41 83 C0 03           - add r8d,03
-7FF726CB1FDD - 41 83 E0 FC           - and r8d,-04
-7FF726CB1FE1 - 0F57 C0               - xorps xmm0,xmm0
-7FF726CB1FE4 - F3 49 0F2A C2         - cvtsi2ss xmm0,r10
-7FF726CB1FE9 - F3 0F59 C1            - mulss xmm0,xmm1
-7FF726CB1FED - F3 48 0F2C C0         - cvttss2si rax,xmm0
-7FF726CB1FF2 - 83 C0 03              - add eax,03
-7FF726CB1FF5 - 83 E0 FC              - and eax,-04
-7FF726CB1FF8 - 89 83 08010000        - mov [rbx+00000108],eax
-7FF726CB1FFE - 0F57 C0               - xorps xmm0,xmm0
-7FF726CB2001 - F3 49 0F2A C0         - cvtsi2ss xmm0,r8
-7FF726CB2006 - F3 0F59 C1            - mulss xmm0,xmm1
-7FF726CB200A - F3 48 0F2C C0         - cvttss2si rax,xmm0
-7FF726CB200F - 83 C0 03              - add eax,03
-7FF726CB2012 - 83 E0 FC              - and eax,-04
-7FF726CB2015 - 89 83 0C010000        - mov [rbx+0000010C],eax
-7FF726CB201B - 43 8B 94 CC A8030000  - mov edx,[r12+r9*8+000003A8]
-7FF726CB2023 - 43 8B 8C CC AC030000  - mov ecx,[r12+r9*8+000003AC]
-7FF726CB202B - 0F57 C0               - xorps xmm0,xmm0
-7FF726CB202E - 41 3B D2              - cmp edx,r10d
-7FF726CB2031 - 72 0E                 - jb 7FF726CB2041
-7FF726CB2033 - 41 2B D2              - sub edx,r10d
-7FF726CB2036 - D1 EA                 - shr edx,1
-7FF726CB2038 - 8B C2                 - mov eax,edx
-7FF726CB203A - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
-7FF726CB203F - EB 0F                 - jmp 7FF726CB2050
-7FF726CB2041 - 41 8B C2              - mov eax,r10d
-7FF726CB2044 - 2B C2                 - sub eax,edx
-7FF726CB2046 - D1 E8                 - shr eax,1
-7FF726CB2048 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
-7FF726CB204D - 0F57 C6               - xorps xmm0,xmm6
-7FF726CB2050 - F3 0F11 83 10010000   - movss [rbx+00000110],xmm0
-7FF726CB2058 - 0F57 C0               - xorps xmm0,xmm0
-7FF726CB205B - 41 3B C8              - cmp ecx,r8d
-7FF726CB205E - 72 0E                 - jb 7FF726CB206E
-7FF726CB2060 - 41 2B C8              - sub ecx,r8d
-7FF726CB2063 - D1 E9                 - shr ecx,1
-7FF726CB2065 - 8B C1                 - mov eax,ecx
-7FF726CB2067 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
-7FF726CB206C - EB 0F                 - jmp 7FF726CB207D
-7FF726CB206E - 41 8B C0              - mov eax,r8d
-7FF726CB2071 - 2B C1                 - sub eax,ecx
-7FF726CB2073 - D1 E8                 - shr eax,1
-7FF726CB2075 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
-7FF726CB207A - 0F57 C6               - xorps xmm0,xmm6
-7FF726CB207D - F3 0F11 83 14010000   - movss [rbx+00000114],xmm0
-7FF726CB2085 - 0F57 C0               - xorps xmm0,xmm0
-7FF726CB2088 - F3 49 0F2A C2         - cvtsi2ss xmm0,r10
-7FF726CB208D - F3 0F11 83 18010000   - movss [rbx+00000118],xmm0
-7FF726CB2095 - 0F57 C9               - xorps xmm1,xmm1
-7FF726CB2098 - F3 49 0F2A C8         - cvtsi2ss xmm1,r8
-7FF726CB209D - F3 0F11 8B 1C010000   - movss [rbx+0000011C],xmm1
-7FF726CB20A5 - 44 89 B3 20010000     - mov [rbx+00000120],r14d
-7FF726CB20AC - C7 83 24010000 0000803F - mov [rbx+00000124],3F800000
-7FF726CB20B6 - 48 8D 53 78           - lea rdx,[rbx+78]
-7FF726CB20BA - 45 33 C9              - xor r9d,r9d
-7FF726CB20BD - 4C 8D 83 D8000000     - lea r8,[rbx+000000D8]
-7FF726CB20C4 - 48 8B 0B              - mov rcx,[rbx]
-7FF726CB20C7 - E8 B4424900           - call 7FF727146380
-7FF726CB20CC - 41 8B FE              - mov edi,r14d
-7FF726CB20CF - 83 BB D8000000 00     - cmp dword ptr [rbx+000000D8],00
-7FF726CB20D6 - 0F86 9F000000         - jbe 7FF726CB217B
-7FF726CB20DC - 0F1F 40 00            - nop dword ptr [rax+00]
-7FF726CB20E0 - 8B F7                 - mov esi,edi
-7FF726CB20E2 - 48 8B 4C F3 78        - mov rcx,[rbx+rsi*8+78]
-7FF726CB20E7 - 48 85 C9              - test rcx,rcx
-7FF726CB20EA - 74 7E                 - je 7FF726CB216A
-7FF726CB20EC - 48 83 C1 20           - add rcx,20
-7FF726CB20F0 - 48 8D 95 70020000     - lea rdx,[rbp+00000270]
-7FF726CB20F7 - E8 042A4800           - call 7FF727134B00
-7FF726CB20FC - 4C 8D 34 F3           - lea r14,[rbx+rsi*8]
-7FF726CB2100 - 49 83 BE 90000000 00  - cmp qword ptr [r14+00000090],00
-7FF726CB2108 - 75 60                 - jne 7FF726CB216A
-7FF726CB210A - 33 C0                 - xor eax,eax
-7FF726CB210C - 48 89 45 A0           - mov [rbp-60],rax
-7FF726CB2110 - 48 89 45 A8           - mov [rbp-58],rax
-7FF726CB2114 - 48 89 45 AC           - mov [rbp-54],rax
-7FF726CB2118 - 8B 85 80020000        - mov eax,[rbp+00000280]
-7FF726CB211E - 89 45 A0              - mov [rbp-60],eax
-7FF726CB2121 - B8 04000000           - mov eax,00000004
-7FF726CB2126 - 83 BD 84020000 01     - cmp dword ptr [rbp+00000284],01
-7FF726CB212D - B9 06000000           - mov ecx,00000006
-7FF726CB2132 - 0F47 C1               - cmova eax,ecx
-7FF726CB2135 - 88 45 A4              - mov [rbp-5C],al
-7FF726CB2138 - 33 C0                 - xor eax,eax
-7FF726CB213A - 89 45 A8              - mov [rbp-58],eax
-7FF726CB213D - C7 45 B0 01000000     - mov [rbp-50],00000001
-7FF726CB2144 - 49 8B 0C 24           - mov rcx,[r12]
-7FF726CB2148 - E8 F3390000           - call 7FF726CB5B40
-7FF726CB214D - 48 8B C8              - mov rcx,rax
-7FF726CB2150 - 4C 89 6C 24 20        - mov [rsp+20],r13
-7FF726CB2155 - 4C 8D 4D A0           - lea r9,[rbp-60]
-7FF726CB2159 - 4C 8B 44 F3 78        - mov r8,[rbx+rsi*8+78]
-7FF726CB215E - 49 8D 96 90000000     - lea rdx,[r14+00000090]
-7FF726CB2165 - E8 06354800           - call 7FF727135670
-7FF726CB216A - FF C7                 - inc edi
-7FF726CB216C - 3B BB D8000000        - cmp edi,[rbx+000000D8]
-7FF726CB2172 - 0F82 68FFFFFF         - jb 7FF726CB20E0
-7FF726CB2178 - 45 33 F6              - xor r14d,r14d
-7FF726CB217B - 48 8B 43 78           - mov rax,[rbx+78]
-7FF726CB217F - 48 85 C0              - test rax,rax
-7FF726CB2182 - 74 0F                 - je 7FF726CB2193
-7FF726CB2184 - 48 89 43 68           - mov [rbx+68],rax
-7FF726CB2188 - 48 8B 83 90000000     - mov rax,[rbx+00000090]
-7FF726CB218F - 48 89 43 70           - mov [rbx+70],rax
-7FF726CB2193 - 48 83 BB E8000000 00  - cmp qword ptr [rbx+000000E8],00
-7FF726CB219B - 0F85 99000000         - jne 7FF726CB223A
-7FF726CB21A1 - 4D 8B C5              - mov r8,r13
-7FF726CB21A4 - BA 10000000           - mov edx,00000010
-7FF726CB21A9 - B9 A0000000           - mov ecx,000000A0
-7FF726CB21AE - E8 AD634B00           - call 7FF727168560
-7FF726CB21B3 - 48 89 45 C8           - mov [rbp-38],rax
-7FF726CB21B7 - 48 85 C0              - test rax,rax
-7FF726CB21BA - 74 0D                 - je 7FF726CB21C9
-7FF726CB21BC - 48 8B C8              - mov rcx,rax
-7FF726CB21BF - E8 EC730E00           - call 7FF726D995B0
-7FF726CB21C4 - 48 8B C8              - mov rcx,rax
-7FF726CB21C7 - EB 03                 - jmp 7FF726CB21CC
-7FF726CB21C9 - 49 8B CE              - mov rcx,r14
-7FF726CB21CC - 48 89 8B E8000000     - mov [rbx+000000E8],rcx
-7FF726CB21D3 - 48 8D 43 28           - lea rax,[rbx+28]
-7FF726CB21D7 - 4C 89 74 24 48        - mov [rsp+48],r14
-7FF726CB21DC - 4C 89 74 24 40        - mov [rsp+40],r14
-7FF726CB21E1 - 4C 89 74 24 38        - mov [rsp+38],r14
-7FF726CB21E6 - C7 44 24 30 00010000  - mov [rsp+30],00000100
-7FF726CB21EE - 48 89 44 24 28        - mov [rsp+28],rax
-7FF726CB21F3 - C7 44 24 20 01000000  - mov [rsp+20],00000001
-7FF726CB21FB - 41 B9 14000000        - mov r9d,00000014
-7FF726CB2201 - 44 8B 83 0C010000     - mov r8d,[rbx+0000010C]
-7FF726CB2208 - 8B 93 08010000        - mov edx,[rbx+00000108]
-7FF726CB220E - E8 CD790E00           - call 7FF726D99BE0
-7FF726CB2213 - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
-7FF726CB221A - 48 83 C1 08           - add rcx,08
-7FF726CB221E - E8 2D664B00           - call 7FF727168850
-7FF726CB2223 - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
-7FF726CB222A - 48 8B 01              - mov rax,[rcx]
-7FF726CB222D - 48 8D 15 4C784E01     - lea rdx,[7FF728199A80]
-7FF726CB2234 - FF 90 90000000        - call qword ptr [rax+00000090]
-7FF726CB223A - 41 8B F6              - mov esi,r14d
-7FF726CB223D - 83 BB D8000000 00     - cmp dword ptr [rbx+000000D8],00
-7FF726CB2244 - 0F86 8E000000         - jbe 7FF726CB22D8
-7FF726CB224A - 66 0F1F 44 00 00      - nop word ptr [rax+rax+00]
-7FF726CB2250 - 8B FE                 - mov edi,esi
-7FF726CB2252 - 48 83 BC FB A8000000 00 - cmp qword ptr [rbx+rdi*8+000000A8],00
-7FF726CB225B - 75 6D                 - jne 7FF726CB22CA
-7FF726CB225D - 4D 8B C5              - mov r8,r13
-7FF726CB2260 - BA 10000000           - mov edx,00000010
-7FF726CB2265 - B9 A0000000           - mov ecx,000000A0
-7FF726CB226A - E8 F1624B00           - call 7FF727168560
-7FF726CB226F - 48 89 45 D0           - mov [rbp-30],rax
-7FF726CB2273 - 48 85 C0              - test rax,rax
-7FF726CB2276 - 74 0D                 - je 7FF726CB2285
-7FF726CB2278 - 48 8B C8              - mov rcx,rax
-7FF726CB227B - E8 404A0000           - call 7FF726CB6CC0
-7FF726CB2280 - 48 8B C8              - mov rcx,rax
-7FF726CB2283 - EB 03                 - jmp 7FF726CB2288
-7FF726CB2285 - 49 8B CE              - mov rcx,r14
-7FF726CB2288 - 48 89 8C FB A8000000  - mov [rbx+rdi*8+000000A8],rcx
-7FF726CB2290 - 48 8B 01              - mov rax,[rcx]
-7FF726CB2293 - 45 33 C0              - xor r8d,r8d
-7FF726CB2296 - 48 8B 54 FB 78        - mov rdx,[rbx+rdi*8+78]
-7FF726CB229B - FF 90 C0000000        - call qword ptr [rax+000000C0]
-7FF726CB22A1 - 48 8B 8C FB A8000000  - mov rcx,[rbx+rdi*8+000000A8]
-7FF726CB22A9 - 48 83 C1 08           - add rcx,08
-7FF726CB22AD - E8 9E654B00           - call 7FF727168850
-7FF726CB22B2 - 48 8B 8C FB A8000000  - mov rcx,[rbx+rdi*8+000000A8]
-7FF726CB22BA - 48 8B 01              - mov rax,[rcx]
-7FF726CB22BD - 48 8D 15 DC774E01     - lea rdx,[7FF728199AA0]
-7FF726CB22C4 - FF 90 90000000        - call qword ptr [rax+00000090]
-7FF726CB22CA - FF C6                 - inc esi
-7FF726CB22CC - 3B B3 D8000000        - cmp esi,[rbx+000000D8]
-7FF726CB22D2 - 0F82 78FFFFFF         - jb 7FF726CB2250
-7FF726CB22D8 - 48 8B 0B              - mov rcx,[rbx]
-7FF726CB22DB - E8 60414900           - call 7FF727146440
-7FF726CB22E0 - 88 83 3C010000        - mov [rbx+0000013C],al
-7FF726CB22E6 - 33 D2                 - xor edx,edx
-7FF726CB22E8 - 44 8D 42 58           - lea r8d,[rdx+58]
-7FF726CB22EC - 48 8D 8D 10020000     - lea rcx,[rbp+00000210]
-7FF726CB22F3 - E8 3868B100           - call 7FF7277C8B30
-7FF726CB22F8 - 48 8D 95 10020000     - lea rdx,[rbp+00000210]
-7FF726CB22FF - 48 8B 0B              - mov rcx,[rbx]
-7FF726CB2302 - E8 B9404900           - call 7FF7271463C0
-7FF726CB2307 - 4D 8B C5              - mov r8,r13
-7FF726CB230A - BA 10000000           - mov edx,00000010
-7FF726CB230F - B9 A0000000           - mov ecx,000000A0
-7FF726CB2314 - E8 47624B00           - call 7FF727168560
-7FF726CB2319 - 48 89 45 D8           - mov [rbp-28],rax
-7FF726CB231D - 48 85 C0              - test rax,rax
-7FF726CB2320 - 74 0A                 - je 7FF726CB232C
-7FF726CB2322 - 48 8B C8              - mov rcx,rax
-7FF726CB2325 - E8 96490000           - call 7FF726CB6CC0
-7FF726CB232A - EB 03                 - jmp 7FF726CB232F
-7FF726CB232C - 49 8B C6              - mov rax,r14
-7FF726CB232F - 48 89 83 F0000000     - mov [rbx+000000F0],rax
-7FF726CB2336 - 48 C7 44 24 60 00000000 - mov qword ptr [rsp+60],00000000
-7FF726CB233F - 44 89 74 24 68        - mov [rsp+68],r14d
-7FF726CB2344 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001
-7FF726CB234C - C7 44 24 70 01000000  - mov [rsp+70],00000001
-7FF726CB2354 - 48 C7 44 24 74 01000000 - mov qword ptr [rsp+74],00000001
-7FF726CB235D - 44 89 74 24 7C        - mov [rsp+7C],r14d
-7FF726CB2362 - 4C 89 75 80           - mov [rbp-80],r14
-7FF726CB2366 - C6 45 88 00           - mov byte ptr [rbp-78],00
-7FF726CB236A - 33 D2                 - xor edx,edx
-7FF726CB236C - 48 8D 4D F8           - lea rcx,[rbp-08]
-7FF726CB2370 - E8 FB6B82FE           - call 7FF7254D8F70
-7FF726CB2375 - 0F10 00               - movups xmm0,[rax]
-7FF726CB2378 - 0F11 45 8C            - movups [rbp-74],xmm0
-7FF726CB237C - 8B 83 08010000        - mov eax,[rbx+00000108]
-7FF726CB2382 - 89 44 24 60           - mov [rsp+60],eax
-7FF726CB2386 - 8B 83 0C010000        - mov eax,[rbx+0000010C]
-7FF726CB238C - 89 44 24 64           - mov [rsp+64],eax
-7FF726CB2390 - 48 8B 8B A8000000     - mov rcx,[rbx+000000A8]
-7FF726CB2397 - 48 8B 01              - mov rax,[rcx]
-7FF726CB239A - FF 50 30              - call qword ptr [rax+30]
-7FF726CB239D - 89 44 24 68           - mov [rsp+68],eax
-7FF726CB23A1 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001
-7FF726CB23A9 - 48 8B 43 28           - mov rax,[rbx+28]
-7FF726CB23AD - 48 89 44 24 74        - mov [rsp+74],rax
-7FF726CB23B2 - 41 0F10 84 24 D4010000  - movups xmm0,[r12+000001D4]
-7FF726CB23BB - 0F11 45 8C            - movups [rbp-74],xmm0
-7FF726CB23BF - 45 33 C9              - xor r9d,r9d
-7FF726CB23C2 - 45 33 C0              - xor r8d,r8d
-7FF726CB23C5 - 48 8D 54 24 60        - lea rdx,[rsp+60]
-7FF726CB23CA - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
-7FF726CB23D1 - E8 1A4A0000           - call 7FF726CB6DF0
-7FF726CB23D6 - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
-7FF726CB23DD - 48 83 C1 08           - add rcx,08
-7FF726CB23E1 - E8 6A644B00           - call 7FF727168850
-7FF726CB23E6 - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
-7FF726CB23ED - 48 8B 01              - mov rax,[rcx]
-7FF726CB23F0 - 48 8D 15 C9764E01     - lea rdx,[7FF728199AC0]
-7FF726CB23F7 - FF 90 90000000        - call qword ptr [rax+00000090]
-7FF726CB23FD - 4C 8B 05 D49CB602     - mov r8,[7FF72981C0D8]
-7FF726CB2404 - 4C 89 45 E0           - mov [rbp-20],r8
-7FF726CB2408 - BA 08000000           - mov edx,00000008
-7FF726CB240D - 8D 4A 60              - lea ecx,[rdx+60]
-7FF726CB2410 - E8 4B614B00           - call 7FF727168560
-7FF726CB2415 - 48 89 45 E8           - mov [rbp-18],rax
-7FF726CB2419 - 48 85 C0              - test rax,rax
-7FF726CB241C - 74 0D                 - je 7FF726CB242B
-7FF726CB241E - 49 8B D5              - mov rdx,r13
-7FF726CB2421 - 48 8B C8              - mov rcx,rax
-7FF726CB2424 - E8 276A0F00           - call 7FF726DA8E50
-7FF726CB2429 - EB 03                 - jmp 7FF726CB242E
-7FF726CB242B - 49 8B C6              - mov rax,r14
-7FF726CB242E - 48 89 83 F8000000     - mov [rbx+000000F8],rax
-7FF726CB2435 - 48 8D 4D 70           - lea rcx,[rbp+70]
-7FF726CB2439 - E8 52ED7FFE           - call 7FF7254B1190
-7FF726CB243E - 90                    - nop 
-7FF726CB243F - 48 8D 8D 20010000     - lea rcx,[rbp+00000120]
-7FF726CB2446 - E8 45ED7FFE           - call 7FF7254B1190
-7FF726CB244B - 90                    - nop 
-7FF726CB244C - 4C 89 75 30           - mov [rbp+30],r14
-7FF726CB2450 - 4C 89 75 38           - mov [rbp+38],r14
-7FF726CB2454 - 0F57 C0               - xorps xmm0,xmm0
-7FF726CB2457 - 66 0F7F 45 40         - movdqa [rbp+40],xmm0
-7FF726CB245C - 0F57 C9               - xorps xmm1,xmm1
-7FF726CB245F - 66 0F7F 4D 50         - movdqa [rbp+50],xmm1
-7FF726CB2464 - 48 C7 45 60 01000000  - mov qword ptr [rbp+60],00000001
-7FF726CB246C - C7 45 68 01000000     - mov [rbp+68],00000001
-7FF726CB2473 - C6 45 6C 00           - mov byte ptr [rbp+6C],00
-7FF726CB2477 - C7 85 E0010000 00000001 - mov [rbp+000001E0],01000000
-7FF726CB2481 - C6 85 E4010000 00     - mov byte ptr [rbp+000001E4],00
-7FF726CB2488 - 48 C7 85 E8010000 00000000 - mov qword ptr [rbp+000001E8],00000000
-7FF726CB2493 - 45 33 C0              - xor r8d,r8d
-7FF726CB2496 - 48 8D 15 27788501     - lea rdx,[7FF728509CC4]
-7FF726CB249D - 48 8D 4D 70           - lea rcx,[rbp+70]
-7FF726CB24A1 - E8 0AFB7FFE           - call 7FF7254B1FB0
-7FF726CB24A6 - 45 33 C0              - xor r8d,r8d
-7FF726CB24A9 - 48 8D 15 14788501     - lea rdx,[7FF728509CC4]
-7FF726CB24B0 - 48 8D 8D 20010000     - lea rcx,[rbp+00000120]
-7FF726CB24B7 - E8 F4FA7FFE           - call 7FF7254B1FB0
-7FF726CB24BC - 4C 89 B5 D0010000     - mov [rbp+000001D0],r14
-7FF726CB24C3 - 4C 89 B5 D8010000     - mov [rbp+000001D8],r14
-7FF726CB24CA - 33 D2                 - xor edx,edx
-7FF726CB24CC - 48 8D 4D 08           - lea rcx,[rbp+08]
-7FF726CB24D0 - E8 9B6A82FE           - call 7FF7254D8F70
-7FF726CB24D5 - 0F10 00               - movups xmm0,[rax]
-7FF726CB24D8 - 0F29 85 F0010000      - movaps [rbp+000001F0],xmm0
-7FF726CB24DF - 0F57 C9               - xorps xmm1,xmm1
-7FF726CB24E2 - 66 0F7F 8D 00020000   - movdqa [rbp+00000200],xmm1
-7FF726CB24EA - C6 45 6C 00           - mov byte ptr [rbp+6C],00
-7FF726CB24EE - 48 8B 83 F0000000     - mov rax,[rbx+000000F0]
-7FF726CB24F5 - 48 89 45 40           - mov [rbp+40],rax
-7FF726CB24F9 - 48 8D 48 70           - lea rcx,[rax+70]
-7FF726CB24FD - 48 8B 01              - mov rax,[rcx]
-7FF726CB2500 - 33 D2                 - xor edx,edx
-7FF726CB2502 - FF 50 08              - call qword ptr [rax+08]
-7FF726CB2505 - 48 89 45 50           - mov [rbp+50],rax
-7FF726CB2509 - 33 D2                 - xor edx,edx
-7FF726CB250B - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
-7FF726CB2512 - E8 49790E00           - call 7FF726D99E60
-7FF726CB2517 - 48 89 45 58           - mov [rbp+58],rax
-7FF726CB251B - 48 8B 83 E8000000     - mov rax,[rbx+000000E8]
-7FF726CB2522 - 48 89 45 48           - mov [rbp+48],rax
-7FF726CB2526 - 4C 89 B5 00020000     - mov [rbp+00000200],r14
-7FF726CB252D - 48 8B 43 28           - mov rax,[rbx+28]
-7FF726CB2531 - 48 89 45 60           - mov [rbp+60],rax
-7FF726CB2535 - 8B 83 08010000        - mov eax,[rbx+00000108]
-7FF726CB253B - 89 45 30              - mov [rbp+30],eax
-7FF726CB253E - 8B 83 0C010000        - mov eax,[rbx+0000010C]
-7FF726CB2544 - 89 45 34              - mov [rbp+34],eax
-7FF726CB2547 - C6 85 E0010000 00     - mov byte ptr [rbp+000001E0],00
-7FF726CB254E - 45 33 C0              - xor r8d,r8d
-7FF726CB2551 - 48 8D 55 30           - lea rdx,[rbp+30]
-7FF726CB2555 - 48 8B 8B F8000000     - mov rcx,[rbx+000000F8]
-7FF726CB255C - E8 3F720F00           - call 7FF726DA97A0
-7FF726CB2561 - 90                    - nop 
-7FF726CB2562 - 48 8B 85 C0010000     - mov rax,[rbp+000001C0]
-7FF726CB2569 - 48 83 F8 08           - cmp rax,08
-7FF726CB256D - 72 28                 - jb 7FF726CB2597
-7FF726CB256F - 48 FF C0              - inc rax
-7FF726CB2572 - 48 83 F8 40           - cmp rax,40
-7FF726CB2576 - 76 18                 - jna 7FF726CB2590
-7FF726CB2578 - 4C 8D 05 51448701     - lea r8,[7FF7285269D0]
-7FF726CB257F - BA 31010000           - mov edx,00000131
-7FF726CB2584 - 48 8D 0D D5764E01     - lea rcx,[7FF728199C60]
-7FF726CB258B - E8 A0584B00           - call 7FF727167E30
-7FF726CB2590 - 80 A5 A1010000 FD     - and byte ptr [rbp+000001A1],-03
-7FF726CB2597 - 48 C7 85 C0010000 07000000 - mov qword ptr [rbp+000001C0],00000007
-7FF726CB25A2 - 4C 89 B5 B8010000     - mov [rbp+000001B8],r14
-7FF726CB25A9 - 66 44 89 B5 A8010000  - mov [rbp+000001A8],r14w
-7FF726CB25B1 - 48 8B 85 10010000     - mov rax,[rbp+00000110]
-7FF726CB25B8 - 48 83 F8 08           - cmp rax,08
-7FF726CB25BC - 72 22                 - jb 7FF726CB25E0
-7FF726CB25BE - 48 FF C0              - inc rax
-7FF726CB25C1 - 48 83 F8 40           - cmp rax,40
-7FF726CB25C5 - 76 19                 - jna 7FF726CB25E0
-7FF726CB25C7 - 4C 8D 05 02448701     - lea r8,[7FF7285269D0]
-7FF726CB25CE - BA 31010000           - mov edx,00000131
-7FF726CB25D3 - 48 8D 0D 86764E01     - lea rcx,[7FF728199C60]
-7FF726CB25DA - E8 51584B00           - call 7FF727167E30
-7FF726CB25DF - 90                    - nop 
-7FF726CB25E0 - 4D 8B C5              - mov r8,r13
-7FF726CB25E3 - BA 10000000           - mov edx,00000010
-7FF726CB25E8 - B9 A0000000           - mov ecx,000000A0
-7FF726CB25ED - E8 6E5F4B00           - call 7FF727168560
-7FF726CB25F2 - 48 89 45 F0           - mov [rbp-10],rax
-7FF726CB25F6 - 48 85 C0              - test rax,rax
-7FF726CB25F9 - 74 0A                 - je 7FF726CB2605
-7FF726CB25FB - 48 8B C8              - mov rcx,rax
-7FF726CB25FE - E8 BD460000           - call 7FF726CB6CC0
-7FF726CB2603 - EB 03                 - jmp 7FF726CB2608
-7FF726CB2605 - 49 8B C6              - mov rax,r14
-7FF726CB2608 - 48 89 83 00010000     - mov [rbx+00000100],rax
-7FF726CB260F - BF 00220600           - mov edi,00062200
-7FF726CB2614 - 41 80 BC 24 E7010000 00 - cmp byte ptr [r12+000001E7],00
-7FF726CB261D - B8 00200600           - mov eax,00062000
-7FF726CB2622 - 0F44 F8               - cmove edi,eax
-7FF726CB2625 - 48 C7 44 24 60 00000000 - mov qword ptr [rsp+60],00000000
-7FF726CB262E - 44 89 74 24 68        - mov [rsp+68],r14d
-7FF726CB2633 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001
-7FF726CB263B - C7 44 24 70 01000000  - mov [rsp+70],00000001
-7FF726CB2643 - 48 C7 44 24 74 01000000 - mov qword ptr [rsp+74],00000001
-7FF726CB264C - 44 89 74 24 7C        - mov [rsp+7C],r14d
-7FF726CB2651 - 4C 89 75 80           - mov [rbp-80],r14
-7FF726CB2655 - C6 45 88 00           - mov byte ptr [rbp-78],00
-7FF726CB2659 - 33 D2                 - xor edx,edx
-7FF726CB265B - 48 8D 4D 18           - lea rcx,[rbp+18]
-7FF726CB265F - E8 0C6982FE           - call 7FF7254D8F70
-7FF726CB2664 - 8B 83 08010000        - mov eax,[rbx+00000108]
-7FF726CB266A - 89 44 24 60           - mov [rsp+60],eax
-7FF726CB266E - 8B 83 0C010000        - mov eax,[rbx+0000010C]
-7FF726CB2674 - 89 44 24 64           - mov [rsp+64],eax
-7FF726CB2678 - C7 44 24 68 1C000000  - mov [rsp+68],0000001C
-7FF726CB2680 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001
-7FF726CB2688 - 48 8B 43 28           - mov rax,[rbx+28]
-7FF726CB268C - 48 89 44 24 74        - mov [rsp+74],rax
-7FF726CB2691 - 89 7C 24 7C           - mov [rsp+7C],edi
-7FF726CB2695 - 4C 89 75 80           - mov [rbp-80],r14
-7FF726CB2699 - 0F28 05 D0CD8701      - movaps xmm0,[7FF72852F470]
-7FF726CB26A0 - 0F11 45 8C            - movups [rbp-74],xmm0
-7FF726CB26A4 - 45 33 C9              - xor r9d,r9d
-7FF726CB26A7 - 45 33 C0              - xor r8d,r8d
-7FF726CB26AA - 48 8D 54 24 60        - lea rdx,[rsp+60]
-7FF726CB26AF - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
-7FF726CB26B6 - E8 35470000           - call 7FF726CB6DF0
-7FF726CB26BB - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
-7FF726CB26C2 - 48 83 C1 08           - add rcx,08
-7FF726CB26C6 - E8 85614B00           - call 7FF727168850
-7FF726CB26CB - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
-7FF726CB26D2 - 48 8B 01              - mov rax,[rcx]
-7FF726CB26D5 - 48 8D 15 0C744E01     - lea rdx,[7FF728199AE8]
-7FF726CB26DC - FF 90 90000000        - call qword ptr [rax+00000090]
-7FF726CB26E2 - 66 C7 83 3E010000 0100 - mov word ptr [rbx+0000013E],0001
-7FF726CB26EB - 83 BB 28010000 00     - cmp dword ptr [rbx+00000128],00
-7FF726CB26F2 - 75 15                 - jne 7FF726CB2709
-7FF726CB26F4 - 44 8B 83 0C010000     - mov r8d,[rbx+0000010C]
-7FF726CB26FB - 8B 93 08010000        - mov edx,[rbx+00000108]
-7FF726CB2701 - 49 8B CC              - mov rcx,r12
-7FF726CB2704 - E8 57190000           - call 7FF726CB4060
-7FF726CB2709 - 8B 44 24 50           - mov eax,[rsp+50]
-7FF726CB270D - 48 81 C3 70010000     - add rbx,00000170
-7FF726CB2714 - 49 3B 9C 24 30010000  - cmp rbx,[r12+00000130]
-7FF726CB271C - 0F85 04F8FFFF         - jne 7FF726CB1F26
-7FF726CB2722 - 48 8B 8D 00030000     - mov rcx,[rbp+00000300]
-7FF726CB2729 - 48 33 CC              - xor rcx,rsp
-7FF726CB272C - E8 4F4CAF00           - call 7FF7277A7380
-7FF726CB2731 - 4C 8D 9C 24 20040000  - lea r11,[rsp+00000420]
-7FF726CB2739 - 49 8B 5B 38           - mov rbx,[r11+38]
-7FF726CB273D - 49 8B 73 40           - mov rsi,[r11+40]
-7FF726CB2741 - 49 8B 7B 48           - mov rdi,[r11+48]
-7FF726CB2745 - 41 0F28 73 F0         - movaps xmm6,[r11-10]
-7FF726CB274A - 49 8B E3              - mov rsp,r11
-7FF726CB274D - 41 5F                 - pop r15
-7FF726CB274F - 41 5E                 - pop r14
-7FF726CB2751 - 41 5D                 - pop r13
-7FF726CB2753 - 41 5C                 - pop r12
-7FF726CB2755 - 5D                    - pop rbp
-7FF726CB2756 - C3                    - ret 
+eldenring.exe+1942CAD - EB 3C                 - jmp eldenring.exe+1942CEB
+eldenring.exe+1942CAF - 3F                    - db 3F
+eldenring.exe+1942CB0 - 48 8B C4              - mov rax,rsp
+eldenring.exe+1942CB3 - 55                    - push rbp
+eldenring.exe+1942CB4 - 41 54                 - push r12
+eldenring.exe+1942CB6 - 41 55                 - push r13
+eldenring.exe+1942CB8 - 41 56                 - push r14
+eldenring.exe+1942CBA - 41 57                 - push r15
+eldenring.exe+1942CBC - 48 8D A8 B8FCFFFF     - lea rbp,[rax-00000348]
+eldenring.exe+1942CC3 - 48 81 EC 20040000     - sub rsp,00000420 { 1056 }
+eldenring.exe+1942CCA - 48 C7 45 B8 FEFFFFFF  - mov qword ptr [rbp-48],FFFFFFFFFFFFFFFE { -2 }
+eldenring.exe+1942CD2 - 48 89 58 10           - mov [rax+10],rbx
+eldenring.exe+1942CD6 - 48 89 70 18           - mov [rax+18],rsi
+eldenring.exe+1942CDA - 48 89 78 20           - mov [rax+20],rdi
+eldenring.exe+1942CDE - 0F29 70 C8            - movaps [rax-38],xmm6
+eldenring.exe+1942CE2 - 48 8B 05 07531C02     - mov rax,[eldenring.exe+3B07FF0] { (-1667829764) }
+eldenring.exe+1942CE9 - 48 33 C4              - xor rax,rsp
+eldenring.exe+1942CEC - 48 89 85 00030000     - mov [rbp+00000300],rax
+eldenring.exe+1942CF3 - 8B C2                 - mov eax,edx
+eldenring.exe+1942CF5 - 89 54 24 50           - mov [rsp+50],edx
+eldenring.exe+1942CF9 - 4C 8B E1              - mov r12,rcx
+eldenring.exe+1942CFC - 4C 8B A9 58010000     - mov r13,[rcx+00000158]
+eldenring.exe+1942D03 - 4C 89 6D C0           - mov [rbp-40],r13
+eldenring.exe+1942D07 - 48 8B 99 28010000     - mov rbx,[rcx+00000128]
+eldenring.exe+1942D0E - 48 3B 99 30010000     - cmp rbx,[rcx+00000130]
+eldenring.exe+1942D15 - 0F84 17080000         - je eldenring.exe+1943532
+eldenring.exe+1942D1B - 45 33 F6              - xor r14d,r14d
+eldenring.exe+1942D1E - F3 0F10 35 3A4F8601   - movss xmm6,[eldenring.exe+31A7C60] { (0.00) }
+eldenring.exe+1942D26 - 83 F8 FF              - cmp eax,-01 { 255 }
+eldenring.exe+1942D29 - 74 0C                 - je eldenring.exe+1942D37
+eldenring.exe+1942D2B - 3B 83 28010000        - cmp eax,[rbx+00000128]
+eldenring.exe+1942D31 - 0F85 E6070000         - jne eldenring.exe+194351D
+eldenring.exe+1942D37 - 8B 83 28010000        - mov eax,[rbx+00000128]
+eldenring.exe+1942D3D - 4C 8D 58 14           - lea r11,[rax+14]
+eldenring.exe+1942D41 - 4F 8D 1C 5B           - lea r11,[r11+r11*2]
+eldenring.exe+1942D45 - 4D 03 DB              - add r11,r11
+eldenring.exe+1942D48 - 47 8B 04 DC           - mov r8d,[r12+r11*8]
+eldenring.exe+1942D4C - 48 8D 0C 40           - lea rcx,[rax+rax*2]
+eldenring.exe+1942D50 - 48 03 C9              - add rcx,rcx
+eldenring.exe+1942D53 - 45 8B 8C CC C4030000  - mov r9d,[r12+rcx*8+000003C4]
+eldenring.exe+1942D5B - 41 8B 84 CC D8030000  - mov eax,[r12+rcx*8+000003D8]
+eldenring.exe+1942D63 - 85 C0                 - test eax,eax
+eldenring.exe+1942D65 - 74 50                 - je eldenring.exe+1942DB7			<----- CHANGE TO JMP
+eldenring.exe+1942D67 - 45 8B 94 CC DC030000  - mov r10d,[r12+rcx*8+000003DC]
+eldenring.exe+1942D6F - 45 85 D2              - test r10d,r10d
+eldenring.exe+1942D72 - 74 43                 - je eldenring.exe+1942DB7
+eldenring.exe+1942D74 - 41 8B D2              - mov edx,r10d
+eldenring.exe+1942D77 - 41 0FAF D0            - imul edx,r8d
+eldenring.exe+1942D7B - 41 0FAF C1            - imul eax,r9d
+eldenring.exe+1942D7F - 3B D0                 - cmp edx,eax
+eldenring.exe+1942D81 - 74 34                 - je eldenring.exe+1942DB7
+eldenring.exe+1942D83 - 76 0D                 - jna eldenring.exe+1942D92
+eldenring.exe+1942D85 - 33 D2                 - xor edx,edx
+eldenring.exe+1942D87 - 41 F7 F2              - div r10d
+eldenring.exe+1942D8A - 89 83 08010000        - mov [rbx+00000108],eax
+eldenring.exe+1942D90 - EB 2C                 - jmp eldenring.exe+1942DBE
+eldenring.exe+1942D92 - 44 89 83 08010000     - mov [rbx+00000108],r8d
+eldenring.exe+1942D99 - 45 0FAF 84 CC DC030000  - imul r8d,[r12+rcx*8+000003DC]
+eldenring.exe+1942DA2 - 33 D2                 - xor edx,edx
+eldenring.exe+1942DA4 - 41 8B C0              - mov eax,r8d
+eldenring.exe+1942DA7 - 41 F7 B4 CC D8030000  - div [r12+rcx*8+000003D8]
+eldenring.exe+1942DAF - 89 83 0C010000        - mov [rbx+0000010C],eax
+eldenring.exe+1942DB5 - EB 0E                 - jmp eldenring.exe+1942DC5
+eldenring.exe+1942DB7 - 44 89 83 08010000     - mov [rbx+00000108],r8d
+eldenring.exe+1942DBE - 44 89 8B 0C010000     - mov [rbx+0000010C],r9d
+eldenring.exe+1942DC5 - F3 41 0F10 8C CC E4030000  - movss xmm1,[r12+rcx*8+000003E4]
+eldenring.exe+1942DCF - 44 8B 93 08010000     - mov r10d,[rbx+00000108]
+eldenring.exe+1942DD6 - 41 83 C2 03           - add r10d,03 { 3 }
+eldenring.exe+1942DDA - 41 83 E2 FC           - and r10d,-04 { 252 }
+eldenring.exe+1942DDE - 44 8B 8B 0C010000     - mov r9d,[rbx+0000010C]
+eldenring.exe+1942DE5 - 41 83 C1 03           - add r9d,03 { 3 }
+eldenring.exe+1942DE9 - 41 83 E1 FC           - and r9d,-04 { 252 }
+eldenring.exe+1942DED - 0F57 C0               - xorps xmm0,xmm0
+eldenring.exe+1942DF0 - F3 49 0F2A C2         - cvtsi2ss xmm0,r10
+eldenring.exe+1942DF5 - F3 0F59 C1            - mulss xmm0,xmm1
+eldenring.exe+1942DF9 - F3 48 0F2C C0         - cvttss2si rax,xmm0
+eldenring.exe+1942DFE - 83 C0 03              - add eax,03 { 3 }
+eldenring.exe+1942E01 - 83 E0 FC              - and eax,-04 { 252 }
+eldenring.exe+1942E04 - 89 83 08010000        - mov [rbx+00000108],eax
+eldenring.exe+1942E0A - 0F57 C0               - xorps xmm0,xmm0
+eldenring.exe+1942E0D - F3 49 0F2A C1         - cvtsi2ss xmm0,r9
+eldenring.exe+1942E12 - F3 0F59 C1            - mulss xmm0,xmm1
+eldenring.exe+1942E16 - F3 48 0F2C C0         - cvttss2si rax,xmm0
+eldenring.exe+1942E1B - 83 C0 03              - add eax,03 { 3 }
+eldenring.exe+1942E1E - 83 E0 FC              - and eax,-04 { 252 }
+eldenring.exe+1942E21 - 89 83 0C010000        - mov [rbx+0000010C],eax
+eldenring.exe+1942E27 - 47 8B 04 DC           - mov r8d,[r12+r11*8]
+eldenring.exe+1942E2B - 41 8B 94 CC C4030000  - mov edx,[r12+rcx*8+000003C4]
+eldenring.exe+1942E33 - 0F57 C0               - xorps xmm0,xmm0
+eldenring.exe+1942E36 - 45 3B C2              - cmp r8d,r10d
+eldenring.exe+1942E39 - 72 10                 - jb eldenring.exe+1942E4B
+eldenring.exe+1942E3B - 45 2B C2              - sub r8d,r10d
+eldenring.exe+1942E3E - 41 D1 E8              - shr r8d,1
+eldenring.exe+1942E41 - 41 8B C0              - mov eax,r8d
+eldenring.exe+1942E44 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+eldenring.exe+1942E49 - EB 10                 - jmp eldenring.exe+1942E5B
+eldenring.exe+1942E4B - 41 8B C2              - mov eax,r10d
+eldenring.exe+1942E4E - 41 2B C0              - sub eax,r8d
+eldenring.exe+1942E51 - D1 E8                 - shr eax,1
+eldenring.exe+1942E53 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+eldenring.exe+1942E58 - 0F57 C6               - xorps xmm0,xmm6
+eldenring.exe+1942E5B - F3 0F11 83 10010000   - movss [rbx+00000110],xmm0
+eldenring.exe+1942E63 - 0F57 C0               - xorps xmm0,xmm0
+eldenring.exe+1942E66 - 41 3B D1              - cmp edx,r9d
+eldenring.exe+1942E69 - 72 0E                 - jb eldenring.exe+1942E79
+eldenring.exe+1942E6B - 41 2B D1              - sub edx,r9d
+eldenring.exe+1942E6E - D1 EA                 - shr edx,1
+eldenring.exe+1942E70 - 8B C2                 - mov eax,edx
+eldenring.exe+1942E72 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+eldenring.exe+1942E77 - EB 0F                 - jmp eldenring.exe+1942E88
+eldenring.exe+1942E79 - 41 8B C1              - mov eax,r9d
+eldenring.exe+1942E7C - 2B C2                 - sub eax,edx
+eldenring.exe+1942E7E - D1 E8                 - shr eax,1
+eldenring.exe+1942E80 - F3 48 0F2A C0         - cvtsi2ss xmm0,rax
+eldenring.exe+1942E85 - 0F57 C6               - xorps xmm0,xmm6
+eldenring.exe+1942E88 - F3 0F11 83 14010000   - movss [rbx+00000114],xmm0
+eldenring.exe+1942E90 - 0F57 C0               - xorps xmm0,xmm0
+eldenring.exe+1942E93 - F3 49 0F2A C2         - cvtsi2ss xmm0,r10
+eldenring.exe+1942E98 - F3 0F11 83 18010000   - movss [rbx+00000118],xmm0
+eldenring.exe+1942EA0 - 0F57 C9               - xorps xmm1,xmm1
+eldenring.exe+1942EA3 - F3 49 0F2A C9         - cvtsi2ss xmm1,r9
+eldenring.exe+1942EA8 - F3 0F11 8B 1C010000   - movss [rbx+0000011C],xmm1
+eldenring.exe+1942EB0 - 44 89 B3 20010000     - mov [rbx+00000120],r14d
+eldenring.exe+1942EB7 - C7 83 24010000 0000803F - mov [rbx+00000124],3F800000 { 1.00 }
+eldenring.exe+1942EC1 - 48 8D 53 78           - lea rdx,[rbx+78]
+eldenring.exe+1942EC5 - 45 33 C9              - xor r9d,r9d
+eldenring.exe+1942EC8 - 4C 8D 83 D8000000     - lea r8,[rbx+000000D8]
+eldenring.exe+1942ECF - 48 8B 0B              - mov rcx,[rbx]
+eldenring.exe+1942ED2 - E8 F9AF4900           - call eldenring.exe+1DDDED0
+eldenring.exe+1942ED7 - 41 8B FE              - mov edi,r14d
+eldenring.exe+1942EDA - 83 BB D8000000 00     - cmp dword ptr [rbx+000000D8],00 { 0 }
+eldenring.exe+1942EE1 - 0F86 A4000000         - jbe eldenring.exe+1942F8B
+eldenring.exe+1942EE7 - 66 0F1F 84 00 00000000  - nop word ptr [rax+rax+00000000]
+eldenring.exe+1942EF0 - 8B F7                 - mov esi,edi
+eldenring.exe+1942EF2 - 48 8B 4C F3 78        - mov rcx,[rbx+rsi*8+78]
+eldenring.exe+1942EF7 - 48 85 C9              - test rcx,rcx
+eldenring.exe+1942EFA - 74 7E                 - je eldenring.exe+1942F7A
+eldenring.exe+1942EFC - 48 83 C1 20           - add rcx,20 { 32 }
+eldenring.exe+1942F00 - 48 8D 95 70020000     - lea rdx,[rbp+00000270]
+eldenring.exe+1942F07 - E8 44974800           - call eldenring.exe+1DCC650
+eldenring.exe+1942F0C - 4C 8D 34 F3           - lea r14,[rbx+rsi*8]
+eldenring.exe+1942F10 - 49 83 BE 90000000 00  - cmp qword ptr [r14+00000090],00 { 0 }
+eldenring.exe+1942F18 - 75 60                 - jne eldenring.exe+1942F7A
+eldenring.exe+1942F1A - 33 C0                 - xor eax,eax
+eldenring.exe+1942F1C - 48 89 45 A0           - mov [rbp-60],rax
+eldenring.exe+1942F20 - 48 89 45 A8           - mov [rbp-58],rax
+eldenring.exe+1942F24 - 48 89 45 AC           - mov [rbp-54],rax
+eldenring.exe+1942F28 - 8B 85 80020000        - mov eax,[rbp+00000280]
+eldenring.exe+1942F2E - 89 45 A0              - mov [rbp-60],eax
+eldenring.exe+1942F31 - B8 04000000           - mov eax,00000004 { 4 }
+eldenring.exe+1942F36 - 83 BD 84020000 01     - cmp dword ptr [rbp+00000284],01 { 1 }
+eldenring.exe+1942F3D - B9 06000000           - mov ecx,00000006 { 6 }
+eldenring.exe+1942F42 - 0F47 C1               - cmova eax,ecx
+eldenring.exe+1942F45 - 88 45 A4              - mov [rbp-5C],al
+eldenring.exe+1942F48 - 33 C0                 - xor eax,eax
+eldenring.exe+1942F4A - 89 45 A8              - mov [rbp-58],eax
+eldenring.exe+1942F4D - C7 45 B0 01000000     - mov [rbp-50],00000001 { 1 }
+eldenring.exe+1942F54 - 49 8B 0C 24           - mov rcx,[r12]
+eldenring.exe+1942F58 - E8 833B0000           - call eldenring.exe+1946AE0
+eldenring.exe+1942F5D - 48 8B C8              - mov rcx,rax
+eldenring.exe+1942F60 - 4C 89 6C 24 20        - mov [rsp+20],r13
+eldenring.exe+1942F65 - 4C 8D 4D A0           - lea r9,[rbp-60]
+eldenring.exe+1942F69 - 4C 8B 44 F3 78        - mov r8,[rbx+rsi*8+78]
+eldenring.exe+1942F6E - 49 8D 96 90000000     - lea rdx,[r14+00000090]
+eldenring.exe+1942F75 - E8 46A24800           - call eldenring.exe+1DCD1C0
+eldenring.exe+1942F7A - FF C7                 - inc edi
+eldenring.exe+1942F7C - 3B BB D8000000        - cmp edi,[rbx+000000D8]
+eldenring.exe+1942F82 - 0F82 68FFFFFF         - jb eldenring.exe+1942EF0
+eldenring.exe+1942F88 - 45 33 F6              - xor r14d,r14d
+eldenring.exe+1942F8B - 48 8B 43 78           - mov rax,[rbx+78]
+eldenring.exe+1942F8F - 48 85 C0              - test rax,rax
+eldenring.exe+1942F92 - 74 0F                 - je eldenring.exe+1942FA3
+eldenring.exe+1942F94 - 48 89 43 68           - mov [rbx+68],rax
+eldenring.exe+1942F98 - 48 8B 83 90000000     - mov rax,[rbx+00000090]
+eldenring.exe+1942F9F - 48 89 43 70           - mov [rbx+70],rax
+eldenring.exe+1942FA3 - 48 83 BB E8000000 00  - cmp qword ptr [rbx+000000E8],00 { 0 }
+eldenring.exe+1942FAB - 0F85 99000000         - jne eldenring.exe+194304A
+eldenring.exe+1942FB1 - 4D 8B C5              - mov r8,r13
+eldenring.exe+1942FB4 - BA 10000000           - mov edx,00000010 { 16 }
+eldenring.exe+1942FB9 - B9 A0000000           - mov ecx,000000A0 { 160 }
+eldenring.exe+1942FBE - E8 EDD14B00           - call eldenring.exe+1E001B0
+eldenring.exe+1942FC3 - 48 89 45 C8           - mov [rbp-38],rax
+eldenring.exe+1942FC7 - 48 85 C0              - test rax,rax
+eldenring.exe+1942FCA - 74 0D                 - je eldenring.exe+1942FD9
+eldenring.exe+1942FCC - 48 8B C8              - mov rcx,rax
+eldenring.exe+1942FCF - E8 4C780E00           - call eldenring.exe+1A2A820
+eldenring.exe+1942FD4 - 48 8B C8              - mov rcx,rax
+eldenring.exe+1942FD7 - EB 03                 - jmp eldenring.exe+1942FDC
+eldenring.exe+1942FD9 - 49 8B CE              - mov rcx,r14
+eldenring.exe+1942FDC - 48 89 8B E8000000     - mov [rbx+000000E8],rcx
+eldenring.exe+1942FE3 - 48 8D 43 28           - lea rax,[rbx+28]
+eldenring.exe+1942FE7 - 4C 89 74 24 48        - mov [rsp+48],r14
+eldenring.exe+1942FEC - 4C 89 74 24 40        - mov [rsp+40],r14
+eldenring.exe+1942FF1 - 4C 89 74 24 38        - mov [rsp+38],r14
+eldenring.exe+1942FF6 - C7 44 24 30 00010000  - mov [rsp+30],00000100 { 256 }
+eldenring.exe+1942FFE - 48 89 44 24 28        - mov [rsp+28],rax
+eldenring.exe+1943003 - C7 44 24 20 01000000  - mov [rsp+20],00000001 { 1 }
+eldenring.exe+194300B - 41 B9 14000000        - mov r9d,00000014 { 20 }
+eldenring.exe+1943011 - 44 8B 83 0C010000     - mov r8d,[rbx+0000010C]
+eldenring.exe+1943018 - 8B 93 08010000        - mov edx,[rbx+00000108]
+eldenring.exe+194301E - E8 2D7E0E00           - call eldenring.exe+1A2AE50
+eldenring.exe+1943023 - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
+eldenring.exe+194302A - 48 83 C1 08           - add rcx,08 { 8 }
+eldenring.exe+194302E - E8 6DD44B00           - call eldenring.exe+1E004A0
+eldenring.exe+1943033 - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
+eldenring.exe+194303A - 48 8B 01              - mov rax,[rcx]
+eldenring.exe+194303D - 48 8D 15 6CD74C01     - lea rdx,[eldenring.exe+2E107B0] { ("DefDepthStencil") }
+eldenring.exe+1943044 - FF 90 90000000        - call qword ptr [rax+00000090]
+eldenring.exe+194304A - 41 8B F6              - mov esi,r14d
+eldenring.exe+194304D - 83 BB D8000000 00     - cmp dword ptr [rbx+000000D8],00 { 0 }
+eldenring.exe+1943054 - 0F86 8E000000         - jbe eldenring.exe+19430E8
+eldenring.exe+194305A - 66 0F1F 44 00 00      - nop word ptr [rax+rax+00]
+eldenring.exe+1943060 - 8B FE                 - mov edi,esi
+eldenring.exe+1943062 - 48 83 BC FB A8000000 00 - cmp qword ptr [rbx+rdi*8+000000A8],00 { 0 }
+eldenring.exe+194306B - 75 6D                 - jne eldenring.exe+19430DA
+eldenring.exe+194306D - 4D 8B C5              - mov r8,r13
+eldenring.exe+1943070 - BA 10000000           - mov edx,00000010 { 16 }
+eldenring.exe+1943075 - B9 A0000000           - mov ecx,000000A0 { 160 }
+eldenring.exe+194307A - E8 31D14B00           - call eldenring.exe+1E001B0
+eldenring.exe+194307F - 48 89 45 D0           - mov [rbp-30],rax
+eldenring.exe+1943083 - 48 85 C0              - test rax,rax
+eldenring.exe+1943086 - 74 0D                 - je eldenring.exe+1943095
+eldenring.exe+1943088 - 48 8B C8              - mov rcx,rax
+eldenring.exe+194308B - E8 F04B0000           - call eldenring.exe+1947C80
+eldenring.exe+1943090 - 48 8B C8              - mov rcx,rax
+eldenring.exe+1943093 - EB 03                 - jmp eldenring.exe+1943098
+eldenring.exe+1943095 - 49 8B CE              - mov rcx,r14
+eldenring.exe+1943098 - 48 89 8C FB A8000000  - mov [rbx+rdi*8+000000A8],rcx
+eldenring.exe+19430A0 - 48 8B 01              - mov rax,[rcx]
+eldenring.exe+19430A3 - 45 33 C0              - xor r8d,r8d
+eldenring.exe+19430A6 - 48 8B 54 FB 78        - mov rdx,[rbx+rdi*8+78]
+eldenring.exe+19430AB - FF 90 C0000000        - call qword ptr [rax+000000C0]
+eldenring.exe+19430B1 - 48 8B 8C FB A8000000  - mov rcx,[rbx+rdi*8+000000A8]
+eldenring.exe+19430B9 - 48 83 C1 08           - add rcx,08 { 8 }
+eldenring.exe+19430BD - E8 DED34B00           - call eldenring.exe+1E004A0
+eldenring.exe+19430C2 - 48 8B 8C FB A8000000  - mov rcx,[rbx+rdi*8+000000A8]
+eldenring.exe+19430CA - 48 8B 01              - mov rax,[rcx]
+eldenring.exe+19430CD - 48 8D 15 FCD64C01     - lea rdx,[eldenring.exe+2E107D0] { ("DefRenderTarget") }
+eldenring.exe+19430D4 - FF 90 90000000        - call qword ptr [rax+00000090]
+eldenring.exe+19430DA - FF C6                 - inc esi
+eldenring.exe+19430DC - 3B B3 D8000000        - cmp esi,[rbx+000000D8]
+eldenring.exe+19430E2 - 0F82 78FFFFFF         - jb eldenring.exe+1943060
+eldenring.exe+19430E8 - 48 8B 0B              - mov rcx,[rbx]
+eldenring.exe+19430EB - E8 A0AE4900           - call eldenring.exe+1DDDF90
+eldenring.exe+19430F0 - 88 83 3C010000        - mov [rbx+0000013C],al
+eldenring.exe+19430F6 - 33 D2                 - xor edx,edx
+eldenring.exe+19430F8 - 44 8D 42 58           - lea r8d,[rdx+58]
+eldenring.exe+19430FC - 48 8D 8D 10020000     - lea rcx,[rbp+00000210]
+eldenring.exe+1943103 - E8 A8D6B100           - call eldenring.exe+24607B0
+eldenring.exe+1943108 - 48 8D 95 10020000     - lea rdx,[rbp+00000210]
+eldenring.exe+194310F - 48 8B 0B              - mov rcx,[rbx]
+eldenring.exe+1943112 - E8 F9AD4900           - call eldenring.exe+1DDDF10
+eldenring.exe+1943117 - 4D 8B C5              - mov r8,r13
+eldenring.exe+194311A - BA 10000000           - mov edx,00000010 { 16 }
+eldenring.exe+194311F - B9 A0000000           - mov ecx,000000A0 { 160 }
+eldenring.exe+1943124 - E8 87D04B00           - call eldenring.exe+1E001B0
+eldenring.exe+1943129 - 48 89 45 D8           - mov [rbp-28],rax
+eldenring.exe+194312D - 48 85 C0              - test rax,rax
+eldenring.exe+1943130 - 74 0A                 - je eldenring.exe+194313C
+eldenring.exe+1943132 - 48 8B C8              - mov rcx,rax
+eldenring.exe+1943135 - E8 464B0000           - call eldenring.exe+1947C80
+eldenring.exe+194313A - EB 03                 - jmp eldenring.exe+194313F
+eldenring.exe+194313C - 49 8B C6              - mov rax,r14
+eldenring.exe+194313F - 48 89 83 F0000000     - mov [rbx+000000F0],rax
+eldenring.exe+1943146 - 48 C7 44 24 60 00000000 - mov qword ptr [rsp+60],00000000 { 0 }
+eldenring.exe+194314F - 44 89 74 24 68        - mov [rsp+68],r14d
+eldenring.exe+1943154 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001 { 1 }
+eldenring.exe+194315C - C7 44 24 70 01000000  - mov [rsp+70],00000001 { 1 }
+eldenring.exe+1943164 - 48 C7 44 24 74 01000000 - mov qword ptr [rsp+74],00000001 { 1 }
+eldenring.exe+194316D - 44 89 74 24 7C        - mov [rsp+7C],r14d
+eldenring.exe+1943172 - 4C 89 75 80           - mov [rbp-80],r14
+eldenring.exe+1943176 - C6 45 88 00           - mov byte ptr [rbp-78],00 { 0 }
+eldenring.exe+194317A - 33 D2                 - xor edx,edx
+eldenring.exe+194317C - 48 8D 4D F8           - lea rcx,[rbp-08]
+eldenring.exe+1943180 - E8 6B5E84FE           - call eldenring.exe+188FF0
+eldenring.exe+1943185 - 0F10 00               - movups xmm0,[rax]
+eldenring.exe+1943188 - 0F11 45 8C            - movups [rbp-74],xmm0
+eldenring.exe+194318C - 8B 83 08010000        - mov eax,[rbx+00000108]
+eldenring.exe+1943192 - 89 44 24 60           - mov [rsp+60],eax
+eldenring.exe+1943196 - 8B 83 0C010000        - mov eax,[rbx+0000010C]
+eldenring.exe+194319C - 89 44 24 64           - mov [rsp+64],eax
+eldenring.exe+19431A0 - 48 8B 8B A8000000     - mov rcx,[rbx+000000A8]
+eldenring.exe+19431A7 - 48 8B 01              - mov rax,[rcx]
+eldenring.exe+19431AA - FF 50 30              - call qword ptr [rax+30]
+eldenring.exe+19431AD - 89 44 24 68           - mov [rsp+68],eax
+eldenring.exe+19431B1 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001 { 1 }
+eldenring.exe+19431B9 - 48 8B 43 28           - mov rax,[rbx+28]
+eldenring.exe+19431BD - 48 89 44 24 74        - mov [rsp+74],rax
+eldenring.exe+19431C2 - 41 0F10 84 24 D4010000  - movups xmm0,[r12+000001D4]
+eldenring.exe+19431CB - 0F11 45 8C            - movups [rbp-74],xmm0
+eldenring.exe+19431CF - 45 33 C9              - xor r9d,r9d
+eldenring.exe+19431D2 - 45 33 C0              - xor r8d,r8d
+eldenring.exe+19431D5 - 48 8D 54 24 60        - lea rdx,[rsp+60]
+eldenring.exe+19431DA - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
+eldenring.exe+19431E1 - E8 CA4B0000           - call eldenring.exe+1947DB0
+eldenring.exe+19431E6 - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
+eldenring.exe+19431ED - 48 83 C1 08           - add rcx,08 { 8 }
+eldenring.exe+19431F1 - E8 AAD24B00           - call eldenring.exe+1E004A0
+eldenring.exe+19431F6 - 48 8B 8B F0000000     - mov rcx,[rbx+000000F0]
+eldenring.exe+19431FD - 48 8B 01              - mov rax,[rcx]
+eldenring.exe+1943200 - 48 8D 15 E9D54C01     - lea rdx,[eldenring.exe+2E107F0] { ("Scene RenderTarget") }
+eldenring.exe+1943207 - FF 90 90000000        - call qword ptr [rax+00000090]
+eldenring.exe+194320D - 4C 8B 05 CCC0B202     - mov r8,[eldenring.exe+446F2E0] { ("h-N^?") }
+eldenring.exe+1943214 - 4C 89 45 E0           - mov [rbp-20],r8
+eldenring.exe+1943218 - BA 08000000           - mov edx,00000008 { 8 }
+eldenring.exe+194321D - 8D 4A 60              - lea ecx,[rdx+60]
+eldenring.exe+1943220 - E8 8BCF4B00           - call eldenring.exe+1E001B0
+eldenring.exe+1943225 - 48 89 45 E8           - mov [rbp-18],rax
+eldenring.exe+1943229 - 48 85 C0              - test rax,rax
+eldenring.exe+194322C - 74 0D                 - je eldenring.exe+194323B
+eldenring.exe+194322E - 49 8B D5              - mov rdx,r13
+eldenring.exe+1943231 - 48 8B C8              - mov rcx,rax
+eldenring.exe+1943234 - E8 D7700F00           - call eldenring.exe+1A3A310
+eldenring.exe+1943239 - EB 03                 - jmp eldenring.exe+194323E
+eldenring.exe+194323B - 49 8B C6              - mov rax,r14
+eldenring.exe+194323E - 48 89 83 F8000000     - mov [rbx+000000F8],rax
+eldenring.exe+1943245 - 48 8D 4D 70           - lea rcx,[rbp+70]
+eldenring.exe+1943249 - E8 C2DF81FE           - call eldenring.exe+161210
+eldenring.exe+194324E - 90                    - nop 
+eldenring.exe+194324F - 48 8D 8D 20010000     - lea rcx,[rbp+00000120]
+eldenring.exe+1943256 - E8 B5DF81FE           - call eldenring.exe+161210
+eldenring.exe+194325B - 90                    - nop 
+eldenring.exe+194325C - 4C 89 75 30           - mov [rbp+30],r14
+eldenring.exe+1943260 - 4C 89 75 38           - mov [rbp+38],r14
+eldenring.exe+1943264 - 0F57 C0               - xorps xmm0,xmm0
+eldenring.exe+1943267 - 66 0F7F 45 40         - movdqa [rbp+40],xmm0
+eldenring.exe+194326C - 0F57 C9               - xorps xmm1,xmm1
+eldenring.exe+194326F - 66 0F7F 4D 50         - movdqa [rbp+50],xmm1
+eldenring.exe+1943274 - 48 C7 45 60 01000000  - mov qword ptr [rbp+60],00000001 { 1 }
+eldenring.exe+194327C - C7 45 68 01000000     - mov [rbp+68],00000001 { 1 }
+eldenring.exe+1943283 - C6 45 6C 00           - mov byte ptr [rbp+6C],00 { 0 }
+eldenring.exe+1943287 - C7 85 E0010000 00000001 - mov [rbp+000001E0],01000000 { 16777216 }
+eldenring.exe+1943291 - C6 85 E4010000 00     - mov byte ptr [rbp+000001E4],00 { 0 }
+eldenring.exe+1943298 - 48 C7 85 E8010000 00000000 - mov qword ptr [rbp+000001E8],00000000 { 0 }
+eldenring.exe+19432A3 - 45 33 C0              - xor r8d,r8d
+eldenring.exe+19432A6 - 48 8D 15 57E78301     - lea rdx,[eldenring.exe+3181A04] { (0) }
+eldenring.exe+19432AD - 48 8D 4D 70           - lea rcx,[rbp+70]
+eldenring.exe+19432B1 - E8 7AED81FE           - call eldenring.exe+162030
+eldenring.exe+19432B6 - 45 33 C0              - xor r8d,r8d
+eldenring.exe+19432B9 - 48 8D 15 44E78301     - lea rdx,[eldenring.exe+3181A04] { (0) }
+eldenring.exe+19432C0 - 48 8D 8D 20010000     - lea rcx,[rbp+00000120]
+eldenring.exe+19432C7 - E8 64ED81FE           - call eldenring.exe+162030
+eldenring.exe+19432CC - 4C 89 B5 D0010000     - mov [rbp+000001D0],r14
+eldenring.exe+19432D3 - 4C 89 B5 D8010000     - mov [rbp+000001D8],r14
+eldenring.exe+19432DA - 33 D2                 - xor edx,edx
+eldenring.exe+19432DC - 48 8D 4D 08           - lea rcx,[rbp+08]
+eldenring.exe+19432E0 - E8 0B5D84FE           - call eldenring.exe+188FF0
+eldenring.exe+19432E5 - 0F10 00               - movups xmm0,[rax]
+eldenring.exe+19432E8 - 0F29 85 F0010000      - movaps [rbp+000001F0],xmm0
+eldenring.exe+19432EF - 0F57 C9               - xorps xmm1,xmm1
+eldenring.exe+19432F2 - 66 0F7F 8D 00020000   - movdqa [rbp+00000200],xmm1
+eldenring.exe+19432FA - C6 45 6C 00           - mov byte ptr [rbp+6C],00 { 0 }
+eldenring.exe+19432FE - 48 8B 83 F0000000     - mov rax,[rbx+000000F0]
+eldenring.exe+1943305 - 48 89 45 40           - mov [rbp+40],rax
+eldenring.exe+1943309 - 48 8D 48 70           - lea rcx,[rax+70]
+eldenring.exe+194330D - 48 8B 01              - mov rax,[rcx]
+eldenring.exe+1943310 - 33 D2                 - xor edx,edx
+eldenring.exe+1943312 - FF 50 08              - call qword ptr [rax+08]
+eldenring.exe+1943315 - 48 89 45 50           - mov [rbp+50],rax
+eldenring.exe+1943319 - 33 D2                 - xor edx,edx
+eldenring.exe+194331B - 48 8B 8B E8000000     - mov rcx,[rbx+000000E8]
+eldenring.exe+1943322 - E8 A97D0E00           - call eldenring.exe+1A2B0D0
+eldenring.exe+1943327 - 48 89 45 58           - mov [rbp+58],rax
+eldenring.exe+194332B - 48 8B 83 E8000000     - mov rax,[rbx+000000E8]
+eldenring.exe+1943332 - 48 89 45 48           - mov [rbp+48],rax
+eldenring.exe+1943336 - 4C 89 B5 00020000     - mov [rbp+00000200],r14
+eldenring.exe+194333D - 48 8B 43 28           - mov rax,[rbx+28]
+eldenring.exe+1943341 - 48 89 45 60           - mov [rbp+60],rax
+eldenring.exe+1943345 - 8B 83 08010000        - mov eax,[rbx+00000108]
+eldenring.exe+194334B - 89 45 30              - mov [rbp+30],eax
+eldenring.exe+194334E - 8B 83 0C010000        - mov eax,[rbx+0000010C]
+eldenring.exe+1943354 - 89 45 34              - mov [rbp+34],eax
+eldenring.exe+1943357 - C6 85 E0010000 00     - mov byte ptr [rbp+000001E0],00 { 0 }
+eldenring.exe+194335E - 45 33 C0              - xor r8d,r8d
+eldenring.exe+1943361 - 48 8D 55 30           - lea rdx,[rbp+30]
+eldenring.exe+1943365 - 48 8B 8B F8000000     - mov rcx,[rbx+000000F8]
+eldenring.exe+194336C - E8 EF780F00           - call eldenring.exe+1A3AC60
+eldenring.exe+1943371 - 90                    - nop 
+eldenring.exe+1943372 - 48 8B 85 C0010000     - mov rax,[rbp+000001C0]
+eldenring.exe+1943379 - 48 83 F8 08           - cmp rax,08 { 8 }
+eldenring.exe+194337D - 72 28                 - jb eldenring.exe+19433A7
+eldenring.exe+194337F - 48 FF C0              - inc rax
+eldenring.exe+1943382 - 48 83 F8 40           - cmp rax,40 { 64 }
+eldenring.exe+1943386 - 76 18                 - jna eldenring.exe+19433A0
+eldenring.exe+1943388 - 4C 8D 05 81B38501     - lea r8,[eldenring.exe+319E710] { ("Invalid item number.") }
+eldenring.exe+194338F - BA 31010000           - mov edx,00000131 { 305 }
+eldenring.exe+1943394 - 48 8D 0D 05D64C01     - lea rcx,[eldenring.exe+2E109A0] { ("W:\GS\Release_GR_3_93\Source\Library\GR\Dantelion2\dist_x64_vc2") }
+eldenring.exe+194339B - E8 E0C64B00           - call eldenring.exe+1DFFA80
+eldenring.exe+19433A0 - 80 A5 A1010000 FD     - and byte ptr [rbp+000001A1],-03 { 253 }
+eldenring.exe+19433A7 - 48 C7 85 C0010000 07000000 - mov qword ptr [rbp+000001C0],00000007 { 7 }
+eldenring.exe+19433B2 - 4C 89 B5 B8010000     - mov [rbp+000001B8],r14
+eldenring.exe+19433B9 - 66 44 89 B5 A8010000  - mov [rbp+000001A8],r14w
+eldenring.exe+19433C1 - 48 8B 85 10010000     - mov rax,[rbp+00000110]
+eldenring.exe+19433C8 - 48 83 F8 08           - cmp rax,08 { 8 }
+eldenring.exe+19433CC - 72 22                 - jb eldenring.exe+19433F0
+eldenring.exe+19433CE - 48 FF C0              - inc rax
+eldenring.exe+19433D1 - 48 83 F8 40           - cmp rax,40 { 64 }
+eldenring.exe+19433D5 - 76 19                 - jna eldenring.exe+19433F0
+eldenring.exe+19433D7 - 4C 8D 05 32B38501     - lea r8,[eldenring.exe+319E710] { ("Invalid item number.") }
+eldenring.exe+19433DE - BA 31010000           - mov edx,00000131 { 305 }
+eldenring.exe+19433E3 - 48 8D 0D B6D54C01     - lea rcx,[eldenring.exe+2E109A0] { ("W:\GS\Release_GR_3_93\Source\Library\GR\Dantelion2\dist_x64_vc2") }
+eldenring.exe+19433EA - E8 91C64B00           - call eldenring.exe+1DFFA80
+eldenring.exe+19433EF - 90                    - nop 
+eldenring.exe+19433F0 - 4D 8B C5              - mov r8,r13
+eldenring.exe+19433F3 - BA 10000000           - mov edx,00000010 { 16 }
+eldenring.exe+19433F8 - B9 A0000000           - mov ecx,000000A0 { 160 }
+eldenring.exe+19433FD - E8 AECD4B00           - call eldenring.exe+1E001B0
+eldenring.exe+1943402 - 48 89 45 F0           - mov [rbp-10],rax
+eldenring.exe+1943406 - 48 85 C0              - test rax,rax
+eldenring.exe+1943409 - 74 0A                 - je eldenring.exe+1943415
+eldenring.exe+194340B - 48 8B C8              - mov rcx,rax
+eldenring.exe+194340E - E8 6D480000           - call eldenring.exe+1947C80
+eldenring.exe+1943413 - EB 03                 - jmp eldenring.exe+1943418
+eldenring.exe+1943415 - 49 8B C6              - mov rax,r14
+eldenring.exe+1943418 - 48 89 83 00010000     - mov [rbx+00000100],rax
+eldenring.exe+194341F - BF 00220600           - mov edi,00062200 { 401920 }
+eldenring.exe+1943424 - 41 80 BC 24 E7010000 00 - cmp byte ptr [r12+000001E7],00 { 0 }
+eldenring.exe+194342D - B8 00200600           - mov eax,00062000 { 401408 }
+eldenring.exe+1943432 - 0F44 F8               - cmove edi,eax
+eldenring.exe+1943435 - 48 C7 44 24 60 00000000 - mov qword ptr [rsp+60],00000000 { 0 }
+eldenring.exe+194343E - 44 89 74 24 68        - mov [rsp+68],r14d
+eldenring.exe+1943443 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001 { 1 }
+eldenring.exe+194344B - C7 44 24 70 01000000  - mov [rsp+70],00000001 { 1 }
+eldenring.exe+1943453 - 48 C7 44 24 74 01000000 - mov qword ptr [rsp+74],00000001 { 1 }
+eldenring.exe+194345C - 44 89 74 24 7C        - mov [rsp+7C],r14d
+eldenring.exe+1943461 - 4C 89 75 80           - mov [rbp-80],r14
+eldenring.exe+1943465 - C6 45 88 00           - mov byte ptr [rbp-78],00 { 0 }
+eldenring.exe+1943469 - 33 D2                 - xor edx,edx
+eldenring.exe+194346B - 48 8D 4D 18           - lea rcx,[rbp+18]
+eldenring.exe+194346F - E8 7C5B84FE           - call eldenring.exe+188FF0
+eldenring.exe+1943474 - 8B 83 08010000        - mov eax,[rbx+00000108]
+eldenring.exe+194347A - 89 44 24 60           - mov [rsp+60],eax
+eldenring.exe+194347E - 8B 83 0C010000        - mov eax,[rbx+0000010C]
+eldenring.exe+1943484 - 89 44 24 64           - mov [rsp+64],eax
+eldenring.exe+1943488 - C7 44 24 68 1C000000  - mov [rsp+68],0000001C { 28 }
+eldenring.exe+1943490 - C7 44 24 6C 01000000  - mov [rsp+6C],00000001 { 1 }
+eldenring.exe+1943498 - 48 8B 43 28           - mov rax,[rbx+28]
+eldenring.exe+194349C - 48 89 44 24 74        - mov [rsp+74],rax
+eldenring.exe+19434A1 - 89 7C 24 7C           - mov [rsp+7C],edi
+eldenring.exe+19434A5 - 4C 89 75 80           - mov [rbp-80],r14
+eldenring.exe+19434A9 - 0F28 05 F03C8601      - movaps xmm0,[eldenring.exe+31A71A0] { (0) }
+eldenring.exe+19434B0 - 0F11 45 8C            - movups [rbp-74],xmm0
+eldenring.exe+19434B4 - 45 33 C9              - xor r9d,r9d
+eldenring.exe+19434B7 - 45 33 C0              - xor r8d,r8d
+eldenring.exe+19434BA - 48 8D 54 24 60        - lea rdx,[rsp+60]
+eldenring.exe+19434BF - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
+eldenring.exe+19434C6 - E8 E5480000           - call eldenring.exe+1947DB0
+eldenring.exe+19434CB - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
+eldenring.exe+19434D2 - 48 83 C1 08           - add rcx,08 { 8 }
+eldenring.exe+19434D6 - E8 C5CF4B00           - call eldenring.exe+1E004A0
+eldenring.exe+19434DB - 48 8B 8B 00010000     - mov rcx,[rbx+00000100]
+eldenring.exe+19434E2 - 48 8B 01              - mov rax,[rcx]
+eldenring.exe+19434E5 - 48 8D 15 2CD34C01     - lea rdx,[eldenring.exe+2E10818] { ("UI RenderTarget") }
+eldenring.exe+19434EC - FF 90 90000000        - call qword ptr [rax+00000090]
+eldenring.exe+19434F2 - 66 C7 83 3E010000 0100 - mov word ptr [rbx+0000013E],0001 { 1 }
+eldenring.exe+19434FB - 83 BB 28010000 00     - cmp dword ptr [rbx+00000128],00 { 0 }
+eldenring.exe+1943502 - 75 15                 - jne eldenring.exe+1943519
+eldenring.exe+1943504 - 44 8B 83 0C010000     - mov r8d,[rbx+0000010C]
+eldenring.exe+194350B - 8B 93 08010000        - mov edx,[rbx+00000108]
+eldenring.exe+1943511 - 49 8B CC              - mov rcx,r12
+eldenring.exe+1943514 - E8 47190000           - call eldenring.exe+1944E60
+eldenring.exe+1943519 - 8B 44 24 50           - mov eax,[rsp+50]
+eldenring.exe+194351D - 48 81 C3 70010000     - add rbx,00000170 { 368 }
+eldenring.exe+1943524 - 49 3B 9C 24 30010000  - cmp rbx,[r12+00000130]
+eldenring.exe+194352C - 0F85 F4F7FFFF         - jne eldenring.exe+1942D26
+eldenring.exe+1943532 - 48 8B 8D 00030000     - mov rcx,[rbp+00000300]
+eldenring.exe+1943539 - 48 33 CC              - xor rcx,rsp
+eldenring.exe+194353C - E8 BFBAAF00           - call eldenring.exe+243F000
+eldenring.exe+1943541 - 4C 8D 9C 24 20040000  - lea r11,[rsp+00000420]
+eldenring.exe+1943549 - 49 8B 5B 38           - mov rbx,[r11+38]
+eldenring.exe+194354D - 49 8B 73 40           - mov rsi,[r11+40]
+eldenring.exe+1943551 - 49 8B 7B 48           - mov rdi,[r11+48]
+eldenring.exe+1943555 - 41 0F28 73 F0         - movaps xmm6,[r11-10]
+eldenring.exe+194355A - 49 8B E3              - mov rsp,r11
+eldenring.exe+194355D - 41 5F                 - pop r15
+eldenring.exe+194355F - 41 5E                 - pop r14
+eldenring.exe+1943561 - 41 5D                 - pop r13
+eldenring.exe+1943563 - 41 5C                 - pop r12
+eldenring.exe+1943565 - 5D                    - pop rbp
+eldenring.exe+1943566 - C3                    - ret 
 
 FUNCTION BELOW:
 
-7FF726CB2758 - 8B 41 0C              - mov eax,[rcx+0C]
-7FF726CB275B - 25 FFFFFF3F           - and eax,3FFFFFFF
-7FF726CB2760 - 40 53                 - push rbx
-7FF726CB2762 - 41 55                 - push r13
-7FF726CB2764 - 41 57                 - push r15
-7FF726CB2766 - 48 83 EC 30           - sub rsp,30
-7FF726CB276A - 48 8B 99 28010000     - mov rbx,[rcx+00000128]
-7FF726CB2771 - 44 8B FA              - mov r15d,edx
-7FF726CB2774 - 4C 8B E9              - mov r13,rcx
-7FF726CB2777 - 48 3B 99 30010000     - cmp rbx,[rcx+00000130]
-7FF726CB277E - 0F84 2D020000         - je 7FF726CB29B1
-7FF726CB2784 - 48 89 6C 24 50        - mov [rsp+50],rbp
-7FF726CB2789 - 48 89 74 24 58        - mov [rsp+58],rsi
-7FF726CB278E - 48 89 7C 24 60        - mov [rsp+60],rdi
-7FF726CB2793 - 4C 89 64 24 28        - mov [rsp+28],r12
-7FF726CB2798 - 45 33 E4              - xor r12d,r12d
-7FF726CB279B - 4C 89 74 24 20        - mov [rsp+20],r14
-7FF726CB27A0 - 41 83 FF FF           - cmp r15d,-01
-7FF726CB27A4 - 74 0D                 - je 7FF726CB27B3
-7FF726CB27A6 - 44 39 BB 28010000     - cmp [rbx+00000128],r15d
-7FF726CB27AD - 0F85 D1010000         - jne 7FF726CB2984
-7FF726CB27B3 - 48 8B BB 00010000     - mov rdi,[rbx+00000100]
-7FF726CB27BA - 48 85 FF              - test rdi,rdi
-7FF726CB27BD - 74 36                 - je 7FF726CB27F5
-7FF726CB27BF - 48 8D 4F 08           - lea rcx,[rdi+08]
-7FF726CB27C3 - E8 C8604B00           - call 7FF727168890
-7FF726CB27C8 - 83 F8 01              - cmp eax,01
-7FF726CB27CB - 75 0A                 - jne 7FF726CB27D7
-7FF726CB27CD - 48 8B 07              - mov rax,[rdi]
-7FF726CB27D0 - 48 8B CF              - mov rcx,rdi
-7FF726CB27D3 - FF 10                 - call qword ptr [rax]
-7FF726CB27D5 - EB 17                 - jmp 7FF726CB27EE
-7FF726CB27D7 - 85 C0                 - test eax,eax
-7FF726CB27D9 - 7F 13                 - jg 7FF726CB27EE
-7FF726CB27DB - 4C 8D 05 5E228701     - lea r8,[7FF728524A40]
-7FF726CB27E2 - BA AB000000           - mov edx,000000AB
-7FF726CB27E7 - 33 C9                 - xor ecx,ecx
-7FF726CB27E9 - E8 42564B00           - call 7FF727167E30
-7FF726CB27EE - 4C 89 A3 00010000     - mov [rbx+00000100],r12
-7FF726CB27F5 - 48 8B B3 F8000000     - mov rsi,[rbx+000000F8]
-7FF726CB27FC - 48 85 F6              - test rsi,rsi
-7FF726CB27FF - 74 24                 - je 7FF726CB2825
-7FF726CB2801 - 48 8B 06              - mov rax,[rsi]
-7FF726CB2804 - 33 D2                 - xor edx,edx
-7FF726CB2806 - 48 8B 3D CB98B602     - mov rdi,[7FF72981C0D8]
-7FF726CB280D - 48 8B CE              - mov rcx,rsi
-7FF726CB2810 - FF 10                 - call qword ptr [rax]
-7FF726CB2812 - 48 8B 07              - mov rax,[rdi]
-7FF726CB2815 - 48 8B D6              - mov rdx,rsi
-7FF726CB2818 - 48 8B CF              - mov rcx,rdi
-7FF726CB281B - FF 50 68              - call qword ptr [rax+68]
-7FF726CB281E - 4C 89 A3 F8000000     - mov [rbx+000000F8],r12
-7FF726CB2825 - 48 8B BB F0000000     - mov rdi,[rbx+000000F0]
-7FF726CB282C - 48 85 FF              - test rdi,rdi
-7FF726CB282F - 74 36                 - je 7FF726CB2867
-7FF726CB2831 - 48 8D 4F 08           - lea rcx,[rdi+08]
-7FF726CB2835 - E8 56604B00           - call 7FF727168890
-7FF726CB283A - 83 F8 01              - cmp eax,01
-7FF726CB283D - 75 0A                 - jne 7FF726CB2849
-7FF726CB283F - 48 8B 07              - mov rax,[rdi]
-7FF726CB2842 - 48 8B CF              - mov rcx,rdi
-7FF726CB2845 - FF 10                 - call qword ptr [rax]
-7FF726CB2847 - EB 17                 - jmp 7FF726CB2860
-7FF726CB2849 - 85 C0                 - test eax,eax
-7FF726CB284B - 7F 13                 - jg 7FF726CB2860
-7FF726CB284D - 4C 8D 05 EC218701     - lea r8,[7FF728524A40]
-7FF726CB2854 - BA AB000000           - mov edx,000000AB
-7FF726CB2859 - 33 C9                 - xor ecx,ecx
-7FF726CB285B - E8 D0554B00           - call 7FF727167E30
-7FF726CB2860 - 4C 89 A3 F0000000     - mov [rbx+000000F0],r12
-7FF726CB2867 - 48 8B BB E8000000     - mov rdi,[rbx+000000E8]
-7FF726CB286E - 48 85 FF              - test rdi,rdi
-7FF726CB2871 - 74 36                 - je 7FF726CB28A9
-7FF726CB2873 - 48 8D 4F 08           - lea rcx,[rdi+08]
-7FF726CB2877 - E8 14604B00           - call 7FF727168890
-7FF726CB287C - 83 F8 01              - cmp eax,01
-7FF726CB287F - 75 0A                 - jne 7FF726CB288B
-7FF726CB2881 - 48 8B 07              - mov rax,[rdi]
-7FF726CB2884 - 48 8B CF              - mov rcx,rdi
-7FF726CB2887 - FF 10                 - call qword ptr [rax]
-7FF726CB2889 - EB 17                 - jmp 7FF726CB28A2
-7FF726CB288B - 85 C0                 - test eax,eax
-7FF726CB288D - 7F 13                 - jg 7FF726CB28A2
-7FF726CB288F - 4C 8D 05 AA218701     - lea r8,[7FF728524A40]
-7FF726CB2896 - BA AB000000           - mov edx,000000AB
-7FF726CB289B - 33 C9                 - xor ecx,ecx
-7FF726CB289D - E8 8E554B00           - call 7FF727167E30
-7FF726CB28A2 - 4C 89 A3 E8000000     - mov [rbx+000000E8],r12
-7FF726CB28A9 - 41 8B F4              - mov esi,r12d
-7FF726CB28AC - 44 39 A3 D8000000     - cmp [rbx+000000D8],r12d
-7FF726CB28B3 - 0F86 CB000000         - jbe 7FF726CB2984
-7FF726CB28B9 - 0F1F 80 00000000      - nop dword ptr [rax+00000000]
-7FF726CB28C0 - 8B EE                 - mov ebp,esi
-7FF726CB28C2 - 4C 8B B4 EB C0000000  - mov r14,[rbx+rbp*8+000000C0]
-7FF726CB28CA - 4D 85 F6              - test r14,r14
-7FF726CB28CD - 74 2B                 - je 7FF726CB28FA
-7FF726CB28CF - 49 8B CE              - mov rcx,r14
-7FF726CB28D2 - E8 991B4C00           - call 7FF727174470
-7FF726CB28D7 - 4D 8B 06              - mov r8,[r14]
-7FF726CB28DA - 33 D2                 - xor edx,edx
-7FF726CB28DC - 49 8B CE              - mov rcx,r14
-7FF726CB28DF - 48 8B F8              - mov rdi,rax
-7FF726CB28E2 - 41 FF 10              - call qword ptr [r8]
-7FF726CB28E5 - 4C 8B 07              - mov r8,[rdi]
-7FF726CB28E8 - 49 8B D6              - mov rdx,r14
-7FF726CB28EB - 48 8B CF              - mov rcx,rdi
-7FF726CB28EE - 41 FF 50 68           - call qword ptr [r8+68]
-7FF726CB28F2 - 4C 89 A4 EB C0000000  - mov [rbx+rbp*8+000000C0],r12
-7FF726CB28FA - 48 8B BC EB A8000000  - mov rdi,[rbx+rbp*8+000000A8]
-7FF726CB2902 - 48 85 FF              - test rdi,rdi
-7FF726CB2905 - 74 37                 - je 7FF726CB293E
-7FF726CB2907 - 48 8D 4F 08           - lea rcx,[rdi+08]
-7FF726CB290B - E8 805F4B00           - call 7FF727168890
-7FF726CB2910 - 83 F8 01              - cmp eax,01
-7FF726CB2913 - 75 0A                 - jne 7FF726CB291F
-7FF726CB2915 - 48 8B 07              - mov rax,[rdi]
-7FF726CB2918 - 48 8B CF              - mov rcx,rdi
-7FF726CB291B - FF 10                 - call qword ptr [rax]
-7FF726CB291D - EB 17                 - jmp 7FF726CB2936
-7FF726CB291F - 85 C0                 - test eax,eax
-7FF726CB2921 - 7F 13                 - jg 7FF726CB2936
-7FF726CB2923 - 4C 8D 05 16218701     - lea r8,[7FF728524A40]
-7FF726CB292A - BA AB000000           - mov edx,000000AB
-7FF726CB292F - 33 C9                 - xor ecx,ecx
-7FF726CB2931 - E8 FA544B00           - call 7FF727167E30
-7FF726CB2936 - 4C 89 A4 EB A8000000  - mov [rbx+rbp*8+000000A8],r12
-7FF726CB293E - 4C 8B B4 EB 90000000  - mov r14,[rbx+rbp*8+00000090]
-7FF726CB2946 - 4D 85 F6              - test r14,r14
-7FF726CB2949 - 74 2B                 - je 7FF726CB2976
-7FF726CB294B - 49 8B CE              - mov rcx,r14
-7FF726CB294E - E8 1D1B4C00           - call 7FF727174470
-7FF726CB2953 - 4D 8B 06              - mov r8,[r14]
-7FF726CB2956 - 33 D2                 - xor edx,edx
-7FF726CB2958 - 49 8B CE              - mov rcx,r14
-7FF726CB295B - 48 8B F8              - mov rdi,rax
-7FF726CB295E - 41 FF 10              - call qword ptr [r8]
-7FF726CB2961 - 4C 8B 07              - mov r8,[rdi]
-7FF726CB2964 - 49 8B D6              - mov rdx,r14
-7FF726CB2967 - 48 8B CF              - mov rcx,rdi
-7FF726CB296A - 41 FF 50 68           - call qword ptr [r8+68]
-7FF726CB296E - 4C 89 A4 EB 90000000  - mov [rbx+rbp*8+00000090],r12
-7FF726CB2976 - FF C6                 - inc esi
-7FF726CB2978 - 3B B3 D8000000        - cmp esi,[rbx+000000D8]
-7FF726CB297E - 0F82 3CFFFFFF         - jb 7FF726CB28C0
-7FF726CB2984 - 48 81 C3 70010000     - add rbx,00000170
-7FF726CB298B - 49 3B 9D 30010000     - cmp rbx,[r13+00000130]
-7FF726CB2992 - 0F85 08FEFFFF         - jne 7FF726CB27A0
-7FF726CB2998 - 4C 8B 74 24 20        - mov r14,[rsp+20]
-7FF726CB299D - 4C 8B 64 24 28        - mov r12,[rsp+28]
-7FF726CB29A2 - 48 8B 7C 24 60        - mov rdi,[rsp+60]
-7FF726CB29A7 - 48 8B 74 24 58        - mov rsi,[rsp+58]
-7FF726CB29AC - 48 8B 6C 24 50        - mov rbp,[rsp+50]
-7FF726CB29B1 - 48 83 C4 30           - add rsp,30
-7FF726CB29B5 - 41 5F                 - pop r15
-7FF726CB29B7 - 41 5D                 - pop r13
-7FF726CB29B9 - 5B                    - pop rbx
-7FF726CB29BA - C3                    - ret 
+eldenring.exe+1943568 - 40 53                 - push rbx
+eldenring.exe+194356A - 48 83 EC 20           - sub rsp,20 { 32 }
+eldenring.exe+194356E - 45 33 40 53           - xor r8d,[r8+53]
+eldenring.exe+1943572 - 41 55                 - push r13
+eldenring.exe+1943574 - 41 57                 - push r15
+eldenring.exe+1943576 - 48 83 EC 30           - sub rsp,30 { 48 }
+eldenring.exe+194357A - 48 8B 99 28010000     - mov rbx,[rcx+00000128]
+eldenring.exe+1943581 - 44 8B FA              - mov r15d,edx
+eldenring.exe+1943584 - 4C 8B E9              - mov r13,rcx
+eldenring.exe+1943587 - 48 3B 99 30010000     - cmp rbx,[rcx+00000130]
+eldenring.exe+194358E - 0F84 2D020000         - je eldenring.exe+19437C1
+eldenring.exe+1943594 - 48 89 6C 24 50        - mov [rsp+50],rbp
+eldenring.exe+1943599 - 48 89 74 24 58        - mov [rsp+58],rsi
+eldenring.exe+194359E - 48 89 7C 24 60        - mov [rsp+60],rdi
+eldenring.exe+19435A3 - 4C 89 64 24 28        - mov [rsp+28],r12
+eldenring.exe+19435A8 - 45 33 E4              - xor r12d,r12d
+eldenring.exe+19435AB - 4C 89 74 24 20        - mov [rsp+20],r14
+eldenring.exe+19435B0 - 41 83 FF FF           - cmp r15d,-01 { 255 }
+eldenring.exe+19435B4 - 74 0D                 - je eldenring.exe+19435C3
+eldenring.exe+19435B6 - 44 39 BB 28010000     - cmp [rbx+00000128],r15d
+eldenring.exe+19435BD - 0F85 D1010000         - jne eldenring.exe+1943794
+eldenring.exe+19435C3 - 48 8B BB 00010000     - mov rdi,[rbx+00000100]
+eldenring.exe+19435CA - 48 85 FF              - test rdi,rdi
+eldenring.exe+19435CD - 74 36                 - je eldenring.exe+1943605
+eldenring.exe+19435CF - 48 8D 4F 08           - lea rcx,[rdi+08]
+eldenring.exe+19435D3 - E8 08CF4B00           - call eldenring.exe+1E004E0
+eldenring.exe+19435D8 - 83 F8 01              - cmp eax,01 { 1 }
+eldenring.exe+19435DB - 75 0A                 - jne eldenring.exe+19435E7
+eldenring.exe+19435DD - 48 8B 07              - mov rax,[rdi]
+eldenring.exe+19435E0 - 48 8B CF              - mov rcx,rdi
+eldenring.exe+19435E3 - FF 10                 - call qword ptr [rax]
+eldenring.exe+19435E5 - EB 17                 - jmp eldenring.exe+19435FE
+eldenring.exe+19435E7 - 85 C0                 - test eax,eax
+eldenring.exe+19435E9 - 7F 13                 - jg eldenring.exe+19435FE
+eldenring.exe+19435EB - 4C 8D 05 8E918501     - lea r8,[eldenring.exe+319C780] { ("DLReferenceCountObject: Invalid Unref() call. m_nRefCount is 0 ") }
+eldenring.exe+19435F2 - BA AB000000           - mov edx,000000AB { 171 }
+eldenring.exe+19435F7 - 33 C9                 - xor ecx,ecx
+eldenring.exe+19435F9 - E8 82C44B00           - call eldenring.exe+1DFFA80
+eldenring.exe+19435FE - 4C 89 A3 00010000     - mov [rbx+00000100],r12
+eldenring.exe+1943605 - 48 8B B3 F8000000     - mov rsi,[rbx+000000F8]
+eldenring.exe+194360C - 48 85 F6              - test rsi,rsi
+eldenring.exe+194360F - 74 24                 - je eldenring.exe+1943635
+eldenring.exe+1943611 - 48 8B 06              - mov rax,[rsi]
+eldenring.exe+1943614 - 33 D2                 - xor edx,edx
+eldenring.exe+1943616 - 48 8B 3D C3BCB202     - mov rdi,[eldenring.exe+446F2E0] { ("h-N^?") }
+eldenring.exe+194361D - 48 8B CE              - mov rcx,rsi
+eldenring.exe+1943620 - FF 10                 - call qword ptr [rax]
+eldenring.exe+1943622 - 48 8B 07              - mov rax,[rdi]
+eldenring.exe+1943625 - 48 8B D6              - mov rdx,rsi
+eldenring.exe+1943628 - 48 8B CF              - mov rcx,rdi
+eldenring.exe+194362B - FF 50 68              - call qword ptr [rax+68]
+eldenring.exe+194362E - 4C 89 A3 F8000000     - mov [rbx+000000F8],r12
+eldenring.exe+1943635 - 48 8B BB F0000000     - mov rdi,[rbx+000000F0]
+eldenring.exe+194363C - 48 85 FF              - test rdi,rdi
+eldenring.exe+194363F - 74 36                 - je eldenring.exe+1943677
+eldenring.exe+1943641 - 48 8D 4F 08           - lea rcx,[rdi+08]
+eldenring.exe+1943645 - E8 96CE4B00           - call eldenring.exe+1E004E0
+eldenring.exe+194364A - 83 F8 01              - cmp eax,01 { 1 }
+eldenring.exe+194364D - 75 0A                 - jne eldenring.exe+1943659
+eldenring.exe+194364F - 48 8B 07              - mov rax,[rdi]
+eldenring.exe+1943652 - 48 8B CF              - mov rcx,rdi
+eldenring.exe+1943655 - FF 10                 - call qword ptr [rax]
+eldenring.exe+1943657 - EB 17                 - jmp eldenring.exe+1943670
+eldenring.exe+1943659 - 85 C0                 - test eax,eax
+eldenring.exe+194365B - 7F 13                 - jg eldenring.exe+1943670
+eldenring.exe+194365D - 4C 8D 05 1C918501     - lea r8,[eldenring.exe+319C780] { ("DLReferenceCountObject: Invalid Unref() call. m_nRefCount is 0 ") }
+eldenring.exe+1943664 - BA AB000000           - mov edx,000000AB { 171 }
+eldenring.exe+1943669 - 33 C9                 - xor ecx,ecx
+eldenring.exe+194366B - E8 10C44B00           - call eldenring.exe+1DFFA80
+eldenring.exe+1943670 - 4C 89 A3 F0000000     - mov [rbx+000000F0],r12
+eldenring.exe+1943677 - 48 8B BB E8000000     - mov rdi,[rbx+000000E8]
+eldenring.exe+194367E - 48 85 FF              - test rdi,rdi
+eldenring.exe+1943681 - 74 36                 - je eldenring.exe+19436B9
+eldenring.exe+1943683 - 48 8D 4F 08           - lea rcx,[rdi+08]
+eldenring.exe+1943687 - E8 54CE4B00           - call eldenring.exe+1E004E0
+eldenring.exe+194368C - 83 F8 01              - cmp eax,01 { 1 }
+eldenring.exe+194368F - 75 0A                 - jne eldenring.exe+194369B
+eldenring.exe+1943691 - 48 8B 07              - mov rax,[rdi]
+eldenring.exe+1943694 - 48 8B CF              - mov rcx,rdi
+eldenring.exe+1943697 - FF 10                 - call qword ptr [rax]
+eldenring.exe+1943699 - EB 17                 - jmp eldenring.exe+19436B2
+eldenring.exe+194369B - 85 C0                 - test eax,eax
+eldenring.exe+194369D - 7F 13                 - jg eldenring.exe+19436B2
+eldenring.exe+194369F - 4C 8D 05 DA908501     - lea r8,[eldenring.exe+319C780] { ("DLReferenceCountObject: Invalid Unref() call. m_nRefCount is 0 ") }
+eldenring.exe+19436A6 - BA AB000000           - mov edx,000000AB { 171 }
+eldenring.exe+19436AB - 33 C9                 - xor ecx,ecx
+eldenring.exe+19436AD - E8 CEC34B00           - call eldenring.exe+1DFFA80
+eldenring.exe+19436B2 - 4C 89 A3 E8000000     - mov [rbx+000000E8],r12
+eldenring.exe+19436B9 - 41 8B F4              - mov esi,r12d
+eldenring.exe+19436BC - 44 39 A3 D8000000     - cmp [rbx+000000D8],r12d
+eldenring.exe+19436C3 - 0F86 CB000000         - jbe eldenring.exe+1943794
+eldenring.exe+19436C9 - 0F1F 80 00000000      - nop dword ptr [rax+00000000]
+eldenring.exe+19436D0 - 8B EE                 - mov ebp,esi
+eldenring.exe+19436D2 - 4C 8B B4 EB C0000000  - mov r14,[rbx+rbp*8+000000C0]
+eldenring.exe+19436DA - 4D 85 F6              - test r14,r14
+eldenring.exe+19436DD - 74 2B                 - je eldenring.exe+194370A
+eldenring.exe+19436DF - 49 8B CE              - mov rcx,r14
+eldenring.exe+19436E2 - E8 D9894C00           - call eldenring.exe+1E0C0C0
+eldenring.exe+19436E7 - 4D 8B 06              - mov r8,[r14]
+eldenring.exe+19436EA - 33 D2                 - xor edx,edx
+eldenring.exe+19436EC - 49 8B CE              - mov rcx,r14
+eldenring.exe+19436EF - 48 8B F8              - mov rdi,rax
+eldenring.exe+19436F2 - 41 FF 10              - call qword ptr [r8]
+eldenring.exe+19436F5 - 4C 8B 07              - mov r8,[rdi]
+eldenring.exe+19436F8 - 49 8B D6              - mov rdx,r14
+eldenring.exe+19436FB - 48 8B CF              - mov rcx,rdi
+eldenring.exe+19436FE - 41 FF 50 68           - call qword ptr [r8+68]
+eldenring.exe+1943702 - 4C 89 A4 EB C0000000  - mov [rbx+rbp*8+000000C0],r12
+eldenring.exe+194370A - 48 8B BC EB A8000000  - mov rdi,[rbx+rbp*8+000000A8]
+eldenring.exe+1943712 - 48 85 FF              - test rdi,rdi
+eldenring.exe+1943715 - 74 37                 - je eldenring.exe+194374E
+eldenring.exe+1943717 - 48 8D 4F 08           - lea rcx,[rdi+08]
+eldenring.exe+194371B - E8 C0CD4B00           - call eldenring.exe+1E004E0
+eldenring.exe+1943720 - 83 F8 01              - cmp eax,01 { 1 }
+eldenring.exe+1943723 - 75 0A                 - jne eldenring.exe+194372F
+eldenring.exe+1943725 - 48 8B 07              - mov rax,[rdi]
+eldenring.exe+1943728 - 48 8B CF              - mov rcx,rdi
+eldenring.exe+194372B - FF 10                 - call qword ptr [rax]
+eldenring.exe+194372D - EB 17                 - jmp eldenring.exe+1943746
+eldenring.exe+194372F - 85 C0                 - test eax,eax
+eldenring.exe+1943731 - 7F 13                 - jg eldenring.exe+1943746
+eldenring.exe+1943733 - 4C 8D 05 46908501     - lea r8,[eldenring.exe+319C780] { ("DLReferenceCountObject: Invalid Unref() call. m_nRefCount is 0 ") }
+eldenring.exe+194373A - BA AB000000           - mov edx,000000AB { 171 }
+eldenring.exe+194373F - 33 C9                 - xor ecx,ecx
+eldenring.exe+1943741 - E8 3AC34B00           - call eldenring.exe+1DFFA80
+eldenring.exe+1943746 - 4C 89 A4 EB A8000000  - mov [rbx+rbp*8+000000A8],r12
+eldenring.exe+194374E - 4C 8B B4 EB 90000000  - mov r14,[rbx+rbp*8+00000090]
+eldenring.exe+1943756 - 4D 85 F6              - test r14,r14
+eldenring.exe+1943759 - 74 2B                 - je eldenring.exe+1943786
+eldenring.exe+194375B - 49 8B CE              - mov rcx,r14
+eldenring.exe+194375E - E8 5D894C00           - call eldenring.exe+1E0C0C0
+eldenring.exe+1943763 - 4D 8B 06              - mov r8,[r14]
+eldenring.exe+1943766 - 33 D2                 - xor edx,edx
+eldenring.exe+1943768 - 49 8B CE              - mov rcx,r14
+eldenring.exe+194376B - 48 8B F8              - mov rdi,rax
+eldenring.exe+194376E - 41 FF 10              - call qword ptr [r8]
+eldenring.exe+1943771 - 4C 8B 07              - mov r8,[rdi]
+eldenring.exe+1943774 - 49 8B D6              - mov rdx,r14
+eldenring.exe+1943777 - 48 8B CF              - mov rcx,rdi
+eldenring.exe+194377A - 41 FF 50 68           - call qword ptr [r8+68]
+eldenring.exe+194377E - 4C 89 A4 EB 90000000  - mov [rbx+rbp*8+00000090],r12
+eldenring.exe+1943786 - FF C6                 - inc esi
+eldenring.exe+1943788 - 3B B3 D8000000        - cmp esi,[rbx+000000D8]
+eldenring.exe+194378E - 0F82 3CFFFFFF         - jb eldenring.exe+19436D0
+eldenring.exe+1943794 - 48 81 C3 70010000     - add rbx,00000170 { 368 }
+eldenring.exe+194379B - 49 3B 9D 30010000     - cmp rbx,[r13+00000130]
+eldenring.exe+19437A2 - 0F85 08FEFFFF         - jne eldenring.exe+19435B0
+eldenring.exe+19437A8 - 4C 8B 74 24 20        - mov r14,[rsp+20]
+eldenring.exe+19437AD - 4C 8B 64 24 28        - mov r12,[rsp+28]
+eldenring.exe+19437B2 - 48 8B 7C 24 60        - mov rdi,[rsp+60]
+eldenring.exe+19437B7 - 48 8B 74 24 58        - mov rsi,[rsp+58]
+eldenring.exe+19437BC - 48 8B 6C 24 50        - mov rbp,[rsp+50]
+eldenring.exe+19437C1 - 48 83 C4 30           - add rsp,30 { 48 }
+eldenring.exe+19437C5 - 41 5F                 - pop r15
+eldenring.exe+19437C7 - 41 5D                 - pop r13
+eldenring.exe+19437C9 - 5B                    - pop rbx
+eldenring.exe+19437CA - C3                    - ret 
+
