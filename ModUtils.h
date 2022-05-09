@@ -1,3 +1,5 @@
+#pragma once 
+
 #include <Windows.h>
 #include <string>
 #include <cstdarg>
@@ -21,8 +23,6 @@ namespace ModUtils
 	static constexpr int MASKED = 0xffff;
 	static constexpr unsigned char HK_NONE = 0x07;
 
-#ifndef TIMER_CLASS
-#define TIMER_CLASS
 	class Timer
 	{
 	public:
@@ -60,7 +60,6 @@ namespace ModUtils
 		bool m_resetOnNextCheck = true;
 		std::chrono::system_clock::time_point m_lastExecutionTime;
 	};
-#endif
 
 	// Gets the name of the .dll which the mod code is running in
 	inline std::string GetModuleName(bool thisModule = true)
@@ -118,7 +117,7 @@ namespace ModUtils
 		va_end(args);
 	}
 
-	// The log should preferably be closed when code execution is finished
+	// The log should preferably be closed when code execution is finished.
 	inline void CloseLog()
 	{
 		if (muLogFile != nullptr)
@@ -230,7 +229,15 @@ namespace ModUtils
 			uintptr_t protection = (uintptr_t)memoryInfo.Protect;
 			uintptr_t state = (uintptr_t)memoryInfo.State;
 
-			if ((protection == PAGE_EXECUTE_READWRITE || protection == PAGE_READWRITE || protection == PAGE_READONLY || protection == PAGE_WRITECOPY || protection == PAGE_EXECUTE_WRITECOPY) && state == MEM_COMMIT)
+			bool readableMemory = (
+				protection == PAGE_EXECUTE_READWRITE || 
+				protection == PAGE_READWRITE || 
+				protection == PAGE_READONLY || 
+				protection == PAGE_WRITECOPY || 
+				protection == PAGE_EXECUTE_WRITECOPY) 
+				&& state == MEM_COMMIT;
+
+			if (readableMemory)
 			{
 				Log("Checking region: %p", regionStart);
 				currentAddress = regionStart;
