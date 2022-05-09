@@ -230,7 +230,7 @@ namespace ModUtils
 			uintptr_t protection = (uintptr_t)memoryInfo.Protect;
 			uintptr_t state = (uintptr_t)memoryInfo.State;
 
-			if ((protection == PAGE_EXECUTE_READWRITE || protection == PAGE_READWRITE || protection == PAGE_READONLY) && state == MEM_COMMIT)
+			if ((protection == PAGE_EXECUTE_READWRITE || protection == PAGE_READWRITE || protection == PAGE_READONLY || protection == PAGE_WRITECOPY || protection == PAGE_EXECUTE_WRITECOPY) && state == MEM_COMMIT)
 			{
 				Log("Checking region: %p", regionStart);
 				currentAddress = regionStart;
