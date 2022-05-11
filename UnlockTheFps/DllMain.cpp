@@ -6,7 +6,7 @@
 using namespace ModUtils;
 using namespace mINI;
 
-static float fpsLimit = 999;
+static float fpsLimit = 300;
 
 void ReadConfig()
 {
@@ -19,7 +19,7 @@ void ReadConfig()
 	}
 	else
 	{
-		ini["unlockthefps"]["limit"] = "999";
+		ini["unlockthefps"]["limit"] = "300";
 		config.write(ini, true);
 	}
 
