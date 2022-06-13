@@ -7,11 +7,13 @@ using namespace ModUtils;
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating ultrawide fix...");
-	std::vector<uint16_t> originalBytes = { 0x74, 0x50, MASKED, 0x8b, MASKED, MASKED, 0xdc, 0x03, 0x00, 0x00, MASKED, 0x85, MASKED, 0x74, MASKED, MASKED, 0x8b, MASKED, MASKED, 0x0f, 0xaf };
+	std::vector<uint16_t> pattern = { 0x48, 0xc7, 0x45, 0xb8, 0xfe, 0xff, 0xff, 0xff, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x70, 0x18, 0x48, 0x89, 0x78, 0x20, 0x0f, 0x29, 0x70, 0xc8, 0x48, 0x8b };
+	std::vector<uint16_t> originalBytes = { 0x74 };
 	std::vector<uint8_t> newBytes = { 0xeb };
-	uintptr_t patchAddress = SigScan(originalBytes);
+	uintptr_t patchAddress = SigScan(pattern);
 	if (patchAddress != 0)
 	{
+		patchAddress += 0x94;
 		Replace(patchAddress, originalBytes, newBytes);
 	}
 	CloseLog();
