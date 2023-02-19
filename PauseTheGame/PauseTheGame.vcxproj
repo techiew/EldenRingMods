@@ -59,6 +59,9 @@
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InputTranslation.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

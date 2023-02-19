@@ -21,7 +21,6 @@ namespace ModUtils
 	static FILE* muLogFile = nullptr;
 	static bool muLogOpened = false;
 	static constexpr int MASKED = 0xffff;
-	static constexpr unsigned char HK_NONE = 0x07;
 
 	class Timer
 	{
@@ -387,10 +386,15 @@ namespace ModUtils
 		return (muWindow == NULL) ? false : true;
 	}
 
-	// Checks if a hotkey or a combination of hotkeys is pressed.
-	inline bool CheckHotkey(WORD key, WORD modifier = HK_NONE, bool checkController = false)
+	inline bool IsKeyPressed(unsigned short key, bool falseWhileHolding = true, bool checkController = false)
 	{
-		static std::vector<unsigned int> notReleasedKeys;
+		return IsKeyPressed({ key }, falseWhileHolding, checkController);
+	}
+
+	// Checks if a keyboard or controller key is pressed.
+	inline bool IsKeyPressed(std::vector<unsigned short> keys, bool falseWhileHolding = true, bool checkController = false)
+	{
+		static std::vector<std::vector<unsigned short>> notReleasedKeys;
 		static bool retrievedWindowHandle = false;
 
 		if (!retrievedWindowHandle)
@@ -413,8 +417,8 @@ namespace ModUtils
 			return false;
 		}
 
-		bool keyPressed = false;
-		bool modifierPressed = false;
+		size_t numKeys = keys.size();
+		size_t numKeysBeingPressed = 0;
 
 		if (checkController)
 		{
@@ -424,61 +428,57 @@ namespace ModUtils
 				DWORD result = XInputGetState(controllerIndex, &state);
 				if (result == ERROR_SUCCESS)
 				{
-					if (state.Gamepad.wButtons == key)
+					for (auto key : keys)
 					{
-						keyPressed = true;
-					}
-					else if (state.Gamepad.wButtons == modifier)
-					{
-						modifierPressed = true;
-					}
-					else if (state.Gamepad.wButtons == (key | modifier))
-					{
-						keyPressed = true;
-						modifierPressed = true;
+						if ((key & state.Gamepad.wButtons) == key)
+						{
+							numKeysBeingPressed++;
+						}
 					}
 				}
 			}
 		}
 		else
 		{
-			keyPressed = GetAsyncKeyState(key) & 0x8000;
-			modifierPressed = GetAsyncKeyState(modifier) & 0x8000;
+			for (auto key : keys)
+			{
+				if (GetAsyncKeyState(key))
+				{
+					numKeysBeingPressed++;
+				}
+			}
 		}
 
-		if (key == HK_NONE)
+		auto iterator = std::find(notReleasedKeys.begin(), notReleasedKeys.end(), keys);
+		bool keysBeingHeld = iterator != notReleasedKeys.end();
+		if (numKeysBeingPressed == numKeys)
 		{
-			return modifierPressed;
+			if (keysBeingHeld)
+			{
+				if (falseWhileHolding)
+				{
+					return false;
+				}
+			}
+			else
+			{
+				notReleasedKeys.push_back(keys);
+			}
 		}
-
-		auto iterator = std::find(notReleasedKeys.begin(), notReleasedKeys.end(), key);
-		bool keyNotReleased = iterator != notReleasedKeys.end();
-
-		if (keyPressed && keyNotReleased)
+		else
 		{
-			return false;
-		}
-
-		if (!keyPressed)
-		{
-			if (keyNotReleased)
+			if (keysBeingHeld)
 			{
 				notReleasedKeys.erase(iterator);
 			}
 			return false;
 		}
 
-		if (modifier != HK_NONE && !modifierPressed)
-		{
-			return false;
-		}
-
-		Log("Key: %i, modifier: %i", keyPressed, modifierPressed);
-		notReleasedKeys.push_back(key);
 		return true;
 	}
 
-	// Disables or enables the memory protection in a given region. Remembers and restores the original memory protection type of the given addresses.
+	// Disables or enables the memory protection in a given region. 
+	// Remembers and restores the original memory protection type of the given addresses.
 	inline void ToggleMemoryProtection(bool protectionEnabled, uintptr_t address, size_t size)
 	{
 		static std::map<uintptr_t, DWORD> protectionHistory;

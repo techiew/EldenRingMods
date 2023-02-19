@@ -2,87 +2,130 @@
 #include <xinput.h>
 
 #include "ModUtils.h"
+#include "InputTranslation.h"
 
 using namespace ModUtils;
 using namespace mINI;
 
-static bool gamePaused = false;
-static uintptr_t patchAddress = 0;
-static unsigned int key = 0x50;
-static unsigned int modifier = HK_NONE;
-static unsigned int controllerKey = 0x0010;
-static unsigned int controllerModifier = HK_NONE;
+bool gameIsPaused = false;
+uintptr_t patchAddress = 0;
 
-void TogglePause()
+struct Keybind
 {
-	if (gamePaused)
-	{
-		Log("Unpaused");
-		Replace(patchAddress + 1, { 0x85 }, { 0x84 });
-		gamePaused = false;
-	}
-	else
-	{
-		Log("Paused");
-		Replace(patchAddress + 1, { 0x84 }, { 0x85 });
-		gamePaused = true;
-	}
+	std::vector<unsigned short> keys;
+	bool isControllerKeybind;
+};
+std::vector<Keybind> pauseKeybinds = {
+	{ { keycodes.at("p") }, false },
+	{ { controllerKeycodes.at("lthumbpress"), controllerKeycodes.at("xa") }, true }
+};
+std::vector<Keybind> unpauseKeybinds = {
+	{ { keycodes.at("p") }, false },
+	{ { controllerKeycodes.at("lthumbpress"), controllerKeycodes.at("xa") }, true }
+};
+
+void Pause()
+{
+	Log("Paused");
+	Replace(patchAddress + 1, { 0x84 }, { 0x85 });
+	gameIsPaused = true;
 }
 
-std::string HexToString(uintptr_t hex)
+void Unpause()
 {
-	std::ostringstream stream;
-	stream << "0x" << std::hex << hex;
-	return stream.str();
+	Log("Unpaused");
+	Replace(patchAddress + 1, { 0x85 }, { 0x84 });
+	gameIsPaused = false;
 }
 
-uintptr_t HexStringToHex(std::string hexString)
+std::vector<std::string> split(std::string str, std::string delimiter)
 {
-	std::istringstream stream(hexString);
-	uintptr_t hex = 0;
-	stream >> std::hex >> hex;
-	return hex;
+	size_t pos = 0;
+	std::vector<std::string> list;
+	while ((pos = str.find(delimiter)) != std::string::npos)
+	{
+		std::string token = str.substr(0, pos);
+		list.push_back(token);
+		str.erase(0, pos + delimiter.size());
+	}
+	list.push_back(str);
+	return list;
 }
 
-unsigned int FilterKeyValue(std::string hexString, unsigned int defaultValue)
+std::vector<Keybind> TranslateInput(std::string inputString)
 {
-	if (hexString.length() > 2 && hexString[0] == '0' && hexString[1] == 'x')
+	// Remove spaces and convert to lowercase
+	inputString.erase(std::remove_if(inputString.begin(), inputString.end(), std::isspace), inputString.end());
+	transform(inputString.begin(), inputString.end(), inputString.begin(), ::tolower);
+
+	std::vector<Keybind> keybinds;
+	std::vector<std::vector<std::string>> keybindsToTranslate;
+
+	// Parse individual and combination keybinds and place in list
+	std::vector<std::string> splitOnComma = split(inputString, ",");
+	for (auto keybind : splitOnComma)
 	{
-		hexString = hexString.substr(2, hexString.length());
-		return HexStringToHex(hexString);
+		std::vector<std::string> splitOnPlus = split(keybind, "+");
+		if (splitOnPlus.size() == 1)
+		{
+			keybindsToTranslate.push_back({ keybind });
+		}
+		else
+		{
+			std::vector<std::string> combos;
+			for (auto combo : splitOnPlus)
+			{
+				combos.push_back(combo);
+			}
+			keybindsToTranslate.push_back(combos);
+		}
 	}
-	else if(!hexString.empty())
+
+	// Convert raw keybind strings to keycodes
+	for (auto rawKeybinds : keybindsToTranslate)
 	{
-		RaiseError("Invalid hex value in config file: '" + hexString + "'! Format: 0x<Number>. Using default keybind.");
+		bool isControllerKeybind = false;
+		std::vector<unsigned short> keybindGroup;
+		for (std::string rawKeybindString : rawKeybinds)
+		{
+			auto search = keycodes.find(rawKeybindString);
+			if (search != keycodes.end())
+			{
+				isControllerKeybind = false;
+				keybindGroup.push_back(keycodes.at(rawKeybindString));
+			}
+			else
+			{
+				search = controllerKeycodes.find(rawKeybindString);
+				if (search != controllerKeycodes.end())
+				{
+					isControllerKeybind = true;
+					keybindGroup.push_back(controllerKeycodes.at(rawKeybindString));
+				}
+			}
+		}
+		keybinds.push_back({ keybindGroup, isControllerKeybind });
 	}
-	return defaultValue;
+
+	return keybinds;
 }
 
 void ReadConfig()
 {
-	INIFile config(GetModuleFolderPath() + "\\pause_keybind.ini");
+	INIFile config(GetModuleFolderPath() + "\\pause_keybinds.ini");
 	INIStructure ini;
 
 	if (config.read(ini))
 	{
-		key = FilterKeyValue(ini["keyboard"].get("key1"), key);
-		modifier = FilterKeyValue(ini["keyboard"].get("key2"), modifier);
-		controllerKey = FilterKeyValue(ini["controller"].get("key1"), controllerKey);
-		controllerModifier = FilterKeyValue(ini["controller"].get("key2"), controllerModifier);
+		pauseKeybinds = TranslateInput(ini["keybinds"].get("pause_keys"));
+		unpauseKeybinds = TranslateInput(ini["keybinds"].get("unpause_keys"));
 	}
 	else
 	{
-		ini["keyboard"]["key1"] = HexToString(key);
-		ini["keyboard"]["key2"] = HexToString(modifier);
-		ini["controller"]["key1"] = HexToString(controllerKey);
-		ini["controller"]["key2"] = HexToString(controllerModifier);
+		ini["keybinds"]["pause_keys"] = "p, lthumbpress+xa";
+		ini["keybinds"]["unpause_keys"] = "p, lthumbpress+xa";
 		config.write(ini, true);
 	}
-
-	Log("key: 0x%x", key);
-	Log("modifier: 0x%x", modifier);
-	Log("controllerKey: 0x%x", controllerKey);
-	Log("controllerModifier: 0x%x", controllerModifier);
 }
 
 DWORD WINAPI MainThread(LPVOID lpParam)
@@ -99,10 +142,27 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 
 	while (true)
 	{
-		if (CheckHotkey(key, modifier) || CheckHotkey(controllerKey, controllerModifier, true))
+		auto* keybinds = &pauseKeybinds;
+		if (gameIsPaused)
 		{
-			TogglePause();
+			keybinds = &unpauseKeybinds;
 		}
+
+		for (Keybind keybind : *keybinds)
+		{
+			if (IsKeyPressed(keybind.keys, true, keybind.isControllerKeybind))
+			{
+				if (gameIsPaused)
+				{
+					Unpause();
+				}
+				else
+				{
+					Pause();
+				}
+			}
+		}
+
 		Sleep(5);
 	}
 
