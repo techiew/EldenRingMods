@@ -26,25 +26,24 @@ namespace ModUtils
 	class Timer
 	{
 	public:
-		Timer(unsigned int millis)
+		Timer(unsigned int intervalMs)
 		{
-			m_interval = millis;
+			this->intervalMs = intervalMs;
 		}
 
 		bool Check()
 		{
-			auto now = std::chrono::system_clock::now();
-			if (m_resetOnNextCheck)
+			if (firstCheck)
 			{
-				m_lastExecutionTime = now;
-				m_resetOnNextCheck = false;
-				return false;
+				Reset();
+				firstCheck = false;
 			}
 
-			auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_lastExecutionTime);
-			if (diff.count() >= m_interval)
+			auto now = std::chrono::system_clock::now();
+			auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastPassedCheckTime);
+			if (diff.count() >= intervalMs)
 			{
-				m_lastExecutionTime = now;
+				lastPassedCheckTime = now;
 				return true;
 			}
 
@@ -53,12 +52,13 @@ namespace ModUtils
 
 		void Reset()
 		{
-			m_resetOnNextCheck = true;
+			lastPassedCheckTime = std::chrono::system_clock::now();
 		}
+
 	private:
-		unsigned int m_interval = 0;
-		bool m_resetOnNextCheck = true;
-		std::chrono::system_clock::time_point m_lastExecutionTime;
+		unsigned int intervalMs = 0;
+		bool firstCheck = true;
+		std::chrono::system_clock::time_point lastPassedCheckTime;
 	};
 
 	static std::string _GetModuleName(bool mainProcessModule)
