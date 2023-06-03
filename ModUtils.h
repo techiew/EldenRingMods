@@ -97,15 +97,15 @@ namespace ModUtils
 			currentModName = _GetModuleName(false);
 		}
 		return currentModName;
-		}
+	}
 
 	static std::string GetModFolderPath()
-		{
+	{
 		return std::string("mods\\" + GetCurrentModName());
-		}
+	}
 
 	static void OpenModLogFile()
-		{
+	{
 		if (!muLogFile.is_open())
 		{
 			CreateDirectoryA(std::string("mods\\" + GetCurrentModName()).c_str(), NULL);
@@ -160,7 +160,6 @@ namespace ModUtils
 				if (bytesRequired)
 				{
 					moduleArrayBytes = (LPBYTE)LocalAlloc(LPTR, bytesRequired);
-
 					if (moduleArrayBytes)
 					{
 						unsigned int moduleCount;
@@ -176,7 +175,6 @@ namespace ModUtils
 			}
 			CloseHandle(processHandle);
 		}
-
 		return baseAddress;
 	}
 
@@ -197,7 +195,7 @@ namespace ModUtils
 	}
 
 	static void MemCopy(uintptr_t destination, uintptr_t source, size_t numBytes)
-		{
+	{
 		ToggleMemoryProtection(false, destination, numBytes);
 		ToggleMemoryProtection(false, source, numBytes);
 		memcpy((void*)destination, (void*)source, numBytes);
@@ -206,30 +204,30 @@ namespace ModUtils
 	}
 
 	static void MemSet(uintptr_t address, unsigned char byte, size_t numBytes)
-			{
+	{
 		ToggleMemoryProtection(false, address, numBytes);
 		memset((void*)address, byte, numBytes);
 		ToggleMemoryProtection(true, address, numBytes);
-			}
+	}
 
 	static uintptr_t RelativeToAbsoluteAddress(uintptr_t relativeAddressLocation)
-			{
+	{
 		uintptr_t absoluteAddress = 0;
 		intptr_t relativeAddress = 0;
 		MemCopy((uintptr_t)&relativeAddress, relativeAddressLocation, 4);
 		absoluteAddress = relativeAddressLocation + 4 + relativeAddress;
 		return absoluteAddress;
-			}
+	}
 
 	static std::vector<std::string> TokenifyAobString(std::string aob)
 	{
 		std::istringstream iss(aob);
-		std::vector<std::string> aobTokens{
+		std::vector<std::string> aobTokens {
 			std::istream_iterator<std::string>{iss},
 			std::istream_iterator<std::string>{}
 		};
 		return aobTokens;
-		}
+	}
 
 	static bool IsAobValid(std::vector<std::string> aobTokens)
 	{
@@ -251,7 +249,6 @@ namespace ModUtils
 				return false;
 			}
 		}
-
 		return true;
 	}
 
@@ -401,7 +398,7 @@ namespace ModUtils
 			{
 				ShowErrorPopup("Cannot convert AOB with mask to raw AOB");
 				return std::vector<unsigned char>();
-		}
+			}
 
 			unsigned char byte = (unsigned char)std::stoul(tokenifiedAob[i], nullptr, 16);
 			rawAob.push_back(byte);
@@ -410,16 +407,16 @@ namespace ModUtils
 	}
 
 	static std::string RawAobToStringAob(std::vector<unsigned char> rawAob)
-		{
+	{
 		std::string aob;
 		for (auto byte : rawAob)
-			{
+		{
 			std::string string = NumberToHexString(byte);
 			aob += string + " ";
-			}
+		}
 		aob.pop_back();
 		return aob;
-		}
+	}
 
 	static bool CheckIfAobsMatch(std::string aob1, std::string aob2)
 	{
@@ -433,13 +430,13 @@ namespace ModUtils
 			if (tokenIsMasked)
 			{
 				continue;
-		}
+			}
 
 			if (aob1Tokens[i] != aob2Tokens[i])
-		{
+			{
 				ShowErrorPopup("Bytes do not match!");
 				return false;
-		}
+			}
 		}
 		return true;
 	}
@@ -448,8 +445,8 @@ namespace ModUtils
 	{
 		if (!VerifyAobs({ expectedBytes, newBytes }))
 		{
-				return false;
-			}
+			return false;
+		}
 
 		std::vector<std::string> expectedBytesTokens = TokenifyAobString(expectedBytes);
 		std::vector<unsigned char> existingBytesBuffer(expectedBytesTokens.size(), 0);
@@ -466,8 +463,8 @@ namespace ModUtils
 			std::vector<unsigned char> rawNewBytes = StringAobToRawAob(newBytes);
 			MemCopy(address, (uintptr_t)&rawNewBytes[0], rawNewBytes.size());
 			Log("Patch applied");
-		return true;
-	}
+			return true;
+		}
 
 		return false;
 	}
@@ -476,19 +473,19 @@ namespace ModUtils
 	{
 		if (muWindow == NULL) 
 		{
-		for (size_t i = 0; i < 10000; i++)
-		{
-				HWND hwnd = FindWindowExA(NULL, NULL, NULL, windowName.c_str());
-			DWORD processId = 0;
-			GetWindowThreadProcessId(hwnd, &processId);
-			if (processId == GetCurrentProcessId())
+			for (size_t i = 0; i < 10000; i++)
 			{
-				muWindow = hwnd;
-				Log("FindWindowExA: found window handle");
-				break;
+				HWND hwnd = FindWindowExA(NULL, NULL, NULL, windowName.c_str());
+				DWORD processId = 0;
+				GetWindowThreadProcessId(hwnd, &processId);
+				if (processId == GetCurrentProcessId())
+				{
+					muWindow = hwnd;
+					Log("FindWindowExA: found window handle");
+					break;
+				}
+				Sleep(1);
 			}
-			Sleep(1);
-		}
 		}
 	}
 
@@ -559,7 +556,7 @@ namespace ModUtils
 			}
 			hasAttemptedToGetWindowHandle = true;
 		}
-		}
+	}
 
 	static bool AreKeysPressed(std::vector<unsigned short> keys, bool trueWhileHolding = false, bool checkController = false)
 	{
