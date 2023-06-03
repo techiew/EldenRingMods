@@ -11,16 +11,17 @@
 #include <sstream>
 #include <map>
 #include <chrono>
+#include <iomanip>
 
 #include "ini.h"
 
 namespace ModUtils
 {
-	static std::string muModuleName = "";
 	static HWND muWindow = NULL;
-	static FILE* muLogFile = nullptr;
-	static bool muLogOpened = false;
-	static constexpr int MASKED = 0xffff;
+	static std::string muGameName = "ELDEN RING";
+	static std::string muExpectedWindowName = "ELDEN RINGâ„¢";
+	static std::ofstream muLogFile;
+	static const std::string muAobMask = "?";
 
 	class Timer
 	{
@@ -60,15 +61,14 @@ namespace ModUtils
 		std::chrono::system_clock::time_point m_lastExecutionTime;
 	};
 
-	// Gets the name of the .dll which the mod code is running in
-	inline std::string GetModuleName(bool thisModule = true)
+	static std::string _GetModuleName(bool mainProcessModule)
 	{
-		static char dummy = 'x';
 		HMODULE module = NULL;
 
-		if (thisModule)
+		if (!mainProcessModule)
 		{
-			GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, &dummy, &module);
+			static char dummyStaticVarToGetModuleHandle = 'x';
+			GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, &dummyStaticVarToGetModuleHandle, &module);
 		}
 
 		char lpFilename[MAX_PATH];
@@ -76,7 +76,7 @@ namespace ModUtils
 		std::string moduleName = strrchr(lpFilename, '\\');
 		moduleName = moduleName.substr(1, moduleName.length());
 
-		if (thisModule)
+		if (!mainProcessModule)
 		{
 			moduleName.erase(moduleName.find(".dll"), moduleName.length());
 		}
@@ -84,61 +84,68 @@ namespace ModUtils
 		return moduleName;
 	}
 
-	// Gets the path to the current mod relative to the game root folder
-	inline std::string GetModuleFolderPath()
+	static std::string GetCurrentProcessName()
 	{
-		return std::string("mods\\" + GetModuleName(true));
+		return _GetModuleName(true);
 	}
 
-	// Logs both to std::out and to a log file simultaneously
-	inline void Log(std::string msg, ...)
+	static std::string GetCurrentModName()
 	{
-		if (muModuleName == "")
+		static std::string currentModName = "NULL";
+		if (currentModName == "NULL")
 		{
-			muModuleName = GetModuleName(true);
+			currentModName = _GetModuleName(false);
+		}
+		return currentModName;
 		}
 
-		if (muLogFile == nullptr && !muLogOpened)
+	static std::string GetModFolderPath()
 		{
-			CreateDirectoryA(std::string("mods\\" + muModuleName).c_str(), NULL);
-			fopen_s(&muLogFile, std::string("mods\\" + muModuleName + "\\log.txt").c_str(), "w");
-			muLogOpened = true;
+		return std::string("mods\\" + GetCurrentModName());
 		}
 
-		va_list args;
-		va_start(args, msg);
-		vprintf(std::string(muModuleName + " > " + msg + "\n").c_str(), args);
-		if (muLogFile != nullptr)
+	static void OpenModLogFile()
 		{
-			vfprintf(muLogFile, std::string(muModuleName + " > " + msg + "\n").c_str(), args);
-			fflush(muLogFile);
-		}
-		va_end(args);
-	}
-
-	// The log should preferably be closed when code execution is finished.
-	inline void CloseLog()
-	{
-		if (muLogFile != nullptr)
+		if (!muLogFile.is_open())
 		{
-			fclose(muLogFile);
-			muLogFile = nullptr;
+			CreateDirectoryA(std::string("mods\\" + GetCurrentModName()).c_str(), NULL);
+			muLogFile.open("mods\\" + GetCurrentModName() + "\\log.txt");
 		}
 	}
 
-	// Shows a popup with a warning and logs that same warning.
-	inline void RaiseError(std::string error)
+	template<typename... Types>
+	static void Log(Types... args)
 	{
-		if (muModuleName == "")
+		OpenModLogFile();
+
+		std::stringstream stream;
+		stream << GetCurrentModName() << " > ";
+		(stream << ... << args) << std::endl;
+		std::cout << stream.str();
+
+		if (muLogFile.is_open())
 		{
-			muModuleName = GetModuleName(true);
+			muLogFile << stream.str();
+			muLogFile.flush();
 		}
-		Log("Raised error: %s", error.c_str());
-		MessageBox(NULL, error.c_str(), muModuleName.c_str(), MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
 	}
 
-	// Gets the base address of the game's memory.
-	inline DWORD_PTR GetProcessBaseAddress(DWORD processId)
+	static void CloseLog()
+	{
+		if (muLogFile.is_open())
+		{
+			muLogFile.close();
+		}
+	}
+
+	static void ShowErrorPopup(std::string error)
+	{
+		GetCurrentModName();
+		Log("Error popup: ", error);
+		MessageBox(NULL, error.c_str(), GetCurrentModName().c_str(), MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
+	}
+
+	static DWORD_PTR GetProcessBaseAddress(DWORD processId)
 	{
 		DWORD_PTR baseAddress = 0;
 		HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
@@ -157,56 +164,70 @@ namespace ModUtils
 					if (moduleArrayBytes)
 					{
 						unsigned int moduleCount;
-
 						moduleCount = bytesRequired / sizeof(HMODULE);
 						moduleArray = (HMODULE*)moduleArrayBytes;
-
 						if (EnumProcessModules(processHandle, moduleArray, bytesRequired, &bytesRequired))
 						{
 							baseAddress = (DWORD_PTR)moduleArray[0];
 						}
-
 						LocalFree(moduleArrayBytes);
 					}
 				}
 			}
-
 			CloseHandle(processHandle);
 		}
 
 		return baseAddress;
 	}
 
-	// Scans the whole memory of the main process module for the given signature.
-	inline uintptr_t SigScan(std::vector<uint16_t> pattern)
+	static void ToggleMemoryProtection(bool protectionEnabled, uintptr_t address, size_t size)
 	{
-		DWORD processId = GetCurrentProcessId();
-		uintptr_t regionStart = GetProcessBaseAddress(processId);
-		Log("Process name: %s", GetModuleName(false).c_str());
-		Log("Process ID: %i", processId);
-		Log("Process base address: 0x%llX", regionStart);
-
-		std::string patternString = "";
-		for (auto bytes : pattern)
+		static std::map<uintptr_t, DWORD> protectionHistory;
+		if (protectionEnabled && protectionHistory.find(address) != protectionHistory.end())
 		{
-			std::stringstream stream;
-			std::string byte = "";
-			if (bytes == MASKED)
+			VirtualProtect((void*)address, size, protectionHistory[address], &protectionHistory[address]);
+			protectionHistory.erase(address);
+		}
+		else if (!protectionEnabled && protectionHistory.find(address) == protectionHistory.end())
+		{
+			DWORD oldProtection = 0;
+			VirtualProtect((void*)address, size, PAGE_EXECUTE_READWRITE, &oldProtection);
+			protectionHistory[address] = oldProtection;
+		}
+	}
+
+	static void MemCopy(uintptr_t destination, uintptr_t source, size_t numBytes)
+		{
+		ToggleMemoryProtection(false, destination, numBytes);
+		ToggleMemoryProtection(false, source, numBytes);
+		memcpy((void*)destination, (void*)source, numBytes);
+		ToggleMemoryProtection(true, source, numBytes);
+		ToggleMemoryProtection(true, destination, numBytes);
+	}
+
+	static void MemSet(uintptr_t address, unsigned char byte, size_t numBytes)
 			{
-				byte = "?";
+		ToggleMemoryProtection(false, address, numBytes);
+		memset((void*)address, byte, numBytes);
+		ToggleMemoryProtection(true, address, numBytes);
 			}
-			else
+
+	static uintptr_t RelativeToAbsoluteAddress(uintptr_t relativeAddressLocation)
 			{
-				stream << "0x" << std::hex << bytes;
-				byte = stream.str();
+		uintptr_t absoluteAddress = 0;
+		intptr_t relativeAddress = 0;
+		MemCopy((uintptr_t)&relativeAddress, relativeAddressLocation, 4);
+		absoluteAddress = relativeAddressLocation + 4 + relativeAddress;
+		return absoluteAddress;
 			}
 			patternString.append(byte + " ");
 		}
 		Log("Pattern: %s", patternString.c_str());
 
 		size_t numRegionsChecked = 0;
+		size_t maxRegionsToCheck = 10000;
 		uintptr_t currentAddress = 0;
-		while (numRegionsChecked < 10000)
+		while (numRegionsChecked < maxRegionsToCheck)
 		{
 			MEMORY_BASIC_INFORMATION memoryInfo = { 0 };
 			if (VirtualQuery((void*)regionStart, &memoryInfo, sizeof(MEMORY_BASIC_INFORMATION)) == 0)
@@ -228,15 +249,14 @@ namespace ModUtils
 			uintptr_t protection = (uintptr_t)memoryInfo.Protect;
 			uintptr_t state = (uintptr_t)memoryInfo.State;
 
-			bool readableMemory = (
-				protection == PAGE_EXECUTE_READWRITE || 
-				protection == PAGE_READWRITE || 
-				protection == PAGE_READONLY || 
-				protection == PAGE_WRITECOPY || 
-				protection == PAGE_EXECUTE_WRITECOPY) 
+			bool isMemoryReadable = (
+				protection == PAGE_EXECUTE_READWRITE
+				|| protection == PAGE_READWRITE
+				|| protection == PAGE_READONLY
+				|| protection == PAGE_WRITECOPY
+				|| protection == PAGE_EXECUTE_WRITECOPY)
 				&& state == MEM_COMMIT;
-
-			if (readableMemory)
+			if (isMemoryReadable)
 			{
 				Log("Checking region: %p", regionStart);
 				currentAddress = regionStart;
@@ -274,7 +294,7 @@ namespace ModUtils
 		}
 
 		Log("Stopped at: %p, num regions checked: %i", currentAddress, numRegionsChecked);
-		RaiseError("Could not find signature!");
+		ShowErrorPopup("Could not find signature!");
 		return 0;
 	}
 
@@ -349,14 +369,13 @@ namespace ModUtils
 		return true;
 	}
 
-	// Attempts different methods to get the main window handle.
-	inline bool GetWindowHandle()
+	static void GetWindowHandleByName(std::string windowName)
 	{
-		Log("Finding application window...");
-
+		if (muWindow == NULL) 
+		{
 		for (size_t i = 0; i < 10000; i++)
 		{
-			HWND hwnd = FindWindowExA(NULL, NULL, NULL, "ELDEN RING™");
+				HWND hwnd = FindWindowExA(NULL, NULL, NULL, windowName.c_str());
 			DWORD processId = 0;
 			GetWindowThreadProcessId(hwnd, &processId);
 			if (processId == GetCurrentProcessId())
@@ -367,8 +386,30 @@ namespace ModUtils
 			}
 			Sleep(1);
 		}
+		}
+	}
 
-		// Backup method
+	static BOOL CALLBACK EnumWindowHandles(HWND hwnd, LPARAM lParam)
+	{
+		DWORD processId = NULL;
+		GetWindowThreadProcessId(hwnd, &processId);
+		if (processId == GetCurrentProcessId())
+		{
+			char buffer[100];
+			GetWindowTextA(hwnd, buffer, 100);
+			Log("Found window belonging to ER: ", buffer);
+			if (std::string(buffer).find(muGameName) != std::string::npos)
+			{
+				Log(buffer, " handle selected");
+				muWindow = hwnd;
+				return false;
+			}
+		}
+		return true;
+	}
+
+	static void GetWindowHandleByEnumeration()
+	{
 		if (muWindow == NULL)
 		{
 			Log("Enumerating windows...");
@@ -382,37 +423,49 @@ namespace ModUtils
 				Sleep(1);
 			}
 		}
+	}
+
+	static bool GetWindowHandle()
+	{
+		Log("Finding application window...");
+
+		GetWindowHandleByName(muExpectedWindowName);
+
+		// From experience it can be tricky to find the game window consistently using only one technique,
+		// (seems to differ from machine to machine for some reason) so we have this extra backup technique.
+		GetWindowHandleByEnumeration();
 
 		return (muWindow == NULL) ? false : true;
 	}
 
-	inline bool IsKeyPressed(unsigned short key, bool falseWhileHolding = true, bool checkController = false)
+	static void AttemptToGetWindowHandle()
 	{
-		return IsKeyPressed({ key }, falseWhileHolding, checkController);
-	}
+		static bool hasAttemptedToGetWindowHandle = false;
 
-	// Checks if a keyboard or controller key is pressed.
-	inline bool IsKeyPressed(std::vector<unsigned short> keys, bool falseWhileHolding = true, bool checkController = false)
-	{
-		static std::vector<std::vector<unsigned short>> notReleasedKeys;
-		static bool retrievedWindowHandle = false;
-
-		if (!retrievedWindowHandle)
+		if (!hasAttemptedToGetWindowHandle)
 		{
 			if (GetWindowHandle())
 			{
 				char buffer[100];
 				GetWindowTextA(muWindow, buffer, 100);
-				Log("Found application window: %s", buffer);
+				Log("Found application window: ", buffer);
 			}
 			else
 			{
-				Log("Failed to get window handle, inputs will be detected globally");
+				Log("Failed to get window handle, inputs will be detected globally!");
 			}
-			retrievedWindowHandle = true;
+			hasAttemptedToGetWindowHandle = true;
+		}
 		}
 
-		if(muWindow != NULL && muWindow != GetForegroundWindow()) 
+	static bool AreKeysPressed(std::vector<unsigned short> keys, bool trueWhileHolding = false, bool checkController = false)
+	{
+		static std::vector<std::vector<unsigned short>> notReleasedKeys;
+
+		AttemptToGetWindowHandle();
+
+		bool ignoreOutOfFocusInput = muWindow != NULL && muWindow != GetForegroundWindow();
+		if(ignoreOutOfFocusInput)
 		{
 			return false;
 		}
@@ -455,7 +508,7 @@ namespace ModUtils
 		{
 			if (keysBeingHeld)
 			{
-				if (falseWhileHolding)
+				if (!trueWhileHolding)
 				{
 					return false;
 				}
@@ -477,50 +530,9 @@ namespace ModUtils
 		return true;
 	}
 
-	// Disables or enables the memory protection in a given region. 
-	// Remembers and restores the original memory protection type of the given addresses.
-	inline void ToggleMemoryProtection(bool protectionEnabled, uintptr_t address, size_t size)
+	static bool AreKeysPressed(unsigned short key, bool trueWhileHolding = false, bool checkController = false)
 	{
-		static std::map<uintptr_t, DWORD> protectionHistory;
-		if (protectionEnabled && protectionHistory.find(address) != protectionHistory.end())
-		{
-			VirtualProtect((void*)address, size, protectionHistory[address], &protectionHistory[address]);
-			protectionHistory.erase(address);
-		}
-		else if(!protectionEnabled && protectionHistory.find(address) == protectionHistory.end())
-		{
-			DWORD oldProtection = 0;
-			VirtualProtect((void*)address, size, PAGE_EXECUTE_READWRITE, &oldProtection);
-			protectionHistory[address] = oldProtection;
-		}
-	}
-
-	// Copies memory after changing the permissions at both the source and destination so we don't get an access violation.
-	inline void MemCopy(uintptr_t destination, uintptr_t source, size_t numBytes)
-	{
-		ToggleMemoryProtection(false, destination, numBytes);
-		ToggleMemoryProtection(false, source, numBytes);
-		memcpy((void*)destination, (void*)source, numBytes);
-		ToggleMemoryProtection(true, source, numBytes);
-		ToggleMemoryProtection(true, destination, numBytes);
-	}
-
-	// Simple wrapper around memset
-	inline void MemSet(uintptr_t address, unsigned char byte, size_t numBytes)
-	{
-		ToggleMemoryProtection(false, address, numBytes);
-		memset((void*)address, byte, numBytes);
-		ToggleMemoryProtection(true, address, numBytes);
-	}
-
-	// Takes a 4-byte relative address and converts it to an absolute 8-byte address.
-	inline uintptr_t RelativeToAbsoluteAddress(uintptr_t relativeAddressLocation)
-	{
-		uintptr_t absoluteAddress = 0;
-		intptr_t relativeAddress = 0;
-		MemCopy((uintptr_t)&relativeAddress, relativeAddressLocation, 4);
-		absoluteAddress = relativeAddressLocation + 4 + relativeAddress;
-		return absoluteAddress;
+		return AreKeysPressed({ key }, trueWhileHolding, checkController);
 	}
 
 	// Places a 14-byte absolutely addressed jump from A to B. Add extra clearance when the jump doesn't fit cleanly.
