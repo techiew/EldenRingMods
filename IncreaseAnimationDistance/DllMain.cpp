@@ -7,14 +7,16 @@ using namespace ModUtils;
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating IncreaseAnimationDistance...");
-	std::vector<uint16_t> pattern = { 0xc7, MASKED, MASKED, MASKED, 0x01, 0x00, 0x00, 0x00, 0xf3, MASKED, 0x0f, 0x10, MASKED, MASKED, MASKED, 0xf3, MASKED, 0x0f, 0x10, MASKED, MASKED, MASKED, 0xf3, 0x0f, 0x59, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, 0xf3, MASKED, 0x0f, 0x5c, MASKED, MASKED, 0x58 };
-	std::vector<uint16_t> originalBytes = { 0xf3, MASKED, 0x0f, 0x5e, MASKED, MASKED, MASKED };
-	std::vector<uint8_t> newBytes = { 0x0f, 0x57, 0xc9, 0x90, 0x90, 0x90, 0x90 };
-	uintptr_t patchAddress = SigScan(pattern);
+	std::string aob = "c7 ? ? ? 01 00 00 00 f3 ? 0f 10 ? ? ? f3 ? 0f 10 ? ? ? f3 0f 59 ? ? ? ? ? ? 0f 28 ? f3 ? 0f 5c ? ? 58";
+	std::string expectedBytes = "f3 ? 0f 5e ? ? ?";
+	std::string newBytes = "0f 57 c9 90 90 90 90";
+	uintptr_t patchAddress = AobScan(aob);
+	size_t offset = 0x48;
+
 	if (patchAddress != 0)
 	{
-		patchAddress += 0x48;
-		Replace(patchAddress, originalBytes, newBytes);
+		patchAddress += offset;
+		ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes);
 	}
 	CloseLog();
 	return 0;

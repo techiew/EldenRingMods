@@ -7,14 +7,15 @@ using namespace ModUtils;
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating RemoveChromaticAberration...");
-	std::vector<uint16_t> pattern = { 0x0f, 0x11, MASKED, 0x60, MASKED, 0x8d, MASKED, 0x80, 0x00, 0x00, 0x00, 0x0f, 0x10, MASKED, 0xa0, 0x00, 0x00, 0x00, 0x0f, 0x11, MASKED, 0xf0, MASKED, 0x8d, MASKED, 0xb0, 0x00, 0x00, 0x00, 0x0f, 0x10, MASKED, 0x0f, 0x11, MASKED, 0x0f, 0x10, MASKED, 0x10 };
-	std::vector<uint16_t> originalBytes = { 0x0f, 0x11, MASKED, MASKED };
-	std::vector<uint8_t> newBytes = { 0x66, 0x0f, 0xef, 0xc9 };
-	uintptr_t patchAddress = SigScan(pattern);
+	std::string aob = "0f 11 ? 60 ? 8d ? 80 00 00 00 0f 10 ? a0 00 00 00 0f 11 ? f0 ? 8d ? b0 00 00 00 0f 10 ? 0f 11 ? 0f 10 ? 10";
+	std::string expectedBytes = "0f 11 ? ?";
+	std::string newBytes = "66 0f ef c9";
+	uintptr_t patchAddress = AobScan(aob);
+	size_t offset = 0x2f;
 	if (patchAddress != 0)
 	{
-		patchAddress += 0x2f;
-		Replace(patchAddress, originalBytes, newBytes);
+		patchAddress += offset;
+		ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes);
 	}
 	CloseLog();
 	return 0;

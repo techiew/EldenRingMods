@@ -220,9 +220,102 @@ namespace ModUtils
 		absoluteAddress = relativeAddressLocation + 4 + relativeAddress;
 		return absoluteAddress;
 			}
-			patternString.append(byte + " ");
+
+	static std::vector<std::string> TokenifyAobString(std::string aob)
+	{
+		std::istringstream iss(aob);
+		std::vector<std::string> aobTokens{
+			std::istream_iterator<std::string>{iss},
+			std::istream_iterator<std::string>{}
+		};
+		return aobTokens;
 		}
-		Log("Pattern: %s", patternString.c_str());
+
+	static bool IsAobValid(std::vector<std::string> aobTokens)
+	{
+		for (auto byte : aobTokens)
+		{
+			if (byte == muAobMask)
+			{
+				continue;
+			}
+
+			if (byte.length() != 2)
+			{
+				return false;
+			}
+
+			std::string whitelist = "0123456789abcdef";
+			if (byte.find_first_not_of(whitelist) != std::string::npos) 
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	static bool VerifyAob(std::string aob)
+	{
+		std::vector<std::string> aobTokens = TokenifyAobString(aob);
+		if (!IsAobValid(aobTokens))
+		{
+			ShowErrorPopup("AOB is invalid! (" + aob + ")");
+			return false;
+		};
+		return true;
+	}
+
+	static bool VerifyAobs(std::vector<std::string> aobs)
+	{
+		for (auto aob : aobs)
+		{
+			if (!VerifyAob(aob))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	template<typename T>
+	static std::string NumberToHexString(T number)
+	{
+		std::stringstream stream;
+		stream
+			<< std::setfill('0') 
+			<< std::setw(sizeof(T) * 2)
+			<< std::hex 
+			<< number;
+		return stream.str();
+	}
+
+	static std::string NumberToHexString(unsigned char number)
+	{
+		std::stringstream stream;
+		stream
+			<< std::setw(2)
+			<< std::setfill('0')
+			<< std::hex
+			<< (unsigned int)number; // The << operator overload for unsigned chars screws us over unless this cast is done
+		return stream.str();
+	}
+ 
+	static uintptr_t AobScan(std::string aob)
+	{
+		std::vector<std::string> aobTokens = TokenifyAobString(aob);
+
+		DWORD processId = GetCurrentProcessId();
+		uintptr_t regionStart = GetProcessBaseAddress(processId);
+		Log("Process name: ", GetCurrentProcessName());
+		Log("Process ID: ", processId);
+		Log("Process base address: ", NumberToHexString(regionStart));
+		Log("AOB: ", aob);
+
+		if (!VerifyAob(aob))
+		{
+			return 0;
+		};
 
 		size_t numRegionsChecked = 0;
 		size_t maxRegionsToCheck = 10000;
@@ -239,7 +332,7 @@ namespace ModUtils
 				}
 				else
 				{
-					Log("VirtualQuery failed, error code: %i.", error);
+					Log("VirtualQuery failed, error code: ", error);
 				}
 				break;
 			}
@@ -258,26 +351,26 @@ namespace ModUtils
 				&& state == MEM_COMMIT;
 			if (isMemoryReadable)
 			{
-				Log("Checking region: %p", regionStart);
+				Log("Checking region: ", NumberToHexString(regionStart));
 				currentAddress = regionStart;
-				while (currentAddress < regionEnd - pattern.size())
+				while (currentAddress < regionEnd - aobTokens.size())
 				{
-					for (size_t i = 0; i < pattern.size(); i++)
+					for (size_t i = 0; i < aobTokens.size(); i++)
 					{
-						if (pattern[i] == MASKED)
+						if (aobTokens[i] == muAobMask)
 						{
 							currentAddress++;
 							continue;
 						} 
-						else if (*(unsigned char*)currentAddress != (unsigned char)pattern[i])
+						else if (*(unsigned char*)currentAddress != (unsigned char)std::stoul(aobTokens[i], nullptr, 16))
 						{
 							currentAddress++;
 							break;
 						}
-						else if (i == pattern.size() - 1)
+						else if (i == aobTokens.size() - 1)
 						{
-							uintptr_t signature = currentAddress - pattern.size() + 1;
-							Log("Found signature at %p", signature);
+							uintptr_t signature = currentAddress - aobTokens.size() + 1;
+							Log("Found signature at ", NumberToHexString(signature));
 							return signature;
 						}
 						currentAddress++;
@@ -286,87 +379,97 @@ namespace ModUtils
 			}
 			else
 			{
-				Log("Skipped region: %p", regionStart);
+				Log("Skipped region: ", NumberToHexString(regionStart));
 			}
 
 			numRegionsChecked++;
 			regionStart += memoryInfo.RegionSize;
 		}
 
-		Log("Stopped at: %p, num regions checked: %i", currentAddress, numRegionsChecked);
+		Log("Stopped at: ", NumberToHexString(currentAddress), ", num regions checked: ", numRegionsChecked);
 		ShowErrorPopup("Could not find signature!");
 		return 0;
 	}
 
-	// Replaces the memory at a given address with newBytes. Performs memory comparison with originalBytes to stop unintended memory modification.
-	inline bool Replace(uintptr_t address, std::vector<uint16_t> originalBytes, std::vector<uint8_t> newBytes)
+	static std::vector<unsigned char> StringAobToRawAob(std::string aob)
 	{
-		std::vector<uint8_t> truncatedOriginalBytes;
-		for (auto byte : originalBytes)
+		std::vector<unsigned char> rawAob;
+		std::vector<std::string> tokenifiedAob = TokenifyAobString(aob);
+		for (size_t i = 0; i < tokenifiedAob.size(); i++)
 		{
-			truncatedOriginalBytes.push_back((uint8_t)byte);
-		}
-
-		std::string bufferString = "";
-		std::vector<uint8_t> buffer(originalBytes.size());
-		memcpy(&buffer[0], (void*)address, buffer.size());
-		for (size_t i = 0; i < buffer.size(); i++) 
-		{
-			std::stringstream stream;
-			stream << "0x" << std::hex << (unsigned int)buffer[i];
-			std::string byte = stream.str();
-			bufferString.append(byte);
-			if (originalBytes[i] == MASKED)
+			if (tokenifiedAob[i] == muAobMask)
 			{
-				bufferString.append("?");
-				buffer[i] = 0xff;
-			}
-			bufferString.append(" ");
+				ShowErrorPopup("Cannot convert AOB with mask to raw AOB");
+				return std::vector<unsigned char>();
 		}
-		Log("Bytes at address: %s", bufferString.c_str());
 
-		std::string newBytesString = "";
-		for (size_t i = 0; i < newBytes.size(); i++)
-		{
-			std::stringstream stream;
-			stream << "0x" << std::hex << (unsigned int)newBytes[i];
-			std::string byte = stream.str();
-			newBytesString.append(byte + " ");
+			unsigned char byte = (unsigned char)std::stoul(tokenifiedAob[i], nullptr, 16);
+			rawAob.push_back(byte);
 		}
-		Log("New bytes: %s", newBytesString.c_str());
-
-		if (memcmp(&buffer[0], &truncatedOriginalBytes[0], buffer.size()) == 0)
-		{
-			Log("Bytes match");
-			memcpy((void*)address, &newBytes[0], newBytes.size());
-			Log("Patch applied");
-			return true;
-		}
-		else
-		{
-			RaiseError("Bytes do not match!");
-		}
-		return false;
+		return rawAob;
 	}
 
-	// Winapi callback that receives all active window handles one by one.
-	inline BOOL CALLBACK EnumWindowHandles(HWND hwnd, LPARAM lParam)
-	{
-		DWORD processId = NULL;
-		GetWindowThreadProcessId(hwnd, &processId);
-		if (processId == GetCurrentProcessId())
+	static std::string RawAobToStringAob(std::vector<unsigned char> rawAob)
 		{
-			char buffer[100];
-			GetWindowTextA(hwnd, buffer, 100);
-			Log("Found window belonging to ER: %s", buffer);
-			if (std::string(buffer).find("ELDEN RING") != std::string::npos)
+		std::string aob;
+		for (auto byte : rawAob)
 			{
-				Log("%s handle selected", buffer);
-				muWindow = hwnd;
-				return false;
+			std::string string = NumberToHexString(byte);
+			aob += string + " ";
 			}
+		aob.pop_back();
+		return aob;
+		}
+
+	static bool CheckIfAobsMatch(std::string aob1, std::string aob2)
+	{
+		std::vector<std::string> aob1Tokens = TokenifyAobString(aob1);
+		std::vector<std::string> aob2Tokens = TokenifyAobString(aob2);
+
+		size_t shortestAobLength = aob1Tokens.size() < aob2Tokens.size() ? aob1Tokens.size() : aob2Tokens.size();
+		for (size_t i = 0; i < shortestAobLength; i++)
+		{
+			bool tokenIsMasked = aob1Tokens[i] == muAobMask || aob2Tokens[i] == muAobMask;
+			if (tokenIsMasked)
+			{
+				continue;
+		}
+
+			if (aob1Tokens[i] != aob2Tokens[i])
+		{
+				ShowErrorPopup("Bytes do not match!");
+				return false;
+		}
 		}
 		return true;
+	}
+
+	static bool ReplaceExpectedBytesAtAddress(uintptr_t address, std::string expectedBytes, std::string newBytes)
+	{
+		if (!VerifyAobs({ expectedBytes, newBytes }))
+		{
+				return false;
+			}
+
+		std::vector<std::string> expectedBytesTokens = TokenifyAobString(expectedBytes);
+		std::vector<unsigned char> existingBytesBuffer(expectedBytesTokens.size(), 0);
+		MemCopy((uintptr_t)&existingBytesBuffer[0], address, existingBytesBuffer.size());
+		std::string existingBytes = RawAobToStringAob(existingBytesBuffer);
+
+		Log("Bytes at address: ", existingBytes);
+		Log("Expected bytes: ", expectedBytes);
+		Log("New bytes: ", newBytes);
+
+		if (CheckIfAobsMatch(existingBytes, expectedBytes))
+		{
+			Log("Bytes match");
+			std::vector<unsigned char> rawNewBytes = StringAobToRawAob(newBytes);
+			MemCopy(address, (uintptr_t)&rawNewBytes[0], rawNewBytes.size());
+			Log("Patch applied");
+		return true;
+	}
+
+		return false;
 	}
 
 	static void GetWindowHandleByName(std::string windowName)
@@ -535,13 +638,12 @@ namespace ModUtils
 		return AreKeysPressed({ key }, trueWhileHolding, checkController);
 	}
 
-	// Places a 14-byte absolutely addressed jump from A to B. Add extra clearance when the jump doesn't fit cleanly.
-	inline void Hook(uintptr_t address, uintptr_t destination, size_t extraClearance = 0)
+	static void Hook(uintptr_t address, uintptr_t destination, size_t extraClearance = 0)
 	{
 		size_t clearance = 14 + extraClearance;
 		MemSet(address, 0x90, clearance);
 		*(uintptr_t*)address = 0x0000000025ff;
 		MemCopy((address + 6), (uintptr_t)&destination, 8);
-		Log("Created jump from %p to %p with a clearance of %i", address, destination, clearance);
+		Log("Created jump from ", NumberToHexString(address), " to ", NumberToHexString(destination),  " with a clearance of ", clearance);
 	}
 }

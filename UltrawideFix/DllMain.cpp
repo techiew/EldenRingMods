@@ -7,14 +7,15 @@ using namespace ModUtils;
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating ultrawide fix...");
-	std::vector<uint16_t> pattern = { 0x48, 0xc7, 0x45, 0xb8, 0xfe, 0xff, 0xff, 0xff, 0x48, 0x89, 0x58, 0x10, 0x48, 0x89, 0x70, 0x18, 0x48, 0x89, 0x78, 0x20, 0x0f, 0x29, 0x70, 0xc8, 0x48, 0x8b };
-	std::vector<uint16_t> originalBytes = { 0x74 };
-	std::vector<uint8_t> newBytes = { 0xeb };
-	uintptr_t patchAddress = SigScan(pattern);
+	std::string aob = "48 c7 45 b8 fe ff ff ff 48 89 58 10 48 89 70 18 48 89 78 20 0f 29 70 c8 48 8b";
+	std::string expectedBytes = "74";
+	std::string newBytes = "eb";
+	uintptr_t patchAddress = AobScan(aob);
+	size_t offset = 0x94;
 	if (patchAddress != 0)
 	{
-		patchAddress += 0x94;
-		Replace(patchAddress, originalBytes, newBytes);
+		patchAddress += offset;
+		ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes);
 	}
 	CloseLog();
 	return 0;

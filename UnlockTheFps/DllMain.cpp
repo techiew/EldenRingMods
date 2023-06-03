@@ -10,7 +10,7 @@ static float fpsLimit = 300;
 
 void ReadConfig()
 {
-	INIFile config(GetModuleFolderPath() + "\\config.ini");
+	INIFile config(GetModFolderPath() + "\\config.ini");
 	INIStructure ini;
 
 	if (config.read(ini))
@@ -23,40 +23,49 @@ void ReadConfig()
 		config.write(ini, true);
 	}
 
-	Log("FPS limit: %f", fpsLimit);
+	Log("FPS limit: ", fpsLimit);
 }
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
 	Log("Activating UnlockTheFps...");
-	std::vector<uint16_t> pattern = { 0xc7, MASKED, MASKED, 0x89, 0x88, 0x88, 0x3c, 0xeb, MASKED, 0x89, MASKED, 0x18, 0xeb, MASKED, 0x89, MASKED, 0x18, 0xc7 };
-	std::vector<uint16_t> originalBytes = { 0x89, 0x88, 0x88, 0x3c };
-	std::vector<uint8_t> newBytes(4, 0x90);
-
-	ReadConfig();
-	float frametime = (1000 / fpsLimit) / 1000;
-	Log("Frametime: %f", frametime);
-	memcpy(&newBytes[0], &frametime, 4);
-
-	uintptr_t patchAddress = SigScan(pattern);
-	if (patchAddress == 0)
 	{
-		return 1;
-	}
-	patchAddress += 0x3;
+		ReadConfig();
 
-	if (!Replace(patchAddress, originalBytes, newBytes))
-	{
-		return 1;
+		std::string aob = "c7 ? ? 89 88 88 3c eb ? 89 ? 18 eb ? 89 ? 18 c7";
+		std::string expectedBytes = "89 88 88 3c";
+		std::string newBytes = "90 90 90 90";
+		size_t offset = 3;
+
+		float frametime = (1000 / fpsLimit) / 1000;
+		Log("Frametime: ", frametime);
+		std::vector<unsigned char> frametimeBytes(sizeof(float), 0);
+		MemCopy((uintptr_t)&frametimeBytes[0], (uintptr_t)&frametime, 4);
+		newBytes = RawAobToStringAob(frametimeBytes);
+
+		uintptr_t patchAddress = AobScan(aob);
+		if (patchAddress == 0)
+		{
+			return 1;
+		}
+
+		patchAddress += offset;
+		if (!ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes))
+		{
+			return 1;
+		}
 	}
-	
+
 	Log("Removing 60 FPS fullscreen limit...");
-	originalBytes = { 0xc7, MASKED, 0xef, 0x3c, 0x00, 0x00, 0x00, 0xc7, MASKED, 0xf3, 0x01, 0x00, 0x00, 0x00 };
-	newBytes = { 0xc7, 0x45, 0xef, 0x00, 0x00, 0x00, 0x00 };
-	patchAddress = SigScan(originalBytes);
-	if (patchAddress != 0)
 	{
-		Replace(patchAddress, originalBytes, newBytes);
+		std::string aob = "c7 ? ef 3c 00 00 00 c7 ? f3 01 00 00 00";
+		std::string expectedBytes = aob;
+		std::string newBytes = "c7 45 ef 00 00 00 00";
+		uintptr_t patchAddress = AobScan(aob);
+		if (patchAddress != 0)
+		{
+			ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes);
+		}
 	}
 
 	CloseLog();
