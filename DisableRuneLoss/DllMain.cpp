@@ -11,14 +11,16 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	std::this_thread::sleep_for(5s);
 	
 	Log("Activating DisableRuneLoss...");
-	std::vector<uint16_t> pattern = { 0xb0, 0x01, MASKED, 0x8b, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, MASKED, 0x8b, MASKED, MASKED, MASKED, 0x32, 0xc0, MASKED, 0x83, MASKED, 0x28, 0xc3 };
-	std::vector<uint16_t> originalBytes = { 0xe8 };
-	std::vector<uint8_t> newBytes = { 0x90, 0x90, 0x90, 0x90, 0x90 };
-	uintptr_t patchAddress = SigScan(pattern);
+	std::string aob = "b0 01 ? 8b ? e8 ? ? ? ? ? 8b ? ? ? 32 c0 ? 83 ? 28 c3";
+	std::string expectedBytes = "e8";
+	std::string newBytes = "90 90 90 90 90";
+	uintptr_t patchAddress = AobScan(aob);
+	size_t offset = 5;
+
 	if (patchAddress != 0)
 	{
-		patchAddress += 5;
-		Replace(patchAddress, originalBytes, newBytes);
+		patchAddress += offset;
+		ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes);
 	}
 	CloseLog();
 	return 0;

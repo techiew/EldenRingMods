@@ -10,14 +10,13 @@ HWND antiFlashbangWindow = NULL;
 
 bool skipIntroLogos = true;
 bool hideInitialWhiteScreen = true;
-unsigned int hideWhiteScreenDuration = 10000;
+unsigned int hideWhiteScreenDurationMs = 10000;
 
 void ShowAntiFlashbangWindow()
 {
-	HINSTANCE hInstance = GetModuleHandleA(GetModuleName().c_str());
+	HINSTANCE hInstance = GetModuleHandleA(GetCurrentProcessName().c_str());
 	const char className[] = "AntiFlashbang";
 	WNDCLASSEX wc;
-
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = DefWindowProc;
@@ -60,26 +59,26 @@ void ShowAntiFlashbangWindow()
 
 void ReadConfigFile()
 {
-	INIFile config(GetModuleFolderPath() + "\\config.ini");
+	INIFile config(GetModFolderPath() + "\\config.ini");
 	INIStructure ini;
 
 	if (config.read(ini))
 	{
 		skipIntroLogos = stoi(ini["skip_the_intro"]["skip_intro_logos"]) > 0;
 		hideInitialWhiteScreen = stoi(ini["skip_the_intro"]["hide_initial_white_screen"]) > 0;
-		hideWhiteScreenDuration = stoi(ini["skip_the_intro"]["hide_initial_white_screen_duration"]);
+		hideWhiteScreenDurationMs = stoi(ini["skip_the_intro"]["hide_initial_white_screen_duration"]);
 	}
 	else
 	{
 		ini["skip_the_intro"]["skip_intro_logos"] = "1";
 		ini["skip_the_intro"]["hide_initial_white_screen"] = "1";
-		ini["skip_the_intro"]["hide_initial_white_screen_duration"] = std::to_string(hideWhiteScreenDuration);
+		ini["skip_the_intro"]["hide_initial_white_screen_duration"] = std::to_string(hideWhiteScreenDurationMs);
 		config.write(ini, true);
 	}
 
-	Log("Skip intro logos: %i", skipIntroLogos);
-	Log("Hide initial white screen: %i", hideInitialWhiteScreen);
-	Log("Hide initial white screen duration: %i", hideWhiteScreenDuration);
+	Log("Skip intro logos: ", skipIntroLogos);
+	Log("Hide initial white screen: ", hideInitialWhiteScreen);
+	Log("Hide initial white screen duration: ", hideWhiteScreenDurationMs);
 }
 
 DWORD WINAPI MainThread(LPVOID lpParam)
@@ -98,21 +97,21 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	if (skipIntroLogos)
 	{
 		Log("Activating SkipTheIntro...");
-		std::vector<uint16_t> pattern = { 0xc6, MASKED, MASKED, MASKED, MASKED, MASKED, 0x01, MASKED, 0x03, 0x00, 0x00, 0x00, MASKED, 0x8b, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, 0xe9, MASKED, MASKED, MASKED, MASKED, MASKED, 0x8d };
-		std::vector<uint16_t> originalBytes = { 0x74 };
-		std::vector<uint8_t> newBytes = { 0x90, 0x90 };
-		uintptr_t patchAddress = SigScan(pattern);
-
+		std::string aob = "c6 ? ? ? ? ? 01 ? 03 00 00 00 ? 8b ? e8 ? ? ? ? e9 ? ? ? ? ? 8d";
+		std::string expectedBytes = "74";
+		std::string newBytes = "90 90";
+		uintptr_t patchAddress = AobScan(aob);
+		size_t offset = 60;
 		if (patchAddress != 0)
 		{
-			patchAddress -= 60;
-			Replace(patchAddress, originalBytes, newBytes);
+			patchAddress -= offset;
+			ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes);
 		}
 	}
 
 	if (hideInitialWhiteScreen)
 	{
-		Timer closeWindowTimer(hideWhiteScreenDuration);
+		Timer closeWindowTimer(hideWhiteScreenDurationMs);
 		while (true)
 		{
 			if (closeWindowTimer.Check())

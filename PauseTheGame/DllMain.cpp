@@ -10,12 +10,14 @@ using namespace mINI;
 
 bool gameIsPaused = false;
 uintptr_t patchAddress = 0;
+size_t offset = 1;
 
 struct Keybind
 {
 	std::vector<unsigned short> keys;
 	bool isControllerKeybind;
 };
+
 std::vector<Keybind> pauseKeybinds = {
 	{ { keycodes.at("p") }, false },
 	{ { controllerKeycodes.at("lthumbpress"), controllerKeycodes.at("xa") }, true }
@@ -28,18 +30,18 @@ std::vector<Keybind> unpauseKeybinds = {
 void Pause()
 {
 	Log("Paused");
-	Replace(patchAddress + 1, { 0x84 }, { 0x85 });
+	ReplaceExpectedBytesAtAddress(patchAddress + offset, "0x84", "0x85");
 	gameIsPaused = true;
 }
 
 void Unpause()
 {
 	Log("Unpaused");
-	Replace(patchAddress + 1, { 0x85 }, { 0x84 });
+	ReplaceExpectedBytesAtAddress(patchAddress + offset, "0x85", "0x84");
 	gameIsPaused = false;
 }
 
-std::vector<std::string> split(std::string str, std::string delimiter)
+std::vector<std::string> splitString(std::string str, std::string delimiter)
 {
 	size_t pos = 0;
 	std::vector<std::string> list;
@@ -55,18 +57,20 @@ std::vector<std::string> split(std::string str, std::string delimiter)
 
 std::vector<Keybind> TranslateInput(std::string inputString)
 {
-	// Remove spaces and convert to lowercase
-	inputString.erase(std::remove_if(inputString.begin(), inputString.end(), std::isspace), inputString.end());
-	transform(inputString.begin(), inputString.end(), inputString.begin(), ::tolower);
-
 	std::vector<Keybind> keybinds;
 	std::vector<std::vector<std::string>> keybindsToTranslate;
 
+	// Remove spaces
+	inputString.erase(std::remove_if(inputString.begin(), inputString.end(), std::isspace), inputString.end());
+
+	// Convert to lowercase
+	transform(inputString.begin(), inputString.end(), inputString.begin(), ::tolower);
+
 	// Parse individual and combination keybinds and place in list
-	std::vector<std::string> splitOnComma = split(inputString, ",");
+	std::vector<std::string> splitOnComma = splitString(inputString, ",");
 	for (auto keybind : splitOnComma)
 	{
-		std::vector<std::string> splitOnPlus = split(keybind, "+");
+		std::vector<std::string> splitOnPlus = splitString(keybind, "+");
 		if (splitOnPlus.size() == 1)
 		{
 			keybindsToTranslate.push_back({ keybind });
@@ -113,7 +117,7 @@ std::vector<Keybind> TranslateInput(std::string inputString)
 
 void ReadConfig()
 {
-	INIFile config(GetModuleFolderPath() + "\\pause_keybinds.ini");
+	INIFile config(GetModFolderPath() + "\\pause_keybinds.ini");
 	INIStructure ini;
 
 	if (config.read(ini))
@@ -135,8 +139,8 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	std::this_thread::sleep_for(5s);
 	
 	Log("Activating PauseTheGame...");
-	std::vector<uint16_t> pattern = { 0x0f, 0x84, MASKED, MASKED, MASKED, MASKED, 0xc6, MASKED, MASKED, MASKED, MASKED, MASKED, 0x00, MASKED, 0x8d, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x89, MASKED, MASKED, 0x89, MASKED, MASKED, MASKED, 0x8b, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x85, MASKED, 0x75 };
-	patchAddress = SigScan(pattern);
+	std::string aob = "0f 84 ? ? ? ? c6 ? ? ? ? ? 00 ? 8d ? ? ? ? ? ? 89 ? ? 89 ? ? ? 8b ? ? ? ? ? ? 85 ? 75";
+	patchAddress = AobScan(aob);
 	if (patchAddress == 0)
 	{
 		return 1;
@@ -154,7 +158,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 
 		for (Keybind keybind : *keybinds)
 		{
-			if (IsKeyPressed(keybind.keys, true, keybind.isControllerKeybind))
+			if (AreKeysPressed(keybind.keys, false, keybind.isControllerKeybind))
 			{
 				if (gameIsPaused)
 				{

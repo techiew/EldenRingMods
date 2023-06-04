@@ -6,12 +6,12 @@
 using namespace ModUtils;
 using namespace mINI;
 
-static bool disableCameraAutoRotate = true;
-static bool disableCameraReset = true;
+bool disableCameraAutoRotate = true;
+bool disableCameraReset = true;
 
 void ReadConfig()
 {
-	INIFile config(GetModuleFolderPath() + "\\config.ini");
+	INIFile config(GetModFolderPath() + "\\config.ini");
 	INIStructure ini;
 
 	if (config.read(ini))
@@ -26,8 +26,8 @@ void ReadConfig()
 		config.write(ini, true);
 	}
 
-	Log("Disable camera auto rotate: %i", disableCameraAutoRotate);
-	Log("Disable camera reset: %i", disableCameraReset);
+	Log("Disable camera auto rotate: ", disableCameraAutoRotate);
+	Log("Disable camera reset: ", disableCameraReset);
 }
 
 DWORD WINAPI MainThread(LPVOID lpParam)
@@ -41,25 +41,26 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 
 	if (disableCameraAutoRotate)
 	{
-		std::vector<uint16_t> originalBytes = { 0x0f, 0x29, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, MASKED, 0x8b, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0xb6, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, MASKED, 0x8b, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, MASKED, 0x8b, MASKED, MASKED, 0x0f, 0x28, MASKED, MASKED, 0x8b, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, MASKED, 0x8d, MASKED, MASKED, MASKED, 0x8b, MASKED, MASKED, 0x8d };
-		std::vector<uint8_t> newBytes(7, 0x90);
-		uintptr_t patchAddress = SigScan(originalBytes);
+		std::string aob = "0f 29 ? ? ? ? ? ? 0f 28 ? ? 8b ? e8 ? ? ? ? ? 0f b6 ? ? ? ? 0f 28 ? ? 8b ? e8 ? ? ? ? ? 8b ? ? 0f 28 ? ? 8b ? e8 ? ? ? ? ? 8d ? ? ? 8b ? ? 8d";
+		std::string newBytes = "90 90 90 90 90 90 90";
+		uintptr_t patchAddress = AobScan(aob);
 		if (patchAddress != 0)
 		{
-			Replace(patchAddress, originalBytes, newBytes);
+			ReplaceExpectedBytesAtAddress(patchAddress, aob, newBytes);
 		}
 	}
 
 	if (disableCameraReset)
 	{
-		std::vector<uint16_t> pattern = { 0x80, MASKED, MASKED, MASKED, MASKED, MASKED, 0x00, 0x74, MASKED, MASKED, 0x8b, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, 0xeb, MASKED, 0x0f, 0x28, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x8d };
-		std::vector<uint16_t> originalBytes = { 0x74 };
-		std::vector<uint8_t> newBytes = { 0xeb };
-		uintptr_t patchAddress = SigScan(pattern);
+		std::string aob = "80 ? ? ? ? ? 00 74 ? ? 8b ? e8 ? ? ? ? eb ? 0f 28 ? ? ? ? ? ? 8d";
+		std::string expectedBytes = "74";
+		std::string newBytes = "eb";
+		uintptr_t patchAddress = AobScan(aob);
+		size_t offset = 7;
 		if (patchAddress != 0)
 		{
-			patchAddress += 7;
-			Replace(patchAddress, originalBytes, newBytes);
+			patchAddress += offset;
+			ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes);
 		}
 	}
 

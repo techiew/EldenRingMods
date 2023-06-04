@@ -16,7 +16,7 @@ extern "C" {
 
 void ReadConfig()
 {
-	INIFile config(GetModuleFolderPath() + "\\config.ini");
+	INIFile config(GetModFolderPath() + "\\config.ini");
 	INIStructure ini;
 
 	if (config.read(ini))
@@ -29,7 +29,7 @@ void ReadConfig()
 		config.write(ini, true);
 	}
 
-	Log("Field of view: %f", fov.m128_f32[0]);
+	Log("Field of view: ", fov.m128_f32[0]);
 }
 
 DWORD WINAPI MainThread(LPVOID lpParam)
@@ -38,13 +38,14 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	std::this_thread::sleep_for(5s);
 	
 	Log("Activating AdjustTheFov...");
-	std::vector<uint16_t> pattern = { 0x8d, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, 0x80, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, 0xf3, MASKED, 0x0f, 0x10, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x57, MASKED, 0xf3, MASKED, 0x0f, 0x59 };
-	uintptr_t hookAddress = SigScan(pattern);
+	std::string aob = "8d ? ? ? ? 0f 28 ? e8 ? ? ? ? 80 ? ? ? ? ? ? ? 0f 28 ? f3 ? 0f 10 ? ? ? ? ? ? 0f 57 ? f3 ? 0f 59";
+	uintptr_t hookAddress = AobScan(aob);
+	size_t offset = 1;
 
 	if (hookAddress != 0)
 	{
 		ReadConfig();
-		hookAddress -= 1;
+		hookAddress -= offset;
 		size_t size = 9;
 		MemCopy((uintptr_t)&FovAdjust, hookAddress, size);
 		returnAddress = hookAddress + 14;
