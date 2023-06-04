@@ -1,3 +1,4 @@
+#include <thread>
 #include <Windows.h>
 #include <xmmintrin.h>
 
@@ -33,6 +34,9 @@ void ReadConfig()
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating AdjustTheFov...");
 	std::vector<uint16_t> pattern = { 0x8d, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, 0xe8, MASKED, MASKED, MASKED, MASKED, 0x80, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x28, MASKED, 0xf3, MASKED, 0x0f, 0x10, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x0f, 0x57, MASKED, 0xf3, MASKED, 0x0f, 0x59 };
 	uintptr_t hookAddress = SigScan(pattern);

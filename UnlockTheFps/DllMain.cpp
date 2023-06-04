@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <algorithm>
+#include <thread>
 
 #include "ModUtils.h"
 
@@ -28,6 +29,9 @@ void ReadConfig()
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating UnlockTheFps...");
 	std::vector<uint16_t> pattern = { 0xc7, MASKED, MASKED, 0x89, 0x88, 0x88, 0x3c, 0xeb, MASKED, 0x89, MASKED, 0x18, 0xeb, MASKED, 0x89, MASKED, 0x18, 0xc7 };
 	std::vector<uint16_t> originalBytes = { 0x89, 0x88, 0x88, 0x3c };

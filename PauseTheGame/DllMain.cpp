@@ -1,3 +1,4 @@
+#include <thread>
 #include <Windows.h>
 #include <xinput.h>
 
@@ -130,6 +131,9 @@ void ReadConfig()
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating PauseTheGame...");
 	std::vector<uint16_t> pattern = { 0x0f, 0x84, MASKED, MASKED, MASKED, MASKED, 0xc6, MASKED, MASKED, MASKED, MASKED, MASKED, 0x00, MASKED, 0x8d, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x89, MASKED, MASKED, 0x89, MASKED, MASKED, MASKED, 0x8b, MASKED, MASKED, MASKED, MASKED, MASKED, MASKED, 0x85, MASKED, 0x75 };
 	patchAddress = SigScan(pattern);

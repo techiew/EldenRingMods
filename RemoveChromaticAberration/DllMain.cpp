@@ -1,3 +1,4 @@
+#include <thread>
 #include <Windows.h>
 
 #include "ModUtils.h"
@@ -6,6 +7,9 @@ using namespace ModUtils;
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating RemoveChromaticAberration...");
 	std::vector<uint16_t> pattern = { 0x0f, 0x11, MASKED, 0x60, MASKED, 0x8d, MASKED, 0x80, 0x00, 0x00, 0x00, 0x0f, 0x10, MASKED, 0xa0, 0x00, 0x00, 0x00, 0x0f, 0x11, MASKED, 0xf0, MASKED, 0x8d, MASKED, 0xb0, 0x00, 0x00, 0x00, 0x0f, 0x10, MASKED, 0x0f, 0x11, MASKED, 0x0f, 0x10, MASKED, 0x10 };
 	std::vector<uint16_t> originalBytes = { 0x0f, 0x11, MASKED, MASKED };
