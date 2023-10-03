@@ -1,3 +1,4 @@
+#include <thread>
 #include <Windows.h>
 
 #include "ModUtils.h"
@@ -6,6 +7,9 @@ using namespace ModUtils;
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating RemoveVignette...");
 	std::string aob = "f3 0f 10 ? 50 f3 0f 59 ? ? ? ? ? e8 ? ? ? ? f3 ? 0f 5c ? f3 ? 0f 59 ? ? 8d ? ? a0 00 00 00";
 	std::string expectedBytes = "f3 ? 0f 59 ?";

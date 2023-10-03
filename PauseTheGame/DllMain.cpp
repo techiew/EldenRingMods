@@ -1,3 +1,4 @@
+#include <thread>
 #include <Windows.h>
 #include <xinput.h>
 
@@ -134,6 +135,9 @@ void ReadConfig()
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating PauseTheGame...");
 	std::string aob = "0f 84 ? ? ? ? c6 ? ? ? ? ? 00 ? 8d ? ? ? ? ? ? 89 ? ? 89 ? ? ? 8b ? ? ? ? ? ? 85 ? 75";
 	patchAddress = AobScan(aob);

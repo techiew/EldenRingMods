@@ -1,3 +1,4 @@
+#include <thread>
 #include <Windows.h>
 #include <xmmintrin.h>
 
@@ -33,6 +34,9 @@ void ReadConfig()
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating AdjustTheFov...");
 	std::string aob = "8d ? ? ? ? 0f 28 ? e8 ? ? ? ? 80 ? ? ? ? ? ? ? 0f 28 ? f3 ? 0f 10 ? ? ? ? ? ? 0f 57 ? f3 ? 0f 59";
 	uintptr_t hookAddress = AobScan(aob);

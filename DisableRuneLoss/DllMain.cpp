@@ -1,3 +1,4 @@
+#include <thread>
 #include <Windows.h>
 
 #include "ModUtils.h"
@@ -6,6 +7,9 @@ using namespace ModUtils;
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating DisableRuneLoss...");
 	std::string aob = "b0 01 ? 8b ? e8 ? ? ? ? ? 8b ? ? ? 32 c0 ? 83 ? 28 c3";
 	std::string expectedBytes = "e8";

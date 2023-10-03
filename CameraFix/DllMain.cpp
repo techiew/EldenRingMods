@@ -1,3 +1,4 @@
+#include <thread>
 #include <Windows.h>
 
 #include "ModUtils.h"
@@ -31,6 +32,9 @@ void ReadConfig()
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(5s);
+	
 	Log("Activating camera fixes...");
 
 	ReadConfig();
