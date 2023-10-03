@@ -29,14 +29,14 @@ std::vector<Keybind> unpauseKeybinds = {
 void Pause()
 {
 	Log("Paused");
-	ReplaceExpectedBytesAtAddress(patchAddress + offset, "0x84", "0x85");
+	ReplaceExpectedBytesAtAddress(patchAddress + offset, "84", "85");
 	gameIsPaused = true;
 }
 
 void Unpause()
 {
 	Log("Unpaused");
-	ReplaceExpectedBytesAtAddress(patchAddress + offset, "0x85", "0x84");
+	ReplaceExpectedBytesAtAddress(patchAddress + offset, "85", "84");
 	gameIsPaused = false;
 }
 
