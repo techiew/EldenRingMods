@@ -471,21 +471,13 @@ namespace ModUtils
 
 	static void GetWindowHandleByName(std::string windowName)
 	{
-		if (muWindow == NULL) 
+		HWND hwnd = FindWindowExA(NULL, NULL, NULL, windowName.c_str());
+		DWORD processId = 0;
+		GetWindowThreadProcessId(hwnd, &processId);
+		if (processId == GetCurrentProcessId())
 		{
-			for (size_t i = 0; i < 10000; i++)
-			{
-				HWND hwnd = FindWindowExA(NULL, NULL, NULL, windowName.c_str());
-				DWORD processId = 0;
-				GetWindowThreadProcessId(hwnd, &processId);
-				if (processId == GetCurrentProcessId())
-				{
-					muWindow = hwnd;
-					Log("FindWindowExA: found window handle");
-					break;
-				}
-				Sleep(1);
-			}
+			muWindow = hwnd;
+			Log("FindWindowExA: found window handle");
 		}
 	}
 
@@ -510,18 +502,11 @@ namespace ModUtils
 
 	static void GetWindowHandleByEnumeration()
 	{
-		if (muWindow == NULL)
+		Log("Enumerating windows...");
+		EnumWindows(&EnumWindowHandles, NULL);
+		if (muWindow != NULL)
 		{
-			Log("Enumerating windows...");
-			for (size_t i = 0; i < 10000; i++)
-			{
-				EnumWindows(&EnumWindowHandles, NULL);
-				if (muWindow != NULL)
-				{
-					break;
-				}
-				Sleep(1);
-			}
+			return;
 		}
 	}
 
@@ -529,11 +514,33 @@ namespace ModUtils
 	{
 		Log("Finding application window...");
 
-		GetWindowHandleByName(muExpectedWindowName);
-
 		// From experience it can be tricky to find the game window consistently using only one technique,
-		// (seems to differ from machine to machine for some reason) so we have this extra backup technique.
-		GetWindowHandleByEnumeration();
+		// (seems to differ from machine to machine for some reason) so we attempt multiple techniques.
+		bool lookingForWindowHandle = true;
+		unsigned int maxAttempts = 10000;
+		unsigned int attempts = 0;
+		while (lookingForWindowHandle)
+		{
+			if (muWindow == NULL)
+			{
+				GetWindowHandleByName(muExpectedWindowName);
+			}
+
+			if (muWindow == NULL)
+			{
+				GetWindowHandleByEnumeration();
+			}
+			
+			if (attempts >= maxAttempts || muWindow != NULL)
+			{
+				lookingForWindowHandle = false;
+			}
+			else
+			{
+				attempts++;
+				Sleep(1);
+			}
+		}
 
 		return (muWindow == NULL) ? false : true;
 	}
