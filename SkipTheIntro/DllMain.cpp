@@ -120,21 +120,8 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 				SetWindowPos(antiFlashbangWindow, HWND_BOTTOM, 0, 0, 0, 0, NULL);
 				ShowWindow(antiFlashbangWindow, SW_HIDE);
 				PostMessage(antiFlashbangWindow, WM_CLOSE, NULL, NULL);
-			}
-
-			MSG msg;
-			if (GetMessage(&msg, NULL, 0, 0) > 0)
-			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			}
-
-			if (IsWindow(antiFlashbangWindow) == false)
-			{
-				Log("Exiting");
 				break;
 			}
-
 			Sleep(10);
 		}
 	}
